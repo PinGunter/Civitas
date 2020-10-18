@@ -9,14 +9,6 @@ package civitas;
  *
  * @author Salva
  */
-public class Casilla {
-    private String nombre;
+public class Jugador {
     
-    Casilla(String n){
-        nombre = n;
-    }
-    
-    String getNombre(){
-        return nombre;
-    }
 }
