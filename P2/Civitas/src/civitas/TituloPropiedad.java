@@ -76,13 +76,6 @@ public class TituloPropiedad {
         return importe;
     }
     
-    // =================
-    //
-    //
-    //      PREGUNTAR
-    //
-    //
-    // ==================
     void actualizaPropietarioPorConversion(Jugador jugador){
         propietario = jugador;
     }
