@@ -17,7 +17,7 @@ public class CivitasJuego {
     private Tablero tablero;
     private ArrayList<Jugador> jugadores;
     private GestorEstados gestorEstados;
-    private EstadosJuego estadosJuego;
+    private EstadosJuego estado;
     
     static final int numJugadores = 4;
     static final int casillaCarcel = 5;
@@ -31,13 +31,15 @@ public class CivitasJuego {
         }
         
         gestorEstados = new GestorEstados();
-        estadosJuego = gestorEstados.estadoInicial();
+        estado = gestorEstados.estadoInicial();
         
         indiceJugadorActual = Dado.getInstance().quienEmpieza(jugadores.size());
         
         mazo = new MazoSopresas();
         
         tablero = new Tablero();
+        
+        estado = EstadosJuego.INICIO_TURNO;
         
         
     }
@@ -67,8 +69,8 @@ public class CivitasJuego {
     }
     
     void siguientePasoCompletado (OperacionesJuego operacion){
-        estadosJuego = gestorEstados.siguienteEstado(jugadores.get(indiceJugadorActual),
-                estadosJuego, operacion);
+        estado = gestorEstados.siguienteEstado(jugadores.get(indiceJugadorActual),
+                estado, operacion);
         
     }
     
@@ -129,6 +131,31 @@ public class CivitasJuego {
         }
     }
     
+    void mostrarRanking(){
+        for(int i=0; i<ranking().size(); i++){
+            System.out.println("Posicion " + i + ": " +
+                    ranking().get(i));
+        }
+    }
+            
+    
+    Casilla getCasillaActual(){
+        tablero.getCasilla(jugadores.get(indiceJugadorActual).getNumCasillaActual());
+    }
+    
+    Jugador getJugadorActual(){
+        jugadores.get(indiceJugadorActual);
+    }
+    
+    String infoJugadorTexto(){
+        return  "POSICION: " + jugadores.get(indiceJugadorActual).toString();  
+    }
+    
+    //void avanzaJugador()
+    
+    //boolean comprar()
+    
+    //OperacionesJuego siguientePaso()
     
     
     

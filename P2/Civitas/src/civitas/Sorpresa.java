@@ -42,7 +42,7 @@ public class Sorpresa {
     Sorpresa(TipoSorpresa tipo, MazoSorpresas m){ // RESTO
         init();
         sorpresa = tipo;
-        
+        mazo = m;
     }
     
     boolean jugadorCorrecto(int actual, ArrayList<Jugador> todos){
@@ -62,7 +62,7 @@ public class Sorpresa {
             case IRCARCEL:
                 aplicarAJugador_irCarcel(actual, todos);
             case IRCASILLA:
-                aplicarAJugador_irCasilla(actual, todos);
+                aplicarAJugador_irACasilla(actual, todos);
             case PAGARCOBRAR:
                 aplicarAJugador_pagarCobrar(actual, todos);
             case PORCASAHOTEL:
@@ -88,6 +88,7 @@ public class Sorpresa {
             int tirada = tablero.calcularTirada(casilla, valor);
             int n = tablero.nuevaPosicion(casilla, tirada);
             todos[actual].moverACasilla(n);
+            tablero.getCasilla(n).recibeJugador(actual, todos);
         }
     }
     
@@ -140,13 +141,13 @@ public class Sorpresa {
   
     void salirDelMazo (){
         if(sorpresa == TipoSorpresa.SALIRCARCEL){
-            mazo.inhabilitarCartaEspecial(this);
+            mazo.inhabilitarCartaEspecial(this); // revisar
         }
     }
     
     void usada (){
         if(sorpresa == TipoSorpresa.SALIRCARCEL){
-            mazo.habilitarCartaEspecial(this);
+            mazo.habilitarCartaEspecial(this); // revisar
         }
     }
     
@@ -160,8 +161,6 @@ public class Sorpresa {
         valor = -1;
         tablero = null;
         mazo = null;
-        //texto = ""; no hace falta CREO
-        // tablero y mazo hacen falta???
     }
 }
     
