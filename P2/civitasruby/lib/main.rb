@@ -10,9 +10,10 @@ require_relative "dado"
 require_relative "mazo_sorpresas"
 require_relative "sorpresa"
 require_relative "estados_juego"
+require_relative "civitas_juego"
 
 module Civitas
-  mazo = MazoSorpresas.new
+  mazo = Mazo_sorpresas.new
   tablero = Tablero.new(3)
   valor = 6
   texto = "buenas tardes"

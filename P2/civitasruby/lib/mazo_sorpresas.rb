@@ -4,7 +4,7 @@
 require_relative "sorpresa"
 require_relative "diario"
 module Civitas
-  class MazoSorpresas
+  class Mazo_sorpresas
     def initialize(d=false)
       init
       @ultima_sorpresa

@@ -35,6 +35,7 @@ public class Casilla {
         tituloPropiedad = titulo;
         tipo = tipo.CALLE;
         nombre = tituloPropiedad.getNombre();
+        importe = titulo.getPrecioCompra();
     }
 
     Casilla(float cantidad, String nombre) {

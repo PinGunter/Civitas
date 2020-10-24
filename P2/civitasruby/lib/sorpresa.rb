@@ -5,10 +5,11 @@ require_relative "diario"
 require_relative "tipo_sorpresa"
 require_relative "tablero"
 require_relative "mazo_sorpresas"
+require_relative "jugador"
 
 module Civitas
   # Clase Sorpresa
-  # Representa las cartas sorpresa que estan dentro del Civitas::MazoSorpresas
+  # Representa las cartas sorpresa que estan dentro del Civitas::Mazo_sorpresas
   class Sorpresa
     # metodo privado para inicializar referencias vacias
     def init
@@ -33,7 +34,7 @@ module Civitas
         @tablero = resto.at(0)
         @valor = resto.at(1)
         @texto = resto.at(2)
-      elsif resto.length == 1 and resto.at(0).instance_of? MazoSorpresas
+      elsif resto.length == 1 and resto.at(0).instance_of? Mazo_sorpresas
         @mazo = resto.at(0)
       elsif resto.length == 1 and resto.at(0).instance_of? Tablero
         @tablero = resto.at(0)
@@ -167,7 +168,7 @@ module Civitas
       @texto
     end
     
-    private :init, :aplicar_a_jugador_ir_a_casilla, :aplicar_a_jugador_ir_carcel, :aplicar_a_jugador_pagar_cobrar, :aplicar_a_jugador_por_casa_hotel, :aplicar_a_jugador_por_jugador, :aplicar_a_jugador_salir_carcel
+    private :init, :informe, :aplicar_a_jugador_ir_a_casilla, :aplicar_a_jugador_ir_carcel, :aplicar_a_jugador_pagar_cobrar, :aplicar_a_jugador_por_casa_hotel, :aplicar_a_jugador_por_jugador, :aplicar_a_jugador_salir_carcel
   end
   
   
