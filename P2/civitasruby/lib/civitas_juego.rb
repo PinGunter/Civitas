@@ -5,8 +5,7 @@
 require_relative "tablero"
 require_relative "mazo_sorpresas"
 require_relative "gestor_estados"
-require_relative "jugador"
-require_relative ""
+#require_relative "jugador"
 module Civitas
   #clase Civitas::Civitas_juego que representa la partida de civitas
   class Civitas_juego   
