@@ -27,7 +27,19 @@ module Civitas
   puts s2.inspect
   puts s3.inspect
   puts s4.inspect
-#  p1 = 0
+  
+  puts "\n\n"
+  
+  listado = Array.new
+  4.times do
+  listado << Sorpresa.new(tipo,valor,texto)
+  end
+
+  listado.length.times do |indice|
+    puts indice
+  end
+  
+  #  p1 = 0
 #  p2 = 0
 #  p3 = 0
 #  p4 = 0
