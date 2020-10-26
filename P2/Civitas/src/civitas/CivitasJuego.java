@@ -127,8 +127,9 @@ public class CivitasJuego {
                     ranking.set(j, jug);
                 }
             }
-            return ranking;
         }
+            return ranking;
+        
     }
     
     void mostrarRanking(){
@@ -140,11 +141,11 @@ public class CivitasJuego {
             
     
     Casilla getCasillaActual(){
-        tablero.getCasilla(jugadores.get(indiceJugadorActual).getNumCasillaActual());
+        return tablero.getCasilla(jugadores.get(indiceJugadorActual).getNumCasillaActual());
     }
     
     Jugador getJugadorActual(){
-        jugadores.get(indiceJugadorActual);
+        return jugadores.get(indiceJugadorActual);
     }
     
     String infoJugadorTexto(){
