@@ -66,52 +66,51 @@ public class Casilla {
         tituloPropiedad = null;
 
     }
-    
-    private void informe(int actual, ArrayList<Jugador> todos){
-        if (jugadorCorrecto(actual,todos)){
-            Diario.getInstance().ocurreEvento("El jugador " + todos.get(actual).getNombre() + " ha caido en la casilla " + nombre+
-                    "\n=========\nInformación de la casilla:\n" + toString()+
-                    "\n=========\nInformación del jugador:\n") + todos.get(actual).toString();
-            
+
+    private void informe(int actual, ArrayList<Jugador> todos) {
+        if (jugadorCorrecto(actual, todos)) {
+            Diario.getInstance().ocurreEvento("El jugador " + todos.get(actual).getNombre() + " ha caido en la casilla " + nombre
+                    + "\n=========\nInformación de la casilla:\n" + toString()
+                    + "\n=========\nInformación del jugador:\n" + todos.get(actual).toString());
+
         }
     }
-    
-    public boolean jugadorCorrecto(int actual, ArrayList<Jugador> todos){
+
+    public boolean jugadorCorrecto(int actual, ArrayList<Jugador> todos) {
         return actual >= 0 && actual < todos.size();
     }
-    
+
     @Override
-    public String toString(){
-        String info = "Carcel: " + carcel +
-                      "\nImporte: " + importe+
-                      "\nNombre: " + nombre +
-                      "\nTipo: " +tipo+
-                      "\nMazoSorpresas: " + mazo+
-                      "\nTituloPropiedad: " + tituloPropiedad.getNombre();
+    public String toString() {
+        String info = "Carcel: " + carcel
+                + "\nImporte: " + importe
+                + "\nNombre: " + nombre
+                + "\nTipo: " + tipo
+                + "\nMazoSorpresas: " + mazo
+                + "\nTituloPropiedad: " + tituloPropiedad.getNombre();
         return info;
     }
-    
-    private void recibeJugador_impuesto(int actual, ArrayList<Jugador>todos){
-        if (jugadorCorrecto(actual,todos)){
-            informe(actual,todos);
+
+    private void recibeJugador_impuesto(int actual, ArrayList<Jugador> todos) {
+        if (jugadorCorrecto(actual, todos)) {
+            informe(actual, todos);
             todos.get(actual).pagaImpuesto(importe);
         }
     }
-    
-    private void recibeJugador_juez(int actual, ArrayList<Jugador>todos){
-        if (jugadorCorrecto(actual,todos)){
-            informe(actual,todos);
+
+    private void recibeJugador_juez(int actual, ArrayList<Jugador> todos) {
+        if (jugadorCorrecto(actual, todos)) {
+            informe(actual, todos);
             todos.get(actual).encarcelar(carcel);
         }
     }
-    
-    public String getNombre(){
+
+    public String getNombre() {
         return nombre;
     }
-    
-    public TituloPropiedad getTitulo(){
+
+    public TituloPropiedad getTitulo() {
         return tituloPropiedad;
     }
-    
-    
+
 }
