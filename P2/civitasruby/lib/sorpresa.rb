@@ -25,7 +25,7 @@ module Civitas
     # Sorpresa(tipo, mazo)
     def self.new_tablero(tipo, tablero)
       #init
-      new(tipo,tablero,-1,"",nil)
+      new(tipo,tablero,-1,"Añadida por Tablero",nil)
     end
 
     def self.new_tablero_valor_texto(tipo, tablero, valor, texto)
@@ -40,7 +40,7 @@ module Civitas
 
     def self.new_mazo(tipo,mazo)
       #init
-      new(tipo,nil,-1,"",mazo)
+      new(tipo,nil,-1,"Añadida por Mazo",mazo)
     end
 
     def initialize(tipo, tablero, valor, texto, mazo)
@@ -55,34 +55,36 @@ module Civitas
     # true si es correcto
     # falso si no es correcto
     def jugador_correcto(actual,todos)
-      correcto = actual >= 0 and actual < todos.length
+      correcto = actual >= 0 && actual < todos.length
       return correcto
     end
 
     # metodo para informar al Civitas::Diario de que un jugador a recibido esta sorpresa
     def informe(actual,todos)
-      Diario.instance.ocurre_evento("Jugador: " + todos.at(actual).nombre + " recibe sorpresa " + @nombre)
+      if jugador_correcto(actual,todos)
+        Diario.instance.ocurre_evento("Jugador: " + todos.at(actual).nombre + " recibe sorpresa " + @texto)
+      end
     end
 
     # metodo para gestionar que le debe pasar al jugador en funcion del tipo de sorpresa que sea
     # es un switch para seleccionar metodos privados
     def aplicar_a_jugador(actual,todos)
       case @tipo
-      when Tipo_sorpresas::IR_CARCEL
+      when Tipo_sorpresa::IR_CARCEL
         aplicar_a_jugador_ir_carcel(actual,todos)
-      when Tipo_sorpresas::IR_CASILLA
+      when Tipo_sorpresa::IR_CASILLA
         aplicar_a_jugador_ir_a_casilla(actual,todos)
 
-      when Tipo_sorpresas::PAGAR_COBRAR
+      when Tipo_sorpresa::PAGAR_COBRAR
         aplicar_a_jugador_pagar_cobrar(actual,todos)
 
-      when Tipo_sorpresas::SALIR_CARCEL
+      when Tipo_sorpresa::SALIR_CARCEL
         aplicar_a_jugador_salir_carcel(actual,todos)
 
-      when Tipo_sorpresas::POR_CASA_HOTEL
+      when Tipo_sorpresa::POR_CASA_HOTEL
         aplicar_a_jugador_por_casa_hotel(actual,todos)
 
-      when Tipo_sorpresas::POR_JUGADOR
+      when Tipo_sorpresa::POR_JUGADOR
         aplicar_a_jugador_por_jugador(actual,todos)
 
       end
@@ -162,14 +164,14 @@ module Civitas
 
     # metodo para sacar la carta actual(librarte de la carcel) del mazo
     def salir_del_mazo
-      if @tipo == Tipo_sopresas::SALIR_CARCEL
+      if @tipo == Tipo_sorpresa::SALIR_CARCEL
         @mazo.inhabilitar_carta_especial(self)
       end
     end
 
     # metodo para devolver la carta de salvoconducto al mazo
     def usada
-      if @tipo == Tipo_sorpresas::SALIR_CARCEL
+      if @tipo == Tipo_sorpresa::SALIR_CARCEL
         @mazo.habilitar_carta_especial(self)
       end
     end
@@ -180,6 +182,5 @@ module Civitas
 
     private :init, :informe, :aplicar_a_jugador_ir_a_casilla, :aplicar_a_jugador_ir_carcel, :aplicar_a_jugador_pagar_cobrar, :aplicar_a_jugador_por_casa_hotel, :aplicar_a_jugador_por_jugador, :aplicar_a_jugador_salir_carcel
   end
-
 
 end
