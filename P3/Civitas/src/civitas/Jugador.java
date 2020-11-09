@@ -77,7 +77,7 @@ public class Jugador implements Comparable<Jugador> {
         boolean obtiene = !encarcelado;
         if (obtiene) {
             salvoconducto = s;
-            salvoconducto.tipo = TipoSorpresa.SALIRCARCEL;
+            //  salvoconducto.tipo = TipoSorpresa.SALIRCARCEL;
         }
         return obtiene;
     }
@@ -280,5 +280,35 @@ public class Jugador implements Comparable<Jugador> {
                 + "\nPropiedades: " + propiedades
                 + "\nSalvoconducto: " + salvoconducto;
         return resultado;
+    }
+
+    boolean cancelarHipoteca(int ip) {
+        boolean result = false;
+        if (isEncarcelado()) {
+            return result;
+        }
+        if (existeLaPropiedad(ip)) {
+            TituloPropiedad propiedad = propiedades.get(ip);
+            float cantidad = propiedad.getImporteCancelarHipoteca();
+            boolean puedoGastar = puedoGastar(cantidad);
+            if (puedoGastar) {
+                result = propiedad.cancelarHipoteca(this);
+                if (!result) {
+                    if (propiedad.getHipotecado()) {
+                        if (propiedad.esEsteElPropietario(this)) {
+                            propiedad.getPropietario().paga(propiedad.getImporteCancelarHipoteca());
+                            //hipotecado = false
+                            result = true;
+                        }
+
+                    }
+                }
+            }
+            if (result) {
+                Diario.getInstance().ocurreEvento("El jugador " + nombre + " cancela la hipoteca de la propiedad " + ip);
+            }
+        }
+
+        return result;
     }
 }
