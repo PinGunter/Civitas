@@ -293,22 +293,46 @@ public class Jugador implements Comparable<Jugador> {
             boolean puedoGastar = puedoGastar(cantidad);
             if (puedoGastar) {
                 result = propiedad.cancelarHipoteca(this);
-                if (!result) {
-                    if (propiedad.getHipotecado()) {
-                        if (propiedad.esEsteElPropietario(this)) {
-                            propiedad.getPropietario().paga(propiedad.getImporteCancelarHipoteca());
-                            //hipotecado = false
-                            result = true;
-                        }
-
-                    }
+                if (result) {
+                    Diario.getInstance().ocurreEvento("El jugador " + nombre + " cancela la hipoteca de la propiedad " + ip);
                 }
-            }
-            if (result) {
-                Diario.getInstance().ocurreEvento("El jugador " + nombre + " cancela la hipoteca de la propiedad " + ip);
             }
         }
 
+        return result;
+    }
+
+    boolean comprar(TituloPropiedad titulo) {
+        boolean result = false;
+        if (encarcelado) {
+            return result;
+        }
+        if (puedeComprar) {
+            float precio = titulo.getPrecioCompra();
+            if (puedoGastar(precio)) {
+                result = titulo.comprar(this);
+                if (result) {
+                    propiedades.add(titulo);
+                    Diario.getInstance().ocurreEvento("El jugador " + this + " compra la propiedad " + titulo.toString());
+                }
+                puedeComprar = false;
+            }
+        }
+        return result;
+    }
+
+    boolean construirHotel(int ip) {
+        boolean result = false;
+        if (encarcelado) {
+            return result;
+        }
+        if (existeLaPropiedad(ip)) {
+            TituloPropiedad propiedad = propiedades.get(ip);
+            result = propiedad.hipotecar(this);
+        }
+        if (result) {
+            Diario.getInstance().ocurreEvento("El jugador " + nombre + " hipoteca la propiedad " + ip);
+        }
         return result;
     }
 }

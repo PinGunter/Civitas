@@ -113,4 +113,36 @@ public class Casilla {
         return tituloPropiedad;
     }
 
+    void recibeJugador(int actual, ArrayList<Jugador> todos) {
+        switch (tipo) {
+            case CALLE:
+                this.recibeJugador_calle(actual, todos);
+                break;
+            case IMPUESTO:
+                this.recibeJugador_impuesto(actual, todos);
+                break;
+            case JUEZ:
+                this.recibeJugador_juez(actual, todos);
+                break;
+            case SORPRESA:
+                this.recibeJugador_sorpresa(actual, todos);
+                break;
+            default:
+                informe(actual, todos);
+                break;
+        }
+    }
+
+    private void recibeJugador_calle(int actual, ArrayList<Jugador> todos) {
+        if (jugadorCorrecto(actual, todos)) {
+            informe(actual, todos);
+            Jugador jugador = todos.get(actual);
+            if (!tituloPropiedad.tienePropietario()) {
+                jugador.puedeComprarCasilla();
+            } else {
+                tituloPropiedad.tramitarAlquiler(jugador);
+            }
+        }
+
+    }
 }
