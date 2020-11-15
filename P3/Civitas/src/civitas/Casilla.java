@@ -145,4 +145,12 @@ public class Casilla {
         }
 
     }
+
+    private void recibeJugador_sorpresa(int actual, ArrayList<Jugador> todos) {
+        if (jugadorCorrecto(actual, todos)) {
+            Sorpresa sorpresa = mazo.siguiente();
+            informe(actual, todos);
+            sorpresa.aplicarAJugador(actual, todos);
+        }
+    }
 }
