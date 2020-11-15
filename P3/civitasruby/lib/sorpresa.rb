@@ -1,7 +1,6 @@
 #encoding:utf-8
 # author: Salva
 #
-require_relative "diario"
 require_relative "tipo_sorpresa"
 require_relative "tablero"
 require_relative "mazo_sorpresas"
