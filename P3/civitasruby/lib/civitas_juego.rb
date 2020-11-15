@@ -5,6 +5,7 @@
 require_relative "tablero"
 require_relative "mazo_sorpresas"
 require_relative "gestor_estados"
+require_relative "sorpresa"
 #require_relative "jugador"
 module Civitas
   #clase Civitas::Civitas_juego que representa la partida de civitas
@@ -52,7 +53,18 @@ module Civitas
     end
 
     def inicializar_mazo(tablero)
-      #añadir cartas sorpresa
+      @mazo = Mazo_sorpresas.new
+      @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::PAGAR_COBRAR, -75, "Multa por exceso de velocidad. Paga 75"))
+      @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::POR_CASA_HOTEL, -300, "La nueva PS5 ocupa demasiado espacio, debes hacer reformas. Paga 300 por cada casa u hotel"))
+      @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::IR_CASILLA, 19, "Es la feria de Málaga y no te la puedes perder. Avanza hasta Calle Marqués de Larios"))
+      @mazo.al_mazo(Sorpresa.new_tablero(Tipo_sorpresa::IR_CARCEL, @tablero))  # se hace con new_mazo?
+      @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::POR_JUGADOR, -250, "Vas a cenar con tus amigos pero se les olvida la cartera. Paga 250 a cada jugador"))
+      @mazo.al_mazo(Sorpresa.new_tablero(Tipo_sorpresa::SALIR_CARCEL, @tablero)) # se hace con new_mazo?
+      @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::IR_CASILLA, valor, texto))
+      @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::POR_CASA_HOTEL, valor, texto))
+      @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::PAGAR_COBRAR, valor, texto))
+      @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::POR_JUGADOR, valor, texto))
+
     end
 
     # metodo para añadir el dinero al jugador segun el numero de veces que pasa por salida
