@@ -1,6 +1,6 @@
+#encoding:utf-8
 # Salva Romero
 
-#encoding :utf-8
 require_relative "casilla"
 module Civitas
   class Tablero
@@ -21,7 +21,7 @@ module Civitas
     end
     #metodo privado para saber si el tablero es correcto. parametro opcional num_casilla para comprobar tambien una posicion del tablero
     def correcto(num_casilla=0)
-      return (@casillas.length > @num_casilla_carcel and @tiene_juez and num_casilla >= 0 and num_casilla < @casillas.length)
+      return (@casillas.length > @num_casilla_carcel && @tiene_juez && num_casilla >= 0 && num_casilla < @casillas.length)
     end
 
     def get_por_salida
@@ -35,22 +35,23 @@ module Civitas
 
     def añade_casilla(casilla)
       if @casillas.length == @num_casilla_carcel
-        @casillas << Casilla.new("Cárcel")
+        @casillas << Casilla.new_num_casilla_carcel_nombre(@num_casilla_carcel,"Cárcel")
       end
       @casillas << casilla
       if @casillas.length == @num_casilla_carcel
-        @casillas << Casilla.new("Cárcel")
+        @casillas << Casilla.new_num_casilla_carcel_nombre(@num_casilla_carcel,"Cárcel")
       end
     end
 
     def añade_juez
       if not @tiene_juez
-        @casillas << Casilla.new("Juez")
+        @casillas << Casilla.new_nombre("Juez")
         @tiene_juez = true
       end
     end
 
     def get_casilla(num_casilla)
+      puts correcto(num_casilla)
       if correcto(num_casilla)
         return @casillas.at(num_casilla);
       else

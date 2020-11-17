@@ -1,7 +1,9 @@
+#encoding:utf-8
+
 # To change this license header, choose License Headers in Project Properties.
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
-# Salva Romero
+
 module Civitas
   class Titulo_propiedad
     attr_reader :nombre, :precio_compra, :alquiler_base, :factor_revalorizacion,
@@ -18,7 +20,7 @@ module Civitas
       @hipotecada = false
       @num_hoteles = 0
       @num_casas = 0
-      @propietario = nill
+      @propietario = nil
     end
 
     @override

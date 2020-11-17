@@ -1,3 +1,5 @@
+#encoding:utf-8
+
 # To change this license header, choose License Headers in Project Properties.
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
@@ -12,7 +14,7 @@ module Civitas
 
     def initialize(encarcelado,nombre,num_casilla_actual,puede_comprar,saldo ,salvoconducto,propiedades)
       @nombre = nombre
-      @encarcelado = 4
+      @encarcelado = encarcelado
       @num_casilla_actual = num_casilla_actual
       @puede_comprar = puede_comprar
       @saldo = saldo
@@ -28,7 +30,7 @@ module Civitas
       #@num_casilla_actual = -1
       #@propiedades = Array.new
       #@salvo_conductor = nil
-      self.new(false,nombre,false,-1,nil,[])
+      self.new(false,n,-1,false,-1,nil,[])
     end
 
     def self.jugador_2(otro)
@@ -282,7 +284,7 @@ module Civitas
     def to_s
       "Nombre: #{@nombre}
       Encarcelado: #{@encarcelado}
-      Puede comprar:#{"puede_comprar"}
+      Puede comprar:#{@puede_comprar}
       Numero casilla actual: #{@num_casilla_actual}
       Saldo: #{@saldo}
       Numero de propiedades: #{@propiedades.length}

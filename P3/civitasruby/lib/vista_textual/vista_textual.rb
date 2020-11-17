@@ -1,6 +1,7 @@
 #encoding:utf-8
 require_relative '../civitas/operaciones_juego'
 require 'io/console'
+require_relative '../civitas/civitas_juego'
 
 module Civitas
 
@@ -91,5 +92,10 @@ module Civitas
     end
 
   end
+  vista = Vista_textual.new
+  puts vista.inspect
+  nombres = ["salva", "pepe", "abel", "pablo"]
+  puts nombres
+  vista.setCivitasJuego(Civitas_juego.new(nombres))
 
 end

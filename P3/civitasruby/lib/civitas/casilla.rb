@@ -1,7 +1,11 @@
+#encoding:utf-8
+
 # To change this license header, choose License Headers in Project Properties.
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
 # Abel
+
+require_relative "tipo_casilla"
 module Civitas
   class Casilla
 
@@ -20,7 +24,7 @@ module Civitas
     end
 
     def self.new_titulo_propiedad(titulo)
-      new(titulo.get_nombre, titulo, titulo.get_precio, -1, @tipo::CALLE)
+      new(titulo.get_nombre, titulo, titulo.get_precio_edificar, -1,nil, Tipo_casilla::CALLE)
     end
 
     def self.new_cantidad_nombre(cantidad, nombre)

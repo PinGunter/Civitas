@@ -1,12 +1,16 @@
+#encoding:utf-8
+
 # To change this license header, choose License Headers in Project Properties.
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
 # @author salva
+require_relative "dado"
 require_relative "tablero"
 require_relative "mazo_sorpresas"
 require_relative "gestor_estados"
 require_relative "sorpresa"
-#require_relative "jugador"
+require_relative "jugador"
+require_relative "titulo_propiedad"
 module Civitas
   #clase Civitas::Civitas_juego que representa la partida de civitas
   class Civitas_juego
@@ -18,7 +22,7 @@ module Civitas
     def initialize(nombres)
       @jugadores = Array.new
       nombres.each do |nombre|
-        @jugadores << Jugador.new(nombre)
+        @jugadores << Jugador.jugador_1(nombre)
       end
 
       @gestor_estados = Gestor_estados.new
@@ -60,10 +64,10 @@ module Civitas
       @mazo.al_mazo(Sorpresa.new_tablero(Tipo_sorpresa::IR_CARCEL, @tablero))  # se hace con new_mazo?
       @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::POR_JUGADOR, -250, "Vas a cenar con tus amigos pero se les olvida la cartera. Paga 250 a cada jugador"))
       @mazo.al_mazo(Sorpresa.new_tablero(Tipo_sorpresa::SALIR_CARCEL, @tablero)) # se hace con new_mazo?
-      @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::IR_CASILLA, valor, texto))
-      @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::POR_CASA_HOTEL, valor, texto))
-      @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::PAGAR_COBRAR, valor, texto))
-      @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::POR_JUGADOR, valor, texto))
+      #      @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::IR_CASILLA, valor, texto))
+      #      @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::POR_CASA_HOTEL, valor, texto))
+      #      @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::PAGAR_COBRAR, valor, texto))
+      #      @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::POR_JUGADOR, valor, texto))
 
     end
 
@@ -146,7 +150,8 @@ module Civitas
 
     #metodo que devuelve la casilla actual
     def get_casilla_actual
-      return @tablero.get_casilla(get_jugador_actual.num_casilla_actual)
+      puts get_jugador_actual.get_num_casilla_actual
+      @tablero.get_casilla(get_jugador_actual.get_num_casilla_actual)
     end
 
     # metodo que proporciona informacion sobre el jugador actual
