@@ -262,7 +262,14 @@ public class Jugador implements Comparable<Jugador> {
     }
 
     private boolean puedoEdificarHotel(TituloPropiedad propiedad) {
-        return saldo >= propiedad.getPrecioEdificar() && propiedad.getNumCasas() < HotelesMax;
+        boolean puedoEdificarHotel = false;
+        float precio = propiedad.getPrecioEdificar();
+        if (puedoGastar(precio)) {
+            if (propiedad.getNumHoteles() < getHotelesMax()) {
+
+            }
+        }
+
     }
 
     @Override
@@ -359,5 +366,17 @@ public class Jugador implements Comparable<Jugador> {
             }
         }
         return result;
+    }
+
+    boolean construirHotel(int ip) {
+        boolean result = false;
+        if (encarcelado) {
+            return result;
+        }
+        if (existeLaPropiedad(ip)) {
+            TituloPropiedad propiedad = propiedades.get(ip);
+            boolean puedoEdificarHotel = puedoEdificarHotel(propiedad);
+
+        }
     }
 }
