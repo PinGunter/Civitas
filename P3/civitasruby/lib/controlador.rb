@@ -5,7 +5,8 @@
 #encoding:utf-8
 
 require_relative 'civitas_juego'
-require_relative ''
+require_relative 'operaciones_juego'
+require_relative "operacion_inmobiliaria"
 
 module Juego_texto
   class Controlador
@@ -19,7 +20,38 @@ module Juego_texto
       while(@juego.final_de_juego)
         @vista.actualizar_vista
         @vista.pausa
-        @vista.siguiente_operacion()
+        
+        op = @juego.siguiente_paso
+        @vista.mostrar_siguiente_operacion(op)
+        
+        if(op != operaciones_juego::PASAR_TURNO)
+          @vista.mostrar_eventos
+        end
+        
+        if(@juego.final_del_juego)
+          # tocar cossas del ranking
+        
+        else
+          case op
+          when operaciones_juego::COMPRAR
+            if(@vista.comprar == respuestas_::SI)
+              @juego.comprar 
+            end
+            @juego.siguiente_paso_completado(op)
+          when operaciones_juego::GESTIONAR
+            @vista.gestionar
+            #
+            #
+            #
+          when operaciones_juego::SALIR_CARCEL
+            if(@vista.salir_carcel == salidas_carcel::PAGANDO)
+              @juego.salir_carcel_pagando
+            else
+              @juego.salir_carcel_tirando
+            end
+            @juego.siguiente_paso_completado(op)
+          end
+        end
       end
     end
     

@@ -129,6 +129,6 @@ module Civitas
     
     
     
-    
+    private :informe, :init, :recibejugador, :recibejugador_calle, :recibejugador_impuesto, :recibejugador_juez, :recibejugador_sorpresa
   end
 end

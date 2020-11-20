@@ -15,8 +15,8 @@ import civitas.TituloPropiedad;
 class VistaTextual {
   
   CivitasJuego juegoModel; 
-  int iGestion=-1;
-  int iPropiedad=-1;
+  private int iGestion=-1;
+  private int iPropiedad=-1;
   private static String separador = "=====================";
   
   private Scanner in;
@@ -118,7 +118,7 @@ class VistaTextual {
         this.actualizarVista();
     }
   
-  void actualizarVista(){
+  public void actualizarVista(){
       System.out.println("Jugador actual: ");
       System.out.println(juegoModel.infoJugadorTexto());
       System.out.println("Posicion actual: ");

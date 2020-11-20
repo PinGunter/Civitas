@@ -421,5 +421,10 @@ module Civitas
       Propiedades #{@propiedades}"
       end
    
+      
+      private :existe_la_propiedad, :get_casas_max, :get_hoteles_max, :get_precio_libertad, :get_premio_paso_por_salida, :perder_salvoconducto, :puede_salir_carcel_pagando,
+        :puedo_edificar_casa, :puedo_edificar_hotel, :puedo_gastar
+      protected :debe_ser_encarcelado, :get_nombre, :get_propiedades, :get_saldo, :jugador
+
     end
   end

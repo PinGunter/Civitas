@@ -44,7 +44,7 @@ public class CivitasJuego {
 
     }
 
-    void inicializarTablero (/*MazoSorpresas mazo*/){
+    private void inicializarTablero (/*MazoSorpresas mazo*/){
         tablero = new Tablero(casillaCarcel);
         
         tablero.añadeCasilla(new Casilla(new TituloPropiedad("Huerta Los Patos", 300, 10, (float) 0.27, 300, 300)));
@@ -68,17 +68,17 @@ public class CivitasJuego {
         tablero.añadeCasilla(new Casilla(new TituloPropiedad("Periodista Rafael Gómez", 2000, 200, (float) 0.64, 2000, 2000)));           
     }
 
-    void inicializarMazoSorpresas() { // AÑADIR
+    private void inicializarMazoSorpresas() { // AÑADIR
         mazo = new MazoSorpresas();
     }
 
-    void contabilizarPasosPorSalida(Jugador jugadorActual) {
+    private void contabilizarPasosPorSalida(Jugador jugadorActual) {
         if (tablero.getPorSalida() > 0) {
             jugadorActual.pasaPorSalida();
         }
     }
 
-    void pasarTurno() {
+    private void pasarTurno() {
         if (indiceJugadorActual < jugadores.size()) {
             indiceJugadorActual++;
         } else {
@@ -86,25 +86,25 @@ public class CivitasJuego {
         }
     }
 
-    void siguientePasoCompletado(OperacionesJuego operacion) {
+    public void siguientePasoCompletado(OperacionesJuego operacion) {
         estado = gestorEstados.siguienteEstado(jugadores.get(indiceJugadorActual),
                 estado, operacion);
 
     }
 
-    boolean construirCasa(int ip) {
+    public boolean construirCasa(int ip) {
         return jugadores.get(indiceJugadorActual).construirCasa(ip);
     }
 
-    boolean construirHotel(int ip) {
+    public boolean construirHotel(int ip) {
         return jugadores.get(indiceJugadorActual).construirHotel(ip);
     }
 
-    boolean vender(int ip) {
+    public boolean vender(int ip) {
         return jugadores.get(indiceJugadorActual).vender(ip);
     }
 
-    boolean hipotecar(int ip) {
+    public boolean hipotecar(int ip) {
         return jugadores.get(indiceJugadorActual).hipotecar(ip);
     }
 
@@ -112,11 +112,11 @@ public class CivitasJuego {
         return jugadores.get(indiceJugadorActual).cancelarHipoteca(ip);
     }
 
-    boolean salirCarcelPagando() {
+    public boolean salirCarcelPagando() {
         return jugadores.get(indiceJugadorActual).salirCarcelPagando();
     }
 
-    boolean salirCarcelTirando() {
+    public boolean salirCarcelTirando() {
         return jugadores.get(indiceJugadorActual).salirCarcelTirando();
     }
     
@@ -131,7 +131,7 @@ public class CivitasJuego {
         return false;
     }
 
-    ArrayList<Jugador> ranking() {
+    private ArrayList<Jugador> ranking() {
         ArrayList<Jugador> ranking = new ArrayList<Jugador>();
 
         for (int i = 0; i < jugadores.size(); i++) {

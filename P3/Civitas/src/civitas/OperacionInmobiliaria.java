@@ -8,8 +8,8 @@ package civitas;
  * @author abelrios
  */
 public class OperacionInmobiliaria {
-    private GestionesInmobiliarias gestionesInmobiliarias;
-    int indice;
+    private GestionesInmobiliarias gestion;
+    private int numPropiedad;
 
 
 /*public OperacionInmobiliaria(GestionesInmobiliarias g, int n){
@@ -18,15 +18,15 @@ public class OperacionInmobiliaria {
 }*/
 
 public OperacionInmobiliaria(){
-    indice = 0;
+    numPropiedad = 0;
 }
 
-GestionesInmobiliarias getGestionesInmobiliarias(){
-    return gestionesInmobiliarias;
+public GestionesInmobiliarias getGestionesInmobiliarias(){
+    return gestion;
 }
 
-int getIndice(){
-    return indice;
+public int getIndice(){
+    return numPropiedad;
 }
 
 
