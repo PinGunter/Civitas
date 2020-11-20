@@ -44,6 +44,46 @@ module Civitas
       @titulo_propiedad = nil
     end
     
+    def recibe_jugador(iactual, todos)
+      case tipo
+      when CALLE
+        recibejugador_calle(iactual, todos) # hacer
+      when IMPUESTO
+        recibejugador_impuesto(iactual, todos)
+      when JUEZ
+        recibejugador_juez(iactual, todos)
+      when SORPRESA
+        recibejugador_sorpresa(iactual, todos) # hacer
+      else
+        informe(iactual, todos)
+      end
+    end
+    
+    def recibejugador_calle(iactual, todos)
+      if (jugador_correcto(iactual, todos))
+        informe(iactual, todos)
+        jugador = todos.get(actual)
+        if(!@titulo.tiene_propietario)
+          jugador.puede_comprar_casilla
+        else
+          @titulo.tramitar_alquiler(jugador)
+        end
+        
+      end
+    end
+    
+    def recibejugador_sorpresa(iactual, todos)
+      if(jugador_correcto(iactual, todos))
+        sorpresa = @mazo.siguiente
+      end
+      if(jugador_correcto(iactual, todos))
+        informe(iactual, todos)
+      end
+      if(jugador_correcto(iactual, todos))
+        sorpresa.aplicar_a_jugador(iactual, todos)
+      end
+    end
+       
     def informe(actual, todos)
       if jugador_correcto(actual, todos)
         Diario.instance.ocurre_evento("El jugador #{todos.get(actual).get_nombre}

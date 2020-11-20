@@ -9,6 +9,6 @@ package civitas;
  *
  * @author salva
  */
-enum OperacionesJuego {
+public enum OperacionesJuego {
     AVANZAR, COMPRAR, GESTIONAR, SALIR_CARCEL, PASAR_TURNO
 }

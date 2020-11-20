@@ -50,16 +50,31 @@ module Civitas
       @propietario = jugador
     end
     
-    def cancelar_hipoteca
-      
+    def cancelar_hipoteca(jugador)
+      result = false
+      if(@hipotecado)
+        if(es_este_el_propietaro(jugador))
+          @propietario.paga(get_importe_cancelar_hipoteca)
+          @hipotecado = false
+          result =  true
+        end
+      end
+      return result
     end
+    
     
     def cantidad_casas_hoteles
       (get_num_casas + get_num_hoteles)
     end
     
     def comprar(jugador)
-      
+      result = false
+      if (@propietario == nill)
+        @propietario = jugador
+        result = true
+        @propietario.paga(precio_compra)
+      end
+      return result
     end
     
     def construir_casa(jugador)
@@ -67,7 +82,13 @@ module Civitas
     end
     
     def construir_hotel(jugador)
-      
+      result = false
+      if (es_este_el_propietario(jugador))
+        @propietario.paga(precio_edificar)
+        num_hoteles = num_hoteles + 1
+        result = true
+      end
+      return result
     end
     
     def es_este_el_propietario(jugador)
@@ -108,13 +129,22 @@ module Civitas
     end
     
     def hipotecar(jugador)
-      
+      salida = false
+      if (@hipotecado == false && es_este_el_propietario(jugador))
+        @propietario.recibe(get_importe_hipoteca)
+        @hipotecado = true
+        salida = true
+      end
+      return salida
     end
     
     def tramitar_alquiler(jugador)
-      if tiene_propietario == true and es_este_el_propietario(jugador) == false
-        jugador.paga_alquiler(get_precio_alquiler)
-        @propietario.recibe(get_precio_alquiler)
+      if (@propietario != nill)
+        if(es_este_el_propietario(jugador) == false)
+        precio= get_precio_alquiler()
+        jugador.paga_alquiler(precio)
+        recibe(precio)
+        end
       end
     end
     
