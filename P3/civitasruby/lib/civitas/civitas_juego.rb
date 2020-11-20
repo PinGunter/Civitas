@@ -62,7 +62,7 @@ module Civitas
       @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::POR_CASA_HOTEL, -300, "La nueva PS5 ocupa demasiado espacio, debes hacer reformas. Paga 300 por cada casa u hotel"))
       @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::IR_CASILLA, 19, "Es la feria de Málaga y no te la puedes perder. Avanza hasta Calle Marqués de Larios"))
       @mazo.al_mazo(Sorpresa.new_tablero(Tipo_sorpresa::IR_CARCEL, @tablero))  # se hace con new_mazo?
-      @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::POR_JUGADOR, -250, "Vas a cenar con tus amigos pero se les olvida la cartera. Paga 250 a cada jugador"))
+      @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::POR_JUGADOR, 250, "Vas a cenar con tus amigos pero se les olvida la cartera. Cada jugador te paga 250"))
       @mazo.al_mazo(Sorpresa.new_tablero(Tipo_sorpresa::SALIR_CARCEL, @tablero)) # se hace con new_mazo?
       #      @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::IR_CASILLA, valor, texto))
       #      @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::POR_CASA_HOTEL, valor, texto))
@@ -172,5 +172,15 @@ module Civitas
 
     end
 
+    def comprar
+      jugador_actual = @jugadores.at(@indice_jugador_actual)
+      num_casilla_actual = jugador_actual.get_num_casilla_actual
+      casilla = @tablero.get_casilla(num_casilla_actual)
+      titulo = casilla.get_titulo_propiedad
+      res = jugador_actual.comprar(titulo)
+      res
+    end
+
+    private :avanza_jugador, :contabilizar_pasos_por_salida, :inicializar_mazo_sorpresas, :inicializar_tablero, :pasar_turno, :ranking
   end
 end

@@ -62,7 +62,7 @@ module Civitas
     end
 
     def comprar(jugador)
-
+      
     end
 
     def construir_casa(jugador)

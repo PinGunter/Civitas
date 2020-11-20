@@ -2,10 +2,19 @@
 require_relative '../civitas/operaciones_juego'
 require 'io/console'
 require_relative '../civitas/civitas_juego'
-
+require_relative '../civitas/salidas_carcel'
+require_relative '../civitas/respuestas'
+require_relative '../civitas/gestiones_inmobiliarias'
+require_relative '../civitas/diario'
 module Civitas
 
   class Vista_textual
+
+    def initialize()
+      @iPropiedad
+      @iGestion
+      @juegoModel
+    end
 
     def mostrar_estado(estado)
       puts estado
@@ -62,21 +71,34 @@ module Civitas
 
 
     def comprar
+      opcion=menu("¿Deseas comprar la calle?", ["No", "Si"])
+      Respuestas::Lista_respuestas.at(opcion)
     end
 
     def gestionar
+      opciones = ["Vender", "Hipotecar", "Cancelar Hipoteca", "Construir Casa", "Construir Hotel", "Terminar" ]
+      elegido = menu("Elige la gestión inmobiliaria",opciones)
+      @iGestion=elegido
+      propiedad = menu("Elige la propiedad que quieres gestionar",@juegoModel.get_jugador_actual.get_propiedades )
+      @iPropiedad = propiedad
     end
 
     def getGestion
+      @iGestion
     end
 
     def getPropiedad
+      @iPropiedad
     end
 
     def mostrarSiguienteOperacion(operacion)
+      print "Siguiente operacion #{operacion}"
     end
 
     def mostrarEventos
+      while Diario.instance.eventos_pendientes
+        puts Diario.instance.leer_evento
+      end
     end
 
     def setCivitasJuego(civitas)
@@ -91,11 +113,11 @@ module Civitas
       puts casilla.to_s
     end
 
+    def salirCarcel
+      opcion=menu("¿Cómo quieres salir de la cárcel",["Pagando","Tirando"])
+      Salidas_carcel::Lista_salidas_carcel.at(opcion)
+    end
+
   end
-  vista = Vista_textual.new
-  puts vista.inspect
-  nombres = ["salva", "pepe", "abel", "pablo"]
-  puts nombres
-  vista.setCivitasJuego(Civitas_juego.new(nombres))
 
 end

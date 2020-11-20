@@ -5,11 +5,10 @@
         <group>
             <file>file:/home/salva/Civitas/P3/civitasruby/lib/civitas/tipo_casilla.rb</file>
             <file>file:/home/salva/Civitas/P3/civitasruby/lib/civitas/civitas_juego.rb</file>
-            <file>file:/home/salva/Civitas/P3/civitasruby/lib/civitas/titulo_propiedad.rb</file>
-            <file>file:/home/salva/Civitas/P3/civitasruby/lib/vista_textual/vista_textual.rb</file>
             <file>file:/home/salva/Civitas/P3/civitasruby/lib/civitas/tablero.rb</file>
             <file>file:/home/salva/Civitas/P3/civitasruby/lib/civitas/casilla.rb</file>
             <file>file:/home/salva/Civitas/P3/civitasruby/lib/civitas/jugador.rb</file>
+            <file>file:/home/salva/Civitas/P3/civitasruby/lib/juego_texto/vista_textual.rb</file>
         </group>
     </open-files>
 </project-private>

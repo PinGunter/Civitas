@@ -83,7 +83,7 @@ module Civitas
         @nombre
       end
 
-      def get_titulo
+      def get_titulo_propiedad
         @titulo_propiedad
       end
 

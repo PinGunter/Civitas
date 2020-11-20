@@ -104,6 +104,7 @@ public class TituloPropiedad {
             result = true;
             propietario.paga(precioCompra);
         }
+        return result;
     }
 
     boolean construirCasa(Jugador jugador) {

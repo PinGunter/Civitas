@@ -7,8 +7,8 @@
 
 module Civitas
   module Respuestas
-    NO :no
-    SI :si
-    lista_respuestas = [Respuestas::NO, Respuestas::SI]
+    NO = :no
+    SI = :si
+    Lista_respuestas = [Respuestas::NO, Respuestas::SI]
   end
 end

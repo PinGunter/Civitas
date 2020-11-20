@@ -9,6 +9,7 @@ package civitas;
  *
  * @author salva
  */
-enum OperacionesJuego {
+//Se cambia visibilidad paquete->publica para usarse en controlador
+public enum OperacionesJuego {
     AVANZAR, COMPRAR, GESTIONAR, SALIR_CARCEL, PASAR_TURNO
 }

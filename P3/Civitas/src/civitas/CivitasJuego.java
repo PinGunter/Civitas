@@ -42,22 +42,22 @@ public class CivitasJuego {
 
     }
 
-    void inicializaTablero(MazoSorpresas mazo) {
+    private void inicializaTablero(MazoSorpresas mazo) {
         tablero = new Tablero(casillaCarcel);
         //TituloPropiedad casita1 = new TituloPropiedad()
     }
 
-    void inicializaMazoSorpresas(Tablero tablero) {
+    private void inicializaMazoSorpresas(Tablero tablero) {
 
     }
 
-    void contabilizarPasosPorSalida(Jugador jugadorActual) {
+    private void contabilizarPasosPorSalida(Jugador jugadorActual) {
         if (tablero.getPorSalida() > 0) {
             jugadorActual.pasaPorSalida();
         }
     }
 
-    void pasarTurno() {
+    private void pasarTurno() {
         if (indiceJugadorActual < jugadores.size()) {
             indiceJugadorActual++;
         } else {
@@ -65,41 +65,42 @@ public class CivitasJuego {
         }
     }
 
-    void siguientePasoCompletado(OperacionesJuego operacion) {
+    public void siguientePasoCompletado(OperacionesJuego operacion) {
         estado = gestorEstados.siguienteEstado(jugadores.get(indiceJugadorActual),
                 estado, operacion);
 
     }
 
-    boolean construirCasa(int ip) {
+    public boolean construirCasa(int ip) {
         return jugadores.get(indiceJugadorActual).construirCasa(ip);
     }
 
-    boolean construirHotel(int ip) {
+    public boolean construirHotel(int ip) {
         return jugadores.get(indiceJugadorActual).construirHotel(ip);
     }
 
-    boolean vender(int ip) {
+    public boolean vender(int ip) {
         return jugadores.get(indiceJugadorActual).vender(ip);
     }
 
-    boolean hipotecar(int ip) {
+    public boolean hipotecar(int ip) {
         return jugadores.get(indiceJugadorActual).hipotecar(ip);
     }
 
-    boolean cancelarHipoteca(int ip) {
+    public boolean cancelarHipoteca(int ip) {
         return jugadores.get(indiceJugadorActual).cancelarHipoteca(ip);
     }
 
-    boolean salirCarcelPagando() {
+    public boolean salirCarcelPagando() {
         return jugadores.get(indiceJugadorActual).salirCarcelPagando();
     }
 
-    boolean salirCarcelTirando() {
+    public boolean salirCarcelTirando() {
         return jugadores.get(indiceJugadorActual).salirCarcelTirando();
     }
 
-    boolean finalDelJuego() {
+    //Cambiada visibilidad paquete->publica para usar en controlador
+    public boolean finalDelJuego() {
         boolean res = false;
         for (int i = 0; i < jugadores.size(); i++) {
             if (jugadores.get(i).enBancarrota()) {
@@ -109,7 +110,7 @@ public class CivitasJuego {
         return false;
     }
 
-    ArrayList<Jugador> ranking() {
+    private ArrayList<Jugador> ranking() {
         ArrayList<Jugador> ranking = new ArrayList<Jugador>();
 
         for (int i = 0; i < jugadores.size(); i++) {
@@ -129,22 +130,23 @@ public class CivitasJuego {
 
     }
 
-    void mostrarRanking() {
-        for (int i = 0; i < ranking().size(); i++) {
+    public void mostrarRanking() {
+        ArrayList<Jugador> ranking = ranking();
+        for (int i = 0; i < ranking.size(); i++) {
             System.out.println("Posicion " + i + ": "
-                    + ranking().get(i));
+                    + ranking.get(i));
         }
     }
 
-    Casilla getCasillaActual() {
+    public Casilla getCasillaActual() {
         return tablero.getCasilla(jugadores.get(indiceJugadorActual).getNumCasillaActual());
     }
 
-    Jugador getJugadorActual() {
+    public Jugador getJugadorActual() {
         return jugadores.get(indiceJugadorActual);
     }
 
-    String infoJugadorTexto() {
+    public String infoJugadorTexto() {
         return "POSICION: " + jugadores.get(indiceJugadorActual).toString();
     }
 
