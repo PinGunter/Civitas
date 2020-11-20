@@ -265,11 +265,11 @@ public class Jugador implements Comparable<Jugador> {
         boolean puedoEdificarHotel = false;
         float precio = propiedad.getPrecioEdificar();
         if (puedoGastar(precio)) {
-            if (propiedad.getNumHoteles() < getHotelesMax()) {
-
+            if (propiedad.getNumHoteles() < getHotelesMax() && propiedad.getNumCasas() >= getCasasPorHotel()) {
+                puedoEdificarHotel = true;
             }
         }
-
+        return puedoEdificarHotel;
     }
 
     @Override
@@ -376,7 +376,14 @@ public class Jugador implements Comparable<Jugador> {
         if (existeLaPropiedad(ip)) {
             TituloPropiedad propiedad = propiedades.get(ip);
             boolean puedoEdificarHotel = puedoEdificarHotel(propiedad);
-
+            if (puedoEdificarHotel) {
+                result = propiedad.construirHotel(this);
+                int casasPorHotel = getCasasPorHotel();
+                propiedad.derruirCasas(casasPorHotel, this);
+                Diario.getInstance().ocurreEvento("El jugador " + nombre + " construye hotel en la propiedad " + ip);
+            }
         }
+
+        return result;
     }
 }

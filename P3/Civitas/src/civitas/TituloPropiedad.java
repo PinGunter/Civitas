@@ -107,11 +107,23 @@ public class TituloPropiedad {
     }
 
     boolean construirCasa(Jugador jugador) {
-
+        boolean result = false;
+        if (esEsteElPropietario(jugador)) {
+            propietario.paga(precioEdificar);
+            numCasas = numCasas + 1;
+            result = true;
+        }
+        return result;
     }
 
     boolean construirHotel(Jugador jugador) {
-
+        boolean result = false;
+        if (esEsteElPropietario(jugador)) {
+            propietario.paga(precioEdificar);
+            numHoteles = numHoteles + 1;
+            result = true;
+        }
+        return result;
     }
 
     boolean derruirCasas(int n, Jugador jugador) {
