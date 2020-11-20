@@ -77,17 +77,17 @@ public class Sorpresa {
     void aplicarAJugador_irCarcel(int actual, ArrayList<Jugador> todos){
         if(jugadorCorrecto(actual, todos)){
             informe(actual, todos);
-            todos[actual].encarcelar(tablero.getCarcel());
+            todos.get(actual).encarcelar(tablero.getCarcel());
         }
     }
     
     void aplicarAJugador_irACasilla (int actual, ArrayList<Jugador> todos){
         if(jugadorCorrecto(actual, todos)){
             informe(actual, todos);
-            int casilla = todos[actual].getNumCasillaActual();
+            int casilla = todos.get(actual).getNumCasillaActual();
             int tirada = tablero.calcularTirada(casilla, valor);
             int n = tablero.nuevaPosicion(casilla, tirada);
-            todos[actual].moverACasilla(n);
+            todos.get(actual).moverACasilla(n);
             tablero.getCasilla(n).recibeJugador(actual, todos);
         }
     }

@@ -24,7 +24,7 @@ public class CivitasJuego {
     static final int casillaCarcel = 5;
     static final int numCasillas = 20;
 
-    CivitasJuego(ArrayList<Jugador> nombres) {
+    public CivitasJuego(ArrayList<Jugador> nombres) {
         jugadores = new ArrayList<>();
         for (int i = 0; i < nombres.size(); i++) {
             Jugador j = new Jugador(nombres.get(i));
@@ -108,7 +108,7 @@ public class CivitasJuego {
         return jugadores.get(indiceJugadorActual).hipotecar(ip);
     }
 
-    boolean cancelarHipoteca(int ip) {
+    public boolean cancelarHipoteca(int ip) {
         return jugadores.get(indiceJugadorActual).cancelarHipoteca(ip);
     }
 
@@ -152,9 +152,10 @@ public class CivitasJuego {
     }
 
     void mostrarRanking() {
+        ArrayList<Jugador> ranking = ranking();
         for (int i = 0; i < ranking().size(); i++) {
             System.out.println("Posicion " + i + ": "
-                    + ranking().get(i));
+                    + ranking.get(i));
         }
     }
     //se cambia visibilidad de paquete->publica para poder usarse en vista_textual

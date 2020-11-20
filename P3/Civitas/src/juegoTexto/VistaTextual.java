@@ -84,24 +84,34 @@ class VistaTextual {
   }
 
   void gestionar () {
-      int opcion = menu ("¿Qué número de gestión inmobiliaria desea elegir?",
-              ArrayList<> (Arrays.asList("Vender", "Hipotecar", "Cancelar hipoteca",
+      iGestion = menu ("¿Qué número de gestión inmobiliaria desea elegir?", 
+              new ArrayList<> (Arrays.asList("Vender", "Hipotecar", "Cancelar hipoteca",
                       "Construir casa", "Construir hotel", "Terminar")));
-      iGestion = opcion;
-      iPropiedad = 
+      iPropiedad = menu ("Indique la propiedad a la que desea aplicar la gestión: ",
+              new ArrayList(Arrays.asList("0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+                      "10", "11")));
   }
   
-  public int getGestion(){}
+  public int getGestion(){
+      return iGestion;
+  }
   
   public int getPropiedad(){
-      System.out.println
+      return iPropiedad;
   }
     
 
-  void mostrarSiguienteOperacion(OperacionesJuego operacion) {}
+  void mostrarSiguienteOperacion(OperacionesJuego operacion) {
+      System.out.println("Siguiente operación que se va a realizar");
+      System.out.println(operacion);
+  }
 
 
-  void mostrarEventos() {}
+  void mostrarEventos() {
+      while(Diario.getInstance().eventosPendientes()){
+          System.out.println(Diario.getInstance().leerEvento());
+      }
+  }
   
   public void setCivitasJuego(CivitasJuego civitas){ 
         juegoModel=civitas;
