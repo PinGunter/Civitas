@@ -135,7 +135,7 @@ public class Sorpresa {
             }
 
             if (!loTienen) {
-                todos.get(actual).obtenerSalvoconducto(new Sorpresa(TipoSorpresa.IRCARCEL, -1, "")); // this?
+                todos.get(actual).obtenerSalvoconducto(new Sorpresa(TipoSorpresa.SALIRCARCEL, -1, "")); // this?
                 salirDelMazo();
             }
         }

@@ -4,7 +4,7 @@
 require_relative "tipo_sorpresa"
 require_relative "tablero"
 require_relative "mazo_sorpresas"
-#require_relative "jugador"
+require_relative "jugador"
 
 module Civitas
   # Clase Sorpresa
@@ -155,7 +155,7 @@ module Civitas
           indice +=1
         end
         if not alguien_tiene_s_carcel
-          todos.at(actual).obtener_salvoconducto
+          todos.at(actual).obtener_salvoconducto(Sorpresa.new_valor_texto(Tipo_sorpresa::SALIR_CARCEL,-1,"Quedas libre de la cárcel"))
           salir_del_mazo
         end
       end
