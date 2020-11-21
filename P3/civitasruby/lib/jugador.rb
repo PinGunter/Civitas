@@ -38,10 +38,6 @@ module Civitas
       self.new(false,nombre,false,-1,nil,[])
     end
     
-    def self.jugador_2(otro)
-      new(otro.encarcelado, otro.nombre, otro.num_casilla_actual, otro.puede_comprar,
-        otro.saldo, otro.salvoconducto, otro.propiedades)
-    end
     
     def cancelar_hipoteca(ip)
       result = false
@@ -133,7 +129,7 @@ module Civitas
           result = construir_hotel(self)
           casas_por_hotel = get_casas_por_hotel
           propiedad.derruir_casas(casas_por_hotel, self)
-          Diario.get_instance.ocurre_evento("#{@jugador} construye hotel en la
+          Diario.instance.ocurre_evento("#{@jugador} construye hotel en la
             propiedad #{ip}")
         end
       end
@@ -153,24 +149,10 @@ module Civitas
       end
       
       if(result)
-        Diario.get_instance.ocurre_evento("#{@nombre} hipoteca la propiedad
+        Diario.instance.ocurre_evento("#{@nombre} hipoteca la propiedad
           #{ip}")
       end
     end
-    
-      def debe_ser_encarcelado
-        if @encarcelado == true
-          res = false
-        elsif tiene_salvoconducto == true
-          perder_salvoconducto
-          res = false
-          Diario.instance.ocurre_evento("#{@nombre} utiliza carta salvoconducto y
-          no va a la carcel")
-        else
-          res = true
-        end
-        return res
-      end
     
       def encarcelar(num_casilla_carcel)
         if debe_ser_encarcelado == true
@@ -356,10 +338,6 @@ module Civitas
         @@hoteles_max
       end
     
-      def get_nombre
-        @nombre
-      end
-    
       def get_num_casilla_actual
         @num_casilla_actual
       end
@@ -378,10 +356,6 @@ module Civitas
     
       def get_puede_comprar
         @puede_comprar
-      end
-    
-      def get_saldo
-        @saldo
       end
     
       def get_is_encarcelado
@@ -424,7 +398,40 @@ module Civitas
       
       private :existe_la_propiedad, :get_casas_max, :get_hoteles_max, :get_precio_libertad, :get_premio_paso_por_salida, :perder_salvoconducto, :puede_salir_carcel_pagando,
         :puedo_edificar_casa, :puedo_edificar_hotel, :puedo_gastar
-      protected :debe_ser_encarcelado, :get_nombre, :get_propiedades, :get_saldo, :jugador
-
+      protected #:debe_ser_encarcelado, :get_nombre, :get_propiedades, :get_saldo, :jugador
+      
+      def debe_ser_encarcelado
+        if @encarcelado == true
+          res = false
+        elsif tiene_salvoconducto == true
+          perder_salvoconducto
+          res = false
+          Diario.instance.ocurre_evento("#{@nombre} utiliza carta salvoconducto y
+          no va a la carcel")
+        else
+          res = true
+        end
+        return res
+      end
+      
+      def get_nombre
+        @nombre
+      end
+      
+      def get_propiedades
+        @propiedades
+      end
+      
+      def get_saldo
+        @saldo
+      end
+      
+      def self.jugador_2(otro)
+      new(otro.encarcelado, otro.nombre, otro.num_casilla_actual, otro.puede_comprar,
+        otro.saldo, otro.salvoconducto, otro.propiedades)
+    end
+      
+      
+      
     end
   end

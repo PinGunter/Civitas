@@ -47,13 +47,13 @@ module Civitas
     def recibe_jugador(iactual, todos)
       case tipo
       when CALLE
-        recibejugador_calle(iactual, todos) # hacer
+        recibeJugador_calle(iactual, todos) # hacer
       when IMPUESTO
-        recibejugador_impuesto(iactual, todos)
+        recibeJugador_impuesto(iactual, todos)
       when JUEZ
-        recibejugador_juez(iactual, todos)
+        recibeJugador_juez(iactual, todos)
       when SORPRESA
-        recibejugador_sorpresa(iactual, todos) # hacer
+        recibeJugador_sorpresa(iactual, todos) # hacer
       else
         informe(iactual, todos)
       end
@@ -72,7 +72,7 @@ module Civitas
       end
     end
     
-    def recibejugador_sorpresa(iactual, todos)
+    def recibeJugador_sorpresa(iactual, todos)
       if(jugador_correcto(iactual, todos))
         sorpresa = @mazo.siguiente
       end
@@ -101,14 +101,14 @@ module Civitas
         Tipo: #{@tipo}. MazoSorpresas: #{@mazo}. TituloPropiedad: #{@titulo_propiedad.get_nombre}"
       end
       
-      def recibejugador_impuesto(actual, todos)
+      def recibeJugador_impuesto(actual, todos)
         if jugador_correcto(actual, todos)
           informe(actual, todos)
           todos.get(actual).paga_impuesto(importe)
         end
       end
       
-      def recibejugador_juez(actual, todos)
+      def recibeJugador_juez(actual, todos)
         if jugador_correcto(actual, todos)
           informe(actual, todos)
           todos.get(actual).encarcelar(@carcel)

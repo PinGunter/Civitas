@@ -4,9 +4,10 @@
 
 #encoding:utf-8
 
-require_relative 'civitas_juego'
-require_relative 'operaciones_juego'
-require_relative "operacion_inmobiliaria"
+require_relative "../civitas/civitas_juego"
+require_relative "../civitas/operaciones_juego"
+require_relative "../civitas/operacion_inmobiliaria"
+
 
 module Juego_texto
   class Controlador
@@ -29,7 +30,7 @@ module Juego_texto
         end
         
         if(@juego.final_del_juego)
-          # tocar cossas del ranking
+          
         
         else
           case op
@@ -40,9 +41,15 @@ module Juego_texto
             @juego.siguiente_paso_completado(op)
           when operaciones_juego::GESTIONAR
             @vista.gestionar
-            #
-            #
-            #
+            gestion = @vista.get_gestion
+            propiedad = @vista.get_propiedad
+            
+            operacion_inmobiliaria = OperacionInmobiliaria.new(propiedad, gestion)
+            
+            
+            case
+            
+            
           when operaciones_juego::SALIR_CARCEL
             if(@vista.salir_carcel == salidas_carcel::PAGANDO)
               @juego.salir_carcel_pagando
