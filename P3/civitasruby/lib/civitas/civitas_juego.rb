@@ -39,35 +39,37 @@ module Civitas
       @tablero = Tablero.new(@@casilla_carcel)
       @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Huerta Los Patos", 300, 10, 0.27, 300, 300)))
       @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Calle Rodahuevo", 300, 20, 0.53, 300, 300)))
-      # añadir suerte
-      # falta datos de Abel -> @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Huerta Los Patos", 600, 40, 0.51, 600, 600)))
+      @tablero.añade_casilla(Casilla.new_mazo_nombre(mazo, "Suerte"))
+      @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Calle Recogidas", 600, 40, 0.51, 600, 600)))
+      # carcel, ya añadida
+      @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Avenida de la Constitución", 700, 50, 0.11, 700, 700)))
       @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Huerta Jorobado", 800, 60, 0.6, 800, 800)))
-      # añadir suerte
+      @tablero.añade_casilla(Casilla.new_mazo_nombre(mazo, "Suerte"))
       @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Calle Hierbabuena", 1000, 80, 0.08, 1000, 1000)))
       @tablero.añade_casilla(Casilla.new_nombre("Parking Gratuito"))
-      # falta datos de Abel -> @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Huerta Los Patos", 1200, 100, 0.75, 1200, 1200)))
-      # añadir suerte
-      # falta datos de Abel -> @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Huerta Los Patos", 1300, 110, 0.59, 1300, 1300)))
-      # falta datos de Abel ->  @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Huerta Los Patos", 1400, 120, 0.90, 1400, 1400)))
+      @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Estación de Autobuses", 1200, 100, 0.75, 1200, 1200)))
+      @tablero.añade_casilla(Casilla.new_mazo_nombre(mazo, "Sorpresa"))
+      @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Calle Periodista Daniel Saucedo Aranda", 1300, 110, 0.59, 1300, 1300)))
+      @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Calle Periodista Rafael Gómez", 1400, 120, 0.90, 1400, 1400)))
       @tablero.añade_juez
-      # falta datos de Abel -> @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Huerta Los Patos", 150, 130, 0.18, 1500, 1500)))
+      @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Calle Real de la Alhambra", 150, 130, 0.18, 1500, 1500)))
       @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Calle Pedro Antonio de Alarcón", 1540, 140, 0.77, 1540, 1540)))
-      @tablero.añade_casilla(Casilla.new_cantidad_nombre(1000, "Impuesto"))
+      @tablero.añade_casilla(Casilla.new_cantidad_nombre(-1000, "Impuesto"))
       @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Calle Marqués de Larios", 2000, 200, 0.64, 2000, 2000)))
     end
 
     def inicializar_mazo(tablero)
       @mazo = Mazo_sorpresas.new
-      @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::PAGAR_COBRAR, -75, "Multa por exceso de velocidad. Paga 75"))
+      @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::PAGAR_COBRAR, -300, "Multa por exceso de velocidad. Paga 300"))
       @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::POR_CASA_HOTEL, -300, "La nueva PS5 ocupa demasiado espacio, debes hacer reformas. Paga 300 por cada casa u hotel"))
       @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::IR_CASILLA, 19, "Es la feria de Málaga y no te la puedes perder. Avanza hasta Calle Marqués de Larios"))
-      @mazo.al_mazo(Sorpresa.new_tablero(Tipo_sorpresa::IR_CARCEL, @tablero))  # se hace con new_mazo?
+      @mazo.al_mazo(Sorpresa.new_tablero(Tipo_sorpresa::IR_CARCEL, tablero))  # se hace con new_mazo?
       @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::POR_JUGADOR, 250, "Vas a cenar con tus amigos pero se les olvida la cartera. Cada jugador te paga 250"))
-      @mazo.al_mazo(Sorpresa.new_tablero(Tipo_sorpresa::SALIR_CARCEL, @tablero)) # se hace con new_mazo?
-      #      @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::IR_CASILLA, valor, texto))
-      #      @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::POR_CASA_HOTEL, valor, texto))
-      #      @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::PAGAR_COBRAR, valor, texto))
-      #      @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::POR_JUGADOR, valor, texto))
+      @mazo.al_mazo(Sorpresa.new_tablero(Tipo_sorpresa::SALIR_CARCEL, tablero)) # se hace con new_mazo?
+      @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::IR_CASILLA, 13, "Suspendes el examen de PDOO y tienes que ir a revisión. Ve a la ETSIIT"))
+      @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::POR_CASA_HOTEL, 350, "Hay un terremoto y el seguro te paga 350 por cada casa y hotel "))
+      @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::PAGAR_COBRAR, 600, "Te conviertes en tu propio jefe y ganas 600"))
+      @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::POR_JUGADOR, 350, "Vas de fiesta con tus amigos sin medidas de seguridad y ahora debes pagarle la PCR"))
 
     end
 
@@ -179,6 +181,19 @@ module Civitas
       titulo = casilla.get_titulo_propiedad
       res = jugador_actual.comprar(titulo)
       res
+    end
+
+    def siguiente_paso
+      jugador_actual = @jugadores.at(@indice_jugador_actual)
+      operacion = @gestor_estados.operaciones_permitidas(jugador_actual, @estado)
+      case operacion
+      when Operaciones_juego::PASAR_TURNO
+        pasar_turno
+        siguiente_paso_completado(operacion)
+      when Operaciones_juego::AVANZAR
+        avanza_jugador
+        siguiente_paso_completado(operacion)
+      end
     end
 
     private :avanza_jugador, :contabilizar_pasos_por_salida, :inicializar_mazo_sorpresas, :inicializar_tablero, :pasar_turno, :ranking

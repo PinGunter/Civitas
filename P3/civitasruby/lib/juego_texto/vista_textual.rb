@@ -83,37 +83,37 @@ module Civitas
       @iPropiedad = propiedad
     end
 
-    def getGestion
+    def get_gestion
       @iGestion
     end
 
-    def getPropiedad
+    def get_propiedad
       @iPropiedad
     end
 
-    def mostrarSiguienteOperacion(operacion)
+    def mostrar_siguiente_operacion(operacion)
       print "Siguiente operacion #{operacion}"
     end
 
-    def mostrarEventos
+    def mostrar_eventos
       while Diario.instance.eventos_pendientes
         puts Diario.instance.leer_evento
       end
     end
 
-    def setCivitasJuego(civitas)
+    def set_civitas_juego(civitas)
       @juegoModel=civitas
       self.actualizarVista
     end
 
-    def actualizarVista
+    def actualizar_vista
       jugador = @juegoModel.get_jugador_actual
       casilla = @juegoModel.get_casilla_actual
       puts jugador.to_s
       puts casilla.to_s
     end
 
-    def salirCarcel
+    def salir_carcel
       opcion=menu("¿Cómo quieres salir de la cárcel",["Pagando","Tirando"])
       Salidas_carcel::Lista_salidas_carcel.at(opcion)
     end
