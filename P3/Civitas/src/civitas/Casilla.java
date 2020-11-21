@@ -28,6 +28,8 @@ public class Casilla {
     Casilla(String nombre) {
         init();
         this.nombre = nombre;
+        this.tipo = TipoCasilla.DESCANSO;
+
     }
 
     Casilla(TituloPropiedad titulo) {
@@ -42,11 +44,12 @@ public class Casilla {
         init();
         this.nombre = nombre;
         importe = cantidad;
+        tipo = TipoCasilla.DESCANSO;
     }
 
     Casilla(int numCasillaCarcel, String nombre) {
         init();
-        this.tipo = TipoCasilla.DESCANSO;
+        this.tipo = TipoCasilla.JUEZ;
         this.nombre = nombre;
         carcel = numCasillaCarcel;
     }

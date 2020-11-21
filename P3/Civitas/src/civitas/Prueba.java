@@ -24,7 +24,7 @@ public class Prueba {
         jugadores.add("Abel");
         VistaTextual vista = new VistaTextual();
         CivitasJuego juego = new CivitasJuego(jugadores);
-        Dado.getInstance().setDebug(Boolean.TRUE);
+        Dado.getInstance().setDebug(Boolean.FALSE);
         Controlador controlador = new Controlador(juego, vista);
         controlador.juega();
     }
