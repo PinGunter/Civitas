@@ -35,9 +35,9 @@ public class Jugador implements Comparable<Jugador> {
     Jugador(String nombre) {
         this.nombre = nombre;
         puedeComprar = false;
-        saldo = -1;
+        saldo = SaldoInicial;
         encarcelado = false;
-        numCasillaActual = -1;
+        numCasillaActual = 0;
         propiedades = new ArrayList<TituloPropiedad>();
         salvoconducto = null;
     }
@@ -122,7 +122,11 @@ public class Jugador implements Comparable<Jugador> {
 
     boolean modificarSaldo(float cantidad) {
         this.saldo += cantidad;
-        Diario.getInstance().ocurreEvento("Se incrementa el saldo del jugador: " + nombre + " en " + cantidad);
+        if (cantidad >= 0) {
+            Diario.getInstance().ocurreEvento("Se incrementa el saldo del jugador: " + nombre + " en " + cantidad);
+        } else {
+            Diario.getInstance().ocurreEvento("Se decrementa el saldo del jugador: " + nombre + " en " + -1 * cantidad);
+        }
         return true;
     }
 
@@ -150,8 +154,8 @@ public class Jugador implements Comparable<Jugador> {
         if (!encarcelado) {
             if (existeLaPropiedad(ip)) {
                 if (propiedades.get(ip).vender(this)) {
-                    propiedades.remove(ip);
                     Diario.getInstance().ocurreEvento("Se vende propiedad " + propiedades.get(ip).getNombre() + " del jugador " + nombre);
+                    propiedades.remove(ip);
                     vendido = true;
                 }
             }
@@ -241,7 +245,8 @@ public class Jugador implements Comparable<Jugador> {
         return PasoPorSalida;
     }
 
-    protected ArrayList<TituloPropiedad> getPropiedades() {
+    //cambiamos visibilidad de protected a public para usarlo en la vista textual en las opciones de gestion
+    public ArrayList<TituloPropiedad> getPropiedades() {
         return propiedades;
     }
 
@@ -249,7 +254,8 @@ public class Jugador implements Comparable<Jugador> {
         return puedeComprar;
     }
 
-    protected float getSaldo() {
+    //cambiamos la visibilidad de protected a public para facilitar la accesibilidad de la partida. Consultado al construir
+    public float getSaldo() {
         return saldo;
     }
 
@@ -281,19 +287,25 @@ public class Jugador implements Comparable<Jugador> {
 
     @Override
     public String toString() {
-        String resultado = "Nombre: " + nombre
-                + "\nPuede Comprar: " + puedeComprar
+        ArrayList<String> nombrePropiedades = new ArrayList<>();
+        for (int i = 0; i < propiedades.size(); i++) {
+            nombrePropiedades.add(propiedades.get(i).getNombre());
+        }
+        String info = "************\n";
+        info = "Nombre: " + nombre
+                //+ "\nPuede Comprar: " + puedeComprar
                 + "\nSaldo: " + saldo
                 + "\nEncarcelado: " + encarcelado
-                + "\nNumCasillaActual: " + numCasillaActual
-                + "\nCasasMax: " + CasasMax
-                + "\nHotelesMax: " + HotelesMax
-                + "\nPaso por Salida: " + PasoPorSalida
-                + "\nPrecio Libertad: " + PrecioLibertad
-                + "\nSaldo inicial: " + SaldoInicial
-                + "\nPropiedades: " + propiedades
+                + "\nPosicion: " + numCasillaActual
+                //                + "\nCasasMax: " + CasasMax
+                //                + "\nHotelesMax: " + HotelesMax
+                //                + "\nPaso por Salida: " + PasoPorSalida
+                //                + "\nPrecio Libertad: " + PrecioLibertad
+                //                + "\nSaldo inicial: " + SaldoInicial
+                + "\nPropiedades: " + nombrePropiedades
                 + "\nSalvoconducto: " + salvoconducto;
-        return resultado;
+        info += "\n************";
+        return info;
     }
 
     boolean cancelarHipoteca(int ip) {
@@ -308,7 +320,7 @@ public class Jugador implements Comparable<Jugador> {
             if (puedoGastar) {
                 result = propiedad.cancelarHipoteca(this);
                 if (result) {
-                    Diario.getInstance().ocurreEvento("El jugador " + nombre + " cancela la hipoteca de la propiedad " + ip);
+                    Diario.getInstance().ocurreEvento("El jugador " + nombre + " cancela la hipoteca de la propiedad " + propiedades.get(ip).getNombre());
                 }
             }
         }
@@ -327,7 +339,7 @@ public class Jugador implements Comparable<Jugador> {
                 result = titulo.comprar(this);
                 if (result) {
                     propiedades.add(titulo);
-                    Diario.getInstance().ocurreEvento("El jugador " + this + " compra la propiedad " + titulo.toString());
+                    Diario.getInstance().ocurreEvento("El jugador " + this.nombre + " compra la propiedad " + titulo.toString());
                 }
                 puedeComprar = false;
             }
@@ -345,7 +357,7 @@ public class Jugador implements Comparable<Jugador> {
             result = propiedad.hipotecar(this);
         }
         if (result) {
-            Diario.getInstance().ocurreEvento("El jugador " + nombre + " hipoteca la propiedad " + ip);
+            Diario.getInstance().ocurreEvento("El jugador " + nombre + " hipoteca la propiedad " + propiedades.get(ip).getNombre());
         }
         return result;
     }
@@ -363,7 +375,7 @@ public class Jugador implements Comparable<Jugador> {
                 if (puedoEdificarCasa) {
                     result = propiedad.construirCasa(this);
                     if (result) {
-                        Diario.getInstance().ocurreEvento("El jugador " + nombre + " construye una casa en la propiedad " + ip);
+                        Diario.getInstance().ocurreEvento("El jugador " + nombre + " construye una casa en la propiedad " + propiedades.get(ip).getNombre());
                     }
                 }
             }
@@ -383,7 +395,7 @@ public class Jugador implements Comparable<Jugador> {
                 result = propiedad.construirHotel(this);
                 int casasPorHotel = getCasasPorHotel();
                 propiedad.derruirCasas(casasPorHotel, this);
-                Diario.getInstance().ocurreEvento("El jugador " + nombre + " construye hotel en la propiedad " + ip);
+                Diario.getInstance().ocurreEvento("El jugador " + nombre + " construye hotel en la propiedad " + propiedades.get(ip).getNombre());
             }
         }
 

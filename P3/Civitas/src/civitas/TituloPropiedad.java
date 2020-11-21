@@ -143,7 +143,8 @@ public class TituloPropiedad {
         return hipotecado;
     }
 
-    String getNombre() {
+//    cambiada visibilidad de paquete a publica para vista textual
+    public String getNombre() {
         return nombre;
     }
 
@@ -159,7 +160,8 @@ public class TituloPropiedad {
         return precioCompra;
     }
 
-    float getPrecioEdificar() {
+    //modificamos visibilidad de paquete a public para que la partida sea más accesible. Se consulta al construir casas y hoteles
+    public float getPrecioEdificar() {
         return precioEdificar;
     }
 

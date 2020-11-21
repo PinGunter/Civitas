@@ -4,22 +4,28 @@
 package juegoTexto;
 
 import civitas.CivitasJuego;
+import civitas.GestionesInmobiliarias;
+import civitas.OperacionInmobiliaria;
 import civitas.OperacionesJuego;
+import civitas.Respuestas;
+import civitas.SalidasCarcel;
 
 public class Controlador {
 
     private CivitasJuego juego;
     private VistaTextual vista;
 
-    Controlador(CivitasJuego juego, VistaTextual vista) {
+    //cambiamos la visibilidad de paquete a public para usarlo en el main de prueba
+    public Controlador(CivitasJuego juego, VistaTextual vista) {
         this.juego = juego;
         this.vista = vista;
     }
 
-    void juega() {
+    //cambiamos la visibilidad de paquete a public para poder usarlo en el main de prueba
+    public void juega() {
         vista.setCivitasJuego(juego);
         while (!juego.finalDelJuego()) {
-            vista.actualizarVista();
+            //vista.actualizarVista(); // comentado para mejorar visibilidad en la ejecucion
             vista.pausa();
             OperacionesJuego siguiente = juego.siguientePaso();
             vista.mostrarSiguienteOperacion(siguiente);
@@ -30,7 +36,7 @@ public class Controlador {
                 switch (siguiente) {
                     case COMPRAR:
                         Respuestas respuesta = vista.comprar();
-                        if (respuesta == Respuestas::SI) {
+                        if (respuesta == civitas.Respuestas.SI) {
                             juego.comprar();
                         }
                         juego.siguientePasoCompletado(siguiente);
@@ -39,7 +45,8 @@ public class Controlador {
                         vista.gestionar();
                         int gestion = vista.getGestion();
                         int propiedad = vista.getPropiedad();
-                        OperacionInmobiliaria operacion = new OperacionInmobiliaria(gestion, propiedad);
+                        GestionesInmobiliarias gestion_inm = GestionesInmobiliarias.values()[gestion];
+                        OperacionInmobiliaria operacion = new OperacionInmobiliaria(gestion_inm, propiedad);
                         switch (operacion.getGestion()) {
                             case VENDER:
                                 juego.vender(propiedad);
@@ -51,6 +58,8 @@ public class Controlador {
                                 juego.cancelarHipoteca(propiedad);
                                 break;
                             case CONSTRUIR_CASA:
+                                System.out.println("Precio de edificación: " + juego.getJugadorActual().getPropiedades().get(propiedad).getPrecioEdificar());
+                                System.out.println("Saldo actual: " + juego.getJugadorActual().getSaldo());
                                 juego.construirCasa(propiedad);
                                 break;
                             case CONSTRUIR_HOTEL:

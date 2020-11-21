@@ -7,7 +7,7 @@ module Civitas
      # :hipoteca_base, :precio_edificar, :num_hoteles, :num_casas
     attr_accessor :hipotecada, :propietario
 
-    def initialize(nom, precioComp, alquiler, factor, hipoteca, precioEdif)
+    def initialize(nom, alquiler, factor, hipoteca, precioComp, precioEdif)
       @nombre = nom
       @precio_compra = precioComp
       @alquiler_base = alquiler

@@ -53,12 +53,13 @@ public class Sorpresa {
         return false;
     }
 
-    void informe(int actual, ArrayList<Jugador> todos){
-        Diario.getInstance().ocurreEvento("Se esta aplicando una sorpresa a" +
-                todos.get(actual).getNombre()); // todos[actual].nombre());
+    void informe(int actual, ArrayList<Jugador> todos) {
+        Diario.getInstance().ocurreEvento("Se esta aplicando una sorpresa a "
+                + todos.get(actual).getNombre()); // todos[actual].nombre());
     }
 
     void aplicarAJugador(int actual, ArrayList<Jugador> todos) {
+        System.out.println(this.texto); //añadido para saber que sorpresa ha tocado
         switch (sorpresa) {
             case IRCARCEL:
                 aplicarAJugador_irCarcel(actual, todos);
@@ -128,13 +129,13 @@ public class Sorpresa {
         if (jugadorCorrecto(actual, todos)) {
             informe(actual, todos);
             Boolean loTienen = false;
-            for(int i=0; i<todos.size() && !loTienen; i++){
-                if(todos.get(i).tieneSalvoconducto()){
+            for (int i = 0; i < todos.size() && !loTienen; i++) {
+                if (todos.get(i).tieneSalvoconducto()) {
                     loTienen = true;
                 }
             }
 
-            if(!loTienen){
+            if (!loTienen) {
                 todos.get(actual).obtenerSalvoconducto(new Sorpresa(sorpresa.SALIRCARCEL, -1, "Quedas libre de la carcel"));
                 salirDelMazo();
             }

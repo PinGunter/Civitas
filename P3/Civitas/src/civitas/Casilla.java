@@ -46,6 +46,7 @@ public class Casilla {
 
     Casilla(int numCasillaCarcel, String nombre) {
         init();
+        this.tipo = TipoCasilla.DESCANSO;
         this.nombre = nombre;
         carcel = numCasillaCarcel;
     }
@@ -82,26 +83,19 @@ public class Casilla {
 
     @Override
     public String toString() {
-        String info = "Carcel: " + carcel
-                + "\nImporte: " + importe
-                + "\nNombre: " + nombre
-                + "\nTipo: " + tipo
-                + "\nMazoSorpresas: " + mazo
-                + "\nTituloPropiedad: " + tituloPropiedad.getNombre();
+        String info = "Nombre: " + nombre;
+        if (tipo == TipoCasilla.CALLE) {
+            info += "\nPrecio: " + importe;
+            Jugador propietario = tituloPropiedad.getPropietario();
+            if (propietario != null) {
+                info += "\nPropietario: " + propietario.getNombre();
+            } else {
+                info += "\nLa casilla no tiene dueño";
+            }
+        }
+
         return info;
     }
-    
-    /*void recibeJugador(int iactual, ArrayList<Jugador> todos){
-        
-    }
-    
-    private void recibeJugador_calle(int actual, ArrayList<Jugador> todos) {
-       
-    }
-    
-    private void recibeJugador_sorpresa(int actual, ArrayList<Jugador> todos) {
-        
-    }*/
 
     private void recibeJugador_impuesto(int actual, ArrayList<Jugador> todos) {
         if (jugadorCorrecto(actual, todos)) {
