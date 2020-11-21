@@ -3,8 +3,8 @@
 # and open the template in the editor.
 module Civitas
   class Titulo_propiedad
-    attr_reader :nombre, :precio_compra, :alquiler_base, :factor_revalorizacion,
-      :hipoteca_base, :precio_edificar, :num_hoteles, :num_casas
+    #attr_reader :nombre, :precio_compra, :alquiler_base, :factor_revalorizacion,
+     # :hipoteca_base, :precio_edificar, :num_hoteles, :num_casas
     attr_accessor :hipotecada, :propietario
     
     def initialize(nom, precioComp, alquiler, factor, hipoteca, precioEdif)
@@ -23,10 +23,31 @@ module Civitas
     @override
     def to_s()
       "\n-TituloPropiedad: \nNombre: #{@nombre} \nHipotecada: #{@hipotecada} 
-         \nPrecio compra: #{@precioCompra} \nAlquiler base: #{@alquilerBase} 
-         \nFactor revalorizacion: #{@factorRevalorizacion} \nHipoteca base: #{@hipotecaBase} 
-         \nPrecio edificar: #{@precioEdificar} \nNúmero de hoteles: #{@numHoteles}
-         \nNúmero de casas: #{@numCasas}\n\n"
+         \nPrecio compra: #{@precio_compra} \nAlquiler base: #{@alquiler_base} 
+         \nFactor revalorizacion: #{@factor_revalorizacion} \nHipoteca base: #{@hipoteca_base} 
+         \nPrecio edificar: #{@precio_edificar} \nNúmero de hoteles: #{@num_hoteles}
+         \nNúmero de casas: #{@num_casas}\n\n"
+    end
+    
+    def get_hipoteca_base
+      @hipoteca_base
+    end
+  
+    def get_num_casas
+      @num_casas
+    end
+    
+    
+    def get_num_hoteles
+      @num_hoteles
+    end 
+    
+    def get_alquiler_base
+      @alquiler_base
+    end
+    
+    def get_factor_revalorizacion
+      @factor_revalorizacion
     end
     
     def get_precio_alquiler
@@ -78,7 +99,10 @@ module Civitas
     end
     
     def construir_casa(jugador)
-      
+      result = false
+      if(es_este_el_propietario(jugador))
+        @propietario.paga(@precio_compra)
+      end
     end
     
     def construir_hotel(jugador)
@@ -117,6 +141,10 @@ module Civitas
     
     def get_precio_edificar
       @precio_edificar
+    end
+    
+    def get_precio_compra
+      @precio_compra
     end
     
     def get_precio_venta

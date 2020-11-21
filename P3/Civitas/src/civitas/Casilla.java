@@ -91,7 +91,7 @@ public class Casilla {
         return info;
     }
     
-    void recibeJugador(int iactual, ArrayList<Jugador> todos){
+    /*void recibeJugador(int iactual, ArrayList<Jugador> todos){
         
     }
     
@@ -101,7 +101,7 @@ public class Casilla {
     
     private void recibeJugador_sorpresa(int actual, ArrayList<Jugador> todos) {
         
-    }
+    }*/
 
     private void recibeJugador_impuesto(int actual, ArrayList<Jugador> todos) {
         if (jugadorCorrecto(actual, todos)) {

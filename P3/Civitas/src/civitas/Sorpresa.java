@@ -117,7 +117,7 @@ public class Sorpresa {
                 if (i != actual)
                     todos.get(i).paga(s.valor);
             
-            Sorpresa s1 = new Sorpresa (TipoSorpresa.PAGARCOBRAR, valor * todos.length-1, "");
+            Sorpresa s1 = new Sorpresa (TipoSorpresa.PAGARCOBRAR, valor * todos.size()-1, "");
             todos.get(actual).recibe (s1.valor);
         }
     }
@@ -133,7 +133,7 @@ public class Sorpresa {
             }
             
             if(!loTienen){
-                todos.get(actual).obtenerSalvoconductor(sorpresa.SALIRCARCEL); // this?
+                todos.get(actual).obtenerSalvoconducto(new Sorpresa(sorpresa.SALIRCARCEL, -1, "Quedas libre de la carcel"));
                 salirDelMazo();
             }
         }

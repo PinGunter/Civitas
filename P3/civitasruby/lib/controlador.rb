@@ -40,24 +40,24 @@ module Juego_texto
           
           when Civitas::OperacionesJuego::GESTIONAR   
             @vista.gestionar
-            gest = GestionesInmobiliarias::lista_Gestiones[@vista.get_gestion]
+            gest = gestiones_inmobiliarias::Lista_gestiones_inmobiliarias[@vista.get_gestion]
             ip = @vista.get_propiedad
                   
-            operacionInm = OperacionInmobiliaria.new(ip,gest)
+            operacion_inm = operacion_inmobiliaria.new(ip,gest)
                   
-            case operacionInm.gestion
+            case operacion_inm.gestion
             when Civitas::gestiones_inmobiliarias::VENDER    #me lo asocia con el método vender de juego en vez de con el enum
               @juego.vender(ip)
             when Civitas::gestiones_inmobiliarias::HIPOTECAR
               @juego.hipotecar(ip)
             when Civitas::gestiones_inmobiliarias::CANCELAR_HIPOTECA
-              @juego.cancelarHipoteca(ip)
+              @juego.cancelar_hipoteca(ip)
             when Civitas::gestiones_inmobiliarias::CONSTRUIR_CASA
-              @juego.construirCasa(ip)
+              @juego.construir_casa(ip)
             when Civitas::gestiones_inmobiliarias::CONSTRUIR_HOTEL
-              @juego.construirHotel(ip)
+              @juego.construir_hotel(ip)
             when Civitas::gestiones_inmobiliarias::TERMINAR
-              @juego.siguientePasoCompletado(operacion)
+              @juego.siguiente_paso_completado(operacion)
             end
           
           when operaciones_juego::SALIR_CARCEL
