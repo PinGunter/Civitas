@@ -16,8 +16,8 @@ module Civitas
   p4 = 0
   i = 0
   100.times do
-    empieza=Dado.Instance.quien_empieza(4)
-    puts "Iteracion" + i
+    empieza=Dado.instance.quien_empieza(4)
+    puts "Iteracion" + i.to_s
     if empieza == 0
       p1 +=1
     elsif empieza == 1
@@ -30,9 +30,9 @@ module Civitas
     i += 1
   end
 
-  puts "Jugador 1:" + p1
-  puts "Jugador 2:" + p2
-  puts "Jugador 3:" + p3
-  puts "Jugador 4:" + p4
+  puts "Jugador 1:" + p1.to_s
+  puts "Jugador 2:" + p2.to_s
+  puts "Jugador 3:" + p3.to_s
+  puts "Jugador 4:" + p4.to_s
 
 end

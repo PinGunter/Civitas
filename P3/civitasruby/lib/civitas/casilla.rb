@@ -60,7 +60,7 @@ module Civitas
       end
     end
 
-    def recibejugador_calle(iactual, todos)
+    def recibeJugador_calle(iactual, todos)
       if (jugador_correcto(iactual, todos))
         informe(iactual, todos)
         jugador = todos.get(actual)
@@ -91,45 +91,45 @@ module Civitas
            ha caido en la casilla #{@nombre}. Informacion de la casilla: #{to_s}
           Informacion del jugador: #{todos.get(actual).to_s}")
       end
-
-      def jugador_correcto(actual, todos)
-        actual >= 0 and actual < todos.length
-      end
-
-      @override
-      def to_s
-        "Carcel: #{@carcel}. Importe: #{@importe}. Nombre: #{@nombre}.
-        Tipo: #{@tipo}. MazoSorpresas: #{@mazo}. TituloPropiedad: #{@titulo_propiedad.get_nombre}"
-      end
-
-      def recibeJugador_impuesto(actual, todos)
-        if jugador_correcto(actual, todos)
-          informe(actual, todos)
-          todos.get(actual).paga_impuesto(importe)
-        end
-      end
-
-      def recibeJugador_juez(actual, todos)
-        if jugador_correcto(actual, todos)
-          informe(actual, todos)
-          todos.get(actual).encarcelar(@carcel)
-        end
-      end
-
-      def get_nombre
-        @nombre
-      end
-
-      def get_titulo
-        @titulo_propiedad
-      end
-
-
     end
 
+    def jugador_correcto(actual, todos)
+      actual >= 0 and actual < todos.length
+    end
 
+    @override
+    def to_s
+      "Carcel: #{@carcel}. Importe: #{@importe}. Nombre: #{@nombre}.
+        Tipo: #{@tipo}. MazoSorpresas: #{@mazo}. TituloPropiedad: #{@titulo_propiedad.get_nombre}"
+    end
 
+    def recibeJugador_impuesto(actual, todos)
+      if jugador_correcto(actual, todos)
+        informe(actual, todos)
+        todos.get(actual).paga_impuesto(importe)
+      end
+    end
 
-    private :informe, :init, :recibeJugador_calle, :recibeJugador_impuesto, :recibeJugador_juez, :recibeJugador_sorpresa
+    def recibeJugador_juez(actual, todos)
+      if jugador_correcto(actual, todos)
+        informe(actual, todos)
+        todos.get(actual).encarcelar(@carcel)
+      end
+    end
+
+    def get_nombre
+      @nombre
+    end
+
+    def get_titulo
+      @titulo_propiedad
+    end
+
+    private :informe, :init, :recibeJugador_calle, :recibeJugador_juez, :recibeJugador_sorpresa, :recibeJugador_impuesto
+
   end
+
+
+
+
 end
