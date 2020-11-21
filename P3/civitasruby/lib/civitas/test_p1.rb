@@ -29,10 +29,10 @@ module Civitas
     end
     i += 1
   end
-  
+
   puts "Jugador 1:" + p1
   puts "Jugador 2:" + p2
   puts "Jugador 3:" + p3
   puts "Jugador 4:" + p4
-  
+
 end

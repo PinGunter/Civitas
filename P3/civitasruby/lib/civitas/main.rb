@@ -123,4 +123,3 @@ module Civitas
   #    indice += 1
   #  end
 end
-

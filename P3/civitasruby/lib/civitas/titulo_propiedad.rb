@@ -1,13 +1,10 @@
-#encoding:utf-8
-
 # To change this license header, choose License Headers in Project Properties.
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
-
 module Civitas
   class Titulo_propiedad
-    attr_reader :nombre, :precio_compra, :alquiler_base, :factor_revalorizacion,
-      :hipoteca_base, :precio_edificar, :num_hoteles, :num_casas
+    #attr_reader :nombre, :precio_compra, :alquiler_base, :factor_revalorizacion,
+     # :hipoteca_base, :precio_edificar, :num_hoteles, :num_casas
     attr_accessor :hipotecada, :propietario
 
     def initialize(nom, precioComp, alquiler, factor, hipoteca, precioEdif)
@@ -20,16 +17,37 @@ module Civitas
       @hipotecada = false
       @num_hoteles = 0
       @num_casas = 0
-      @propietario = nil
+      @propietario = nill
     end
 
     @override
     def to_s()
       "\n-TituloPropiedad: \nNombre: #{@nombre} \nHipotecada: #{@hipotecada}
-         \nPrecio compra: #{@precioCompra} \nAlquiler base: #{@alquilerBase}
-         \nFactor revalorizacion: #{@factorRevalorizacion} \nHipoteca base: #{@hipotecaBase}
-         \nPrecio edificar: #{@precioEdificar} \nNúmero de hoteles: #{@numHoteles}
-         \nNúmero de casas: #{@numCasas}\n\n"
+         \nPrecio compra: #{@precio_compra} \nAlquiler base: #{@alquiler_base}
+         \nFactor revalorizacion: #{@factor_revalorizacion} \nHipoteca base: #{@hipoteca_base}
+         \nPrecio edificar: #{@precio_edificar} \nNúmero de hoteles: #{@num_hoteles}
+         \nNúmero de casas: #{@num_casas}\n\n"
+    end
+
+    def get_hipoteca_base
+      @hipoteca_base
+    end
+
+    def get_num_casas
+      @num_casas
+    end
+
+
+    def get_num_hoteles
+      @num_hoteles
+    end
+
+    def get_alquiler_base
+      @alquiler_base
+    end
+
+    def get_factor_revalorizacion
+      @factor_revalorizacion
     end
 
     def get_precio_alquiler
@@ -53,24 +71,48 @@ module Civitas
       @propietario = jugador
     end
 
-    def cancelar_hipoteca
-
+    def cancelar_hipoteca(jugador)
+      result = false
+      if(@hipotecado)
+        if(es_este_el_propietaro(jugador))
+          @propietario.paga(get_importe_cancelar_hipoteca)
+          @hipotecado = false
+          result =  true
+        end
+      end
+      return result
     end
+
 
     def cantidad_casas_hoteles
       (get_num_casas + get_num_hoteles)
     end
 
     def comprar(jugador)
-      
+      result = false
+      if (@propietario == nill)
+        @propietario = jugador
+        result = true
+        @propietario.paga(precio_compra)
+      end
+      return result
     end
 
     def construir_casa(jugador)
-
+      result = false
+      if(es_este_el_propietario(jugador))
+        @propietario.paga(@precio_compra)
+      end
     end
 
     def construir_hotel(jugador)
-
+      result = false
+      if (es_este_el_propietario(jugador))
+        @propietario.paga(precio_edificar)
+        num_hoteles = num_hoteles + 1
+        result = true
+      end
+      return result
     end
 
     def es_este_el_propietario(jugador)
@@ -101,6 +143,10 @@ module Civitas
       @precio_edificar
     end
 
+    def get_precio_compra
+      @precio_compra
+    end
+
     def get_precio_venta
       (get_precio_compra + get_precio_edificar*
         cantidad_casas_hoteles*@factor_revalorizacion)
@@ -111,13 +157,22 @@ module Civitas
     end
 
     def hipotecar(jugador)
-
+      salida = false
+      if (@hipotecado == false && es_este_el_propietario(jugador))
+        @propietario.recibe(get_importe_hipoteca)
+        @hipotecado = true
+        salida = true
+      end
+      return salida
     end
 
     def tramitar_alquiler(jugador)
-      if tiene_propietario == true and es_este_el_propietario(jugador) == false
-        jugador.paga_alquiler(get_precio_alquiler)
-        @propietario.recibe(get_precio_alquiler)
+      if (@propietario != nill)
+        if(es_este_el_propietario(jugador) == false)
+        precio= get_precio_alquiler()
+        jugador.paga_alquiler(precio)
+        recibe(precio)
+        end
       end
     end
 
