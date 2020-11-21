@@ -54,7 +54,7 @@ public class Sorpresa {
     
     void informe(int actual, ArrayList<Jugador> todos){
         Diario.getInstance().ocurreEvento("Se esta aplicando una sorpresa a" + 
-                todos[actual].getNombre()); // todos[actual].nombre()); 
+                todos.get(actual).getNombre()); // todos[actual].nombre()); 
     }
     
     void aplicarAJugador(int actual, ArrayList<Jugador> todos){
@@ -96,7 +96,7 @@ public class Sorpresa {
     void aplicarAJugador_pagarCobrar (int actual, ArrayList<Jugador> todos){
         if(jugadorCorrecto(actual, todos)){
             informe(actual, todos);
-            todos[actual].modificarSaldo(valor);
+            todos.get(actual).modificarSaldo(valor);
         }
     }
     
@@ -104,7 +104,7 @@ public class Sorpresa {
     void aplicarAJugador_porCasaHotel (int actual, ArrayList<Jugador> todos){
         if(jugadorCorrecto(actual, todos)){
             informe(actual, todos);
-            todos[actual].modificarSaldo(valor*todos[actual].cantidadCasasHoteles());
+            todos.get(actual).modificarSaldo(valor*todos.get(actual).cantidadCasasHoteles());
         }
     }
     
@@ -113,12 +113,12 @@ public class Sorpresa {
             informe (actual, todos);
             Sorpresa s = new Sorpresa (TipoSorpresa.PAGARCOBRAR, valor*-1, "");
             
-            for (int i=0 ; i<todos.length ; i++) // o todos.size();
+            for (int i=0 ; i<todos.size() ; i++) // o todos.size();
                 if (i != actual)
-                    todos[i].paga(s.valor);
+                    todos.get(i).paga(s.valor);
             
             Sorpresa s1 = new Sorpresa (TipoSorpresa.PAGARCOBRAR, valor * todos.length-1, "");
-            todos[actual].recibe (s1.valor);
+            todos.get(actual).recibe (s1.valor);
         }
     }
     
@@ -127,13 +127,13 @@ public class Sorpresa {
             informe (actual, todos);
             Boolean loTienen = false;
             for(int i=0; i<todos.size() && !loTienen; i++){
-                if(todos[i].tieneSalvoconducto()){
+                if(todos.get(i).tieneSalvoconducto()){
                     loTienen = true;
                 }
             }
             
             if(!loTienen){
-                todos[actual].obtenerSalvoconductor(sorpresa.SALIRCARCEL); // this?
+                todos.get(actual).obtenerSalvoconductor(sorpresa.SALIRCARCEL); // this?
                 salirDelMazo();
             }
         }

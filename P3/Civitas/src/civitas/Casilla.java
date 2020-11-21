@@ -90,6 +90,18 @@ public class Casilla {
                 + "\nTituloPropiedad: " + tituloPropiedad.getNombre();
         return info;
     }
+    
+    void recibeJugador(int iactual, ArrayList<Jugador> todos){
+        
+    }
+    
+    private void recibeJugador_calle(int actual, ArrayList<Jugador> todos) {
+       
+    }
+    
+    private void recibeJugador_sorpresa(int actual, ArrayList<Jugador> todos) {
+        
+    }
 
     private void recibeJugador_impuesto(int actual, ArrayList<Jugador> todos) {
         if (jugadorCorrecto(actual, todos)) {
@@ -109,7 +121,7 @@ public class Casilla {
         return nombre;
     }
 
-    public TituloPropiedad getTitulo() {
+    TituloPropiedad getTitulo() {
         return tituloPropiedad;
     }
 
