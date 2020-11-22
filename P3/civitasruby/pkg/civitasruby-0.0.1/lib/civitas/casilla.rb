@@ -10,7 +10,7 @@ module Civitas
       init
       @nombre = nombre
       @titulo = titulo
-      @cantidad = cantidad
+      @importe = cantidad
       @num_casilla_carcel = num_casilla_carcel
       @mazo = mazo
       @tipo = tipo
@@ -37,22 +37,21 @@ module Civitas
     end
 
     def init
-      @importe = -1
       @nombre = ""
       @tipo = nil
       @mazo = nil
-      @titulo_propiedad = nil
+      @titulo = nil
     end
 
     def recibe_jugador(iactual, todos)
-      case tipo
-      when CALLE
+      case @tipo
+      when Tipo_casilla::CALLE
         recibeJugador_calle(iactual, todos) # hacer
-      when IMPUESTO
+      when Tipo_casilla::IMPUESTO
         recibeJugador_impuesto(iactual, todos)
-      when JUEZ
+      when Tipo_casilla::JUEZ
         recibeJugador_juez(iactual, todos)
-      when SORPRESA
+      when Tipo_casilla::SORPRESA
         recibeJugador_sorpresa(iactual, todos) # hacer
       else
         informe(iactual, todos)
@@ -62,7 +61,7 @@ module Civitas
     def recibeJugador_calle(iactual, todos)
       if (jugador_correcto(iactual, todos))
         informe(iactual, todos)
-        jugador = todos.get(actual)
+        jugador = todos.at(iactual)
         if(!@titulo.tiene_propietario)
           jugador.puede_comprar_casilla
         else
@@ -86,9 +85,7 @@ module Civitas
 
     def informe(actual, todos)
       if jugador_correcto(actual, todos)
-        Diario.instance.ocurre_evento("El jugador #{todos.get(actual).get_nombre}
-           ha caido en la casilla #{@nombre}. Informacion de la casilla: #{to_s}
-          Informacion del jugador: #{todos.get(actual).to_s}")
+        Diario.instance.ocurre_evento("El jugador #{todos.at(actual).get_nombre} ha caido en la casilla #{@nombre}. \nInformacion de la casilla: \n#{to_s} \nInformacion del jugador: #{todos.at(actual).to_s}\n")
       end
     end
 
@@ -100,15 +97,15 @@ module Civitas
     def to_s
       info = "Nombre: #{@nombre}"
       if @tipo == Tipo_casilla::CALLE
-        info += "\nPrecio: " + @importe
-        propietario = @titulo_propiedad.get_propietario
+        info += "\nPrecio: " + @importe.to_s
+        propietario = @titulo.get_propietario
         if propietario != nil
-            info += "\nPropietario: " + propietario.get_nombre
-            info += "\nNúmero de casas: " + @titulo_propiedad.get_num_casas
-            info += "\nNúmero de hoteles: " + @titulo_propiedad.get_num_hoteles
-            info += "\nPrecio del alquiler: " + @titulo_propiedad.get_precio_alquiler
+          info += "\nPropietario: " + propietario.get_nombre
+          info += "\nNúmero de casas: " + @titulo.get_num_casas.to_s
+          info += "\nNúmero de hoteles: " + @titulo.get_num_hoteles.to_s
+          info += "\nPrecio del alquiler: " + @titulo.get_precio_alquiler.to_s
         else
-            info += "\nLa casilla no tiene dueño"
+          info += "\nLa casilla no tiene dueño"
         end
 
       end
@@ -118,14 +115,14 @@ module Civitas
     def recibeJugador_impuesto(actual, todos)
       if jugador_correcto(actual, todos)
         informe(actual, todos)
-        todos.get(actual).paga_impuesto(importe)
+        todos.at(actual).paga_impuesto(importe)
       end
     end
 
     def recibeJugador_juez(actual, todos)
       if jugador_correcto(actual, todos)
         informe(actual, todos)
-        todos.get(actual).encarcelar(@carcel)
+        todos.at(actual).encarcelar(@carcel)
       end
     end
 
@@ -134,7 +131,7 @@ module Civitas
     end
 
     def get_titulo
-      @titulo_propiedad
+      @titulo
     end
 
     private :informe, :init, :recibeJugador_calle, :recibeJugador_juez, :recibeJugador_sorpresa, :recibeJugador_impuesto

@@ -115,7 +115,7 @@ module Civitas
     def aplicar_a_jugador_pagar_cobrar(actual,todos)
       if jugador_correcto(actual,todos)
         informe(actual,todos)
-        todos.at(actual).modificar_salvo(@valor)
+        todos.at(actual).modificar_saldo(@valor)
       end
     end
 

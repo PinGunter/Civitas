@@ -59,7 +59,7 @@ module Civitas
       puts titulo
       index = 0
       lista.each { |l|
-        puts tab+index.to_s+"-"+l
+        puts tab+index.to_s+"-"+l.to_s
         index += 1
       }
 
@@ -92,7 +92,7 @@ module Civitas
     end
 
     def mostrar_siguiente_operacion(operacion)
-      print "Siguiente operacion #{operacion}"
+      print "Siguiente operacion #{operacion}\n"
     end
 
     def mostrar_eventos

@@ -39,6 +39,9 @@ module Civitas
       @num_casas
     end
 
+    def tiene_propietario
+      @propietario != nil
+    end
 
     def get_num_hoteles
       @num_hoteles
@@ -55,7 +58,7 @@ module Civitas
     def get_precio_alquiler
       res = @alquiler_base * (1+(@num_casas*0.5)
         + (@num_hoteles*2.5))
-      if hipotecado == true or propietario_encarcelado
+      if @hipotecado == true or propietario_encarcelado
         res = 0
       end
       return res
@@ -92,10 +95,10 @@ module Civitas
 
     def comprar(jugador)
       result = false
-      if (@propietario == nill)
+      if (@propietario == nil)
         @propietario = jugador
         result = true
-        @propietario.paga(precio_compra)
+        @propietario.paga(@precio_compra)
       end
       return result
     end
@@ -180,7 +183,7 @@ module Civitas
 
     def propietario_encarcelado
       res = false
-      if @propietario.encarcelado == true
+      if @propietario.get_is_encarcelado == true
         res = true
       end
       return res
@@ -201,7 +204,7 @@ module Civitas
 
     def vender(jugador)
       res = false
-      if(@hipotecado == false and es_este_el_propietario(jugador) == true)
+      if(!@hipotecado && es_este_el_propietario(jugador))
         jugador.recibe(get_precio_venta())
         derruir_casas(@num_casas,jugador)
         derruir_hoteles(@num_hoteles,jugador)
@@ -211,6 +214,6 @@ module Civitas
       return res
     end
 
-    private :es_este_el_propietario, :get_importe_hipoteca, :get_precio_venta, # :get_precio_alquiler # este ultimo le cambiamos la visiblidad de private a public para mejorar la visibilidad del dato durante las partidas
+    private :es_este_el_propietario, :get_importe_hipoteca, :get_precio_venta #,  :get_precio_alquiler # este ultimo le cambiamos la visiblidad de private a public para mejorar la visibilidad del dato durante las partidas
   end
 end

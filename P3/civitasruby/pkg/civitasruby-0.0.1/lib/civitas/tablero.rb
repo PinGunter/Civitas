@@ -20,8 +20,13 @@ module Civitas
 
     end
     #metodo privado para saber si el tablero es correcto. parametro opcional num_casilla para comprobar tambien una posicion del tablero
-    def correcto(num_casilla=0)
-      return (@casillas.length > @num_casilla_carcel && @tiene_juez && num_casilla >= 0 && num_casilla < @casillas.length)
+    def correcto(num_casilla)
+      if num_casilla == -1
+        num_casilla = 0
+      end
+      correcto_general = @casillas.length > @num_casilla_carcel && @tiene_juez
+      correcto_casilla = (num_casilla  || num_casilla == 0) && num_casilla < @casillas.length
+      correcto_general && correcto_casilla
     end
 
     def get_por_salida
@@ -35,11 +40,11 @@ module Civitas
 
     def añade_casilla(casilla)
       if @casillas.length == @num_casilla_carcel
-        @casillas << Casilla.new_num_casilla_carcel_nombre(@num_casilla_carcel,"Cárcel")
+        @casillas << Casilla.new_nombre("Cárcel")
       end
       @casillas << casilla
       if @casillas.length == @num_casilla_carcel
-        @casillas << Casilla.new_num_casilla_carcel_nombre(@num_casilla_carcel,"Cárcel")
+        @casillas << Casilla.new_nombre("Cárcel")
       end
     end
 
@@ -51,7 +56,7 @@ module Civitas
     end
 
     def get_casilla(num_casilla)
-      puts correcto(num_casilla)
+      #puts correcto(num_casilla)
       if correcto(num_casilla)
         return @casillas.at(num_casilla);
       else
@@ -60,7 +65,7 @@ module Civitas
     end
 
     def nueva_posicion(actual, tirada)
-      if correcto
+      if correcto(-1)
         nueva = actual + tirada
         if nueva >= @casillas.length # cambiado de > a >=
           @por_salida += 1

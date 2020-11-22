@@ -69,15 +69,15 @@ module Civitas
         return result
       end
 
-      if(puede_comprar)
+      if(@puede_comprar)
         precio = titulo.get_precio_compra
 
         if(puedo_gastar(precio))
           result = titulo.comprar(self)
 
           if(result)
-            @propiedades.add(titulo) #@propiedades<<titulo
-            Diario.instance.ocurre_evento("#{@nombre} compra propiedad #{@titulo.get_nombre}")
+            @propiedades<<titulo #@propiedades<<titulo
+            Diario.instance.ocurre_evento("#{@nombre} compra propiedad #{titulo.get_nombre}")
           end
           @puede_comprar = false
         end
@@ -177,12 +177,12 @@ module Civitas
 
     def perder_salvoconducto
       @salvoconducto.usada
-      @salvoconducto = nill
+      @salvoconducto = nil
     end
 
     def tiene_salvoconducto
       res = false
-      if @salvoconducto != nill
+      if @salvoconducto != nil
         res = true
       end
       return res
@@ -270,7 +270,7 @@ module Civitas
 
     def tiene_algo_que_gestionar
       res = false
-      if @propiedades.lenght > 0
+      if @propiedades.size > 0
         res = true
       end
       return res
@@ -306,7 +306,7 @@ module Civitas
 
     def cantidad_casas_hoteles
       total = 0
-      for i in (0..@propiedades.lenght-1)
+      for i in (0..@propiedades.size-1)
         total+=@propiedades.at(i).num_casas
         total+=@propiedades.at(i).num_hoteles
       end
@@ -315,7 +315,7 @@ module Civitas
 
     def en_bancarrota
       res = false
-      if saldo <= 0
+      if @saldo <= 0
         res = true
       end
       return res
@@ -394,18 +394,18 @@ module Civitas
       propiedades = get_propiedades
       nombres_propiedades = []
       propiedades.each do |nombres|
-        nombres_propiedades << nombres
+        nombres_propiedades << nombres.get_nombre
       end
       info = "**********\n"
-      info +=  "Nombre: #{@nombre}      
+      info +=  "Nombre: #{@nombre}
       \nEncarcelado: #{@encarcelado}
       \nNumero casilla actual: #{@num_casilla_actual}
       \nSaldo: #{@saldo}
-      \nPropiedades #{@propiedades}"
+      \nPropiedades #{nombres_propiedades}"
       info += "\n*********"
       return info
     end
-    
+
 
     def get_propiedades #cambiada visibilidad protected->public para usar en opciones de gestion
       @propiedades
@@ -415,6 +415,9 @@ module Civitas
       @saldo
     end
 
+    def get_nombre  #cambiamos la visibilidad de protected a public para facilitar la accesibilidad de la partida.
+      @nombre
+    end
     private :existe_la_propiedad, :get_casas_max, :get_hoteles_max, :get_precio_libertad, :get_premio_por_salida, :perder_salvoconducto, :salir_carcel_pagando,
       :puedo_edificar_casa, :puedo_edificar_hotel, :puedo_gastar
     protected #:debe_ser_encarcelado, :get_nombre, :get_propiedades, :get_saldo, :jugador
@@ -433,12 +436,9 @@ module Civitas
       return res
     end
 
-    def get_nombre
-      @nombre
-    end
 
-    def self.jugador_2(otro)
-      new(otro.encarcelado, otro.nombre, otro.num_casilla_actual, otro.puede_comprar,
+    def self.new_copia(otro)
+      new(otro.encarcelado, otro.nombre, otro.num_casilla_actual, otro.get_puede_comprar,
         otro.saldo, otro.salvoconducto, otro.propiedades)
     end
 

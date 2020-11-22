@@ -18,14 +18,13 @@ module Civitas
 
     def juega
       @vista.set_civitas_juego(@juego)
-      while(!@juego.final_de_juego)
+      while(!@juego.final_del_juego)
         @vista.actualizar_vista
         @vista.pausa
-
         op = @juego.siguiente_paso
         @vista.mostrar_siguiente_operacion(op)
 
-        if(op != operaciones_juego::PASAR_TURNO)
+        if(op != Operaciones_juego::PASAR_TURNO)
           @vista.mostrar_eventos
         end
 
@@ -38,26 +37,26 @@ module Civitas
             end
             @juego.siguiente_paso_completado(op)
 
-          when Civitas::OperacionesJuego::GESTIONAR
+          when Civitas::Operaciones_juego::GESTIONAR
             @vista.gestionar
-            gest = gestiones_inmobiliarias::Lista_gestiones_inmobiliarias[@vista.get_gestion]
+            gest = Gestiones_inmobiliarias::Lista_gestiones_inmobiliarias[@vista.get_gestion]
             ip = @vista.get_propiedad
 
-            operacion_inm = operacion_inmobiliaria.new(ip,gest)
+            operacion_inm = Operacion_inmobiliaria.new(gest,ip)
 
             case operacion_inm.gestion
-            when Civitas::gestiones_inmobiliarias::VENDER    #me lo asocia con el método vender de juego en vez de con el enum
+            when Civitas::Gestiones_inmobiliarias::VENDER    #me lo asocia con el método vender de juego en vez de con el enum
               @juego.vender(ip)
-            when Civitas::gestiones_inmobiliarias::HIPOTECAR
+            when Civitas::Gestiones_inmobiliarias::HIPOTECAR
               @juego.hipotecar(ip)
-            when Civitas::gestiones_inmobiliarias::CANCELAR_HIPOTECA
+            when Civitas::Gestiones_inmobiliarias::CANCELAR_HIPOTECA
               @juego.cancelar_hipoteca(ip)
-            when Civitas::gestiones_inmobiliarias::CONSTRUIR_CASA
+            when Civitas::Gestiones_inmobiliarias::CONSTRUIR_CASA
               @juego.construir_casa(ip)
-            when Civitas::gestiones_inmobiliarias::CONSTRUIR_HOTEL
+            when Civitas::Gestiones_inmobiliarias::CONSTRUIR_HOTEL
               @juego.construir_hotel(ip)
-            when Civitas::gestiones_inmobiliarias::TERMINAR
-              @juego.siguiente_paso_completado(operacion)
+            when Civitas::Gestiones_inmobiliarias::TERMINAR
+              @juego.siguiente_paso_completado(op)
             end
 
           when Operaciones_juego::SALIR_CARCEL
