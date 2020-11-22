@@ -17,7 +17,7 @@ module Civitas
     end
 
     def self.new_nombre(nombre)
-      Casilla.new(nombre, nil, -1, -1, nil, nil)
+      Casilla.new(nombre, nil, -1, -1, nil, Tipo_casilla::DESCANSO)
     end
 
     def self.new_titulo_propiedad(titulo)
