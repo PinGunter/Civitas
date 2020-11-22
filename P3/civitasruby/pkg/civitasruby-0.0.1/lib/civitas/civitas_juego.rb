@@ -22,7 +22,7 @@ module Civitas
     def initialize(nombres)
       @jugadores = Array.new
       nombres.each do |nombre|
-        @jugadores << Jugador.jugador_1(nombre)
+        @jugadores << Jugador.new_nombre(nombre)
       end
 
       @gestor_estados = Gestor_estados.new
@@ -69,7 +69,7 @@ module Civitas
       @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::IR_CASILLA, 13, "Suspendes el examen de PDOO y tienes que ir a revisión. Ve a la ETSIIT"))
       @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::POR_CASA_HOTEL, 350, "Hay un terremoto y el seguro te paga 350 por cada casa y hotel "))
       @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::PAGAR_COBRAR, 600, "Te conviertes en tu propio jefe y ganas 600"))
-      @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::POR_JUGADOR, 350, "Vas de fiesta con tus amigos sin medidas de seguridad y ahora debes pagarle la PCR"))
+      @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::POR_JUGADOR, -350, "Vas de fiesta con tus amigos sin medidas de seguridad y ahora debes pagarle la PCR"))
 
     end
 
@@ -88,7 +88,7 @@ module Civitas
 
     # metodo para obtener el siguiente estado del juego
     def siguiente_paso_completado(operacion)
-      @estado = @gestor_estados.siguiente_estado(@jugadores.at(@indice_jugador_actual), @estado, operacion)
+      @estado = @gestor_estados.siguiente_estado(get_jugador_actual, @estado, operacion)
     end
 
     # metodo que delega la operacion de construir casas
@@ -144,6 +144,15 @@ module Civitas
     def ranking
       orden = @jugadores.sort { |a,b| a <=> b  }
       return orden
+    end
+
+    def mostrar_ranking
+      rango = ranking
+      posicion = 0
+      rango.each do |jugador|
+        puts "Posicion: " + posicion.to_s +  jugador.to_s
+        posicion += 1
+      end
     end
 
     #metodo que devuelve el jugador actual

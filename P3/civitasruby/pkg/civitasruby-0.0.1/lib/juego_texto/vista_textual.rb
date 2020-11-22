@@ -103,13 +103,15 @@ module Civitas
 
     def set_civitas_juego(civitas)
       @juegoModel=civitas
-      self.actualizar_vista
+      actualizar_vista
     end
 
     def actualizar_vista
       jugador = @juegoModel.get_jugador_actual
       casilla = @juegoModel.get_casilla_actual
+      puts "Jugador actual"
       puts jugador.to_s
+      puts "Casilla actual"
       puts casilla.to_s
     end
 

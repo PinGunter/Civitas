@@ -15,7 +15,7 @@ module Civitas
     @@hoteles_max = 4
     @@paso_por_salida = 1000
     @@precio_libertad = 200
-    @@saldo_inicial = 750
+    @@saldo_inicial = 7500
 
     def initialize(encarcelado,nombre,num_casilla_actual,puede_comprar,
         saldo ,salvoconducto,propiedades)
@@ -28,7 +28,7 @@ module Civitas
       @propiedades = propiedades # array de titulopropiedad
     end
 
-    def self.jugador_1(n)
+    def self.new_nombre(n)
       #@nombre = nombre
       #@puede_comprar = false
       #@saldo = -1
@@ -56,7 +56,7 @@ module Civitas
         result = propiedad.cancelar_hipoteca(self)
         if(result)
           Diario.instance.ocurre_evento("#{@nombre} cancela hipoteca de
-            propiedad #{propiedad.nombre}")
+            propiedad #{propiedad.get_nombre}")
         end
       end
 
@@ -77,7 +77,7 @@ module Civitas
 
           if(result)
             @propiedades.add(titulo) #@propiedades<<titulo
-            Diario.instance.ocurre_evento("#{@nombre} compra propiedad #{@titulo.nombre}")
+            Diario.instance.ocurre_evento("#{@nombre} compra propiedad #{@titulo.get_nombre}")
           end
           @puede_comprar = false
         end
@@ -105,7 +105,7 @@ module Civitas
       end
       if(encarcelado == false && existe && puedo_casa_edificar && result)
         Diario.instance.ocurre_evento("El jugador #{@nombre} construye casa
-          en la propiedad #{ip}")
+          en la propiedad #{@propiedades.at(ip).get_nombre}")
       end
       return result
     end
@@ -151,7 +151,7 @@ module Civitas
 
       if(result)
         Diario.instance.ocurre_evento("#{@nombre} hipoteca la propiedad
-          #{ip}")
+          #{@propiedades.at(ip).get_nombre}")
       end
     end
 
@@ -224,7 +224,11 @@ module Civitas
 
     def modificar_saldo(cantidad)
       @saldo += cantidad
-      Diario.instance.ocurre_evento("Se incrementa el saldo del jugador #{@nombre}")
+      if(cantidad >= 0)
+        Diario.instance.ocurre_evento("Se incrementa el saldo del jugador #{@nombre} en #{cantidad}")
+      else
+        Diario.instance.ocurre_evento("Se decrementa el saldo del jugador #{@nombre} en #{-1*cantidad}")
+      end
       return true
     end
 
@@ -232,8 +236,8 @@ module Civitas
       if @encarcelado == true
         res = false
       else
-        @num_casilla = num_casilla
-        Diario.instance.ocurre_evento("#{@nombre} se mueve a casilla: #{@num_casilla}")
+        @num_casilla_actual = num_casilla
+        Diario.instance.ocurre_evento("#{@nombre} se mueve a casilla: #{@num_casilla_actual}")
         res = true
         @puede_comprar = false
       end
@@ -255,10 +259,10 @@ module Civitas
       else
         if (existe_la_propiedad(ip) == true and @propiedades.at(ip).hipotecado() == false)
           propiedad == @propiedades.at(ip)
-          devolver = propiedad.vender(self)
-          Diario.instance.ocurre_evento("#{@nombre} vende la casilla
-            #{@propiedades.at(ip).nombre()}")
-          propiedades.delete_at(ip)
+          res = propiedad.vender(self)
+          Diario.instance.ocurre_evento("#{@nombre} vende la casilla #{@propiedades.at(ip).nombre()}")
+          @propiedades.delete_at(ip)
+
         end
       end
       return res
@@ -387,15 +391,29 @@ module Civitas
 
     @override
     def to_s
-      "Nombre: #{@nombre}
-      Encarcelado: #{@encarcelado}
-      Puede comprar:#{"puede_comprar"}
-      Numero casilla actual: #{@num_casilla_actual}
-      Saldo: #{@saldo}
-      Numero de propiedades: #{@propiedades.length}
-      Propiedades #{@propiedades}"
+      propiedades = get_propiedades
+      nombres_propiedades = []
+      propiedades.each do |nombres|
+        nombres_propiedades << nombres
+      end
+      info = "**********\n"
+      info +=  "Nombre: #{@nombre}      
+      \nEncarcelado: #{@encarcelado}
+      \nNumero casilla actual: #{@num_casilla_actual}
+      \nSaldo: #{@saldo}
+      \nPropiedades #{@propiedades}"
+      info += "\n*********"
+      return info
+    end
+    
+
+    def get_propiedades #cambiada visibilidad protected->public para usar en opciones de gestion
+      @propiedades
     end
 
+    def get_saldo  #cambiamos la visibilidad de protected a public para facilitar la accesibilidad de la partida. Consultado al construir
+      @saldo
+    end
 
     private :existe_la_propiedad, :get_casas_max, :get_hoteles_max, :get_precio_libertad, :get_premio_por_salida, :perder_salvoconducto, :salir_carcel_pagando,
       :puedo_edificar_casa, :puedo_edificar_hotel, :puedo_gastar
@@ -417,14 +435,6 @@ module Civitas
 
     def get_nombre
       @nombre
-    end
-
-    def get_propiedades
-      @propiedades
-    end
-
-    def get_saldo
-      @saldo
     end
 
     def self.jugador_2(otro)

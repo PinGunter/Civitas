@@ -211,6 +211,6 @@ module Civitas
       return res
     end
 
-
+    private :es_este_el_propietario, :get_importe_hipoteca, :get_precio_venta, :get_precio_alquiler
   end
 end

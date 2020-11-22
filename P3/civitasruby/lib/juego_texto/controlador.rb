@@ -32,8 +32,8 @@ module Civitas
         if(!@juego.final_del_juego)
 
           case op
-          when operaciones_juego::COMPRAR
-            if(@vista.comprar == respuestas_::SI)
+          when Operaciones_juego::COMPRAR
+            if(@vista.comprar == Respuestas::Lista_respuestas.at(1))
               @juego.comprar
             end
             @juego.siguiente_paso_completado(op)
@@ -60,7 +60,7 @@ module Civitas
               @juego.siguiente_paso_completado(operacion)
             end
 
-          when operaciones_juego::SALIR_CARCEL
+          when Operaciones_juego::SALIR_CARCEL
             if(@vista.salir_carcel == salidas_carcel::PAGANDO)
               @juego.salir_carcel_pagando
             else

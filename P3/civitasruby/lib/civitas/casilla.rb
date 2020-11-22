@@ -37,7 +37,6 @@ module Civitas
     end
 
     def init
-      @carcel = -1
       @importe = -1
       @nombre = ""
       @tipo = nil
@@ -99,8 +98,18 @@ module Civitas
 
     @override
     def to_s
-      "Carcel: #{@carcel}. Importe: #{@importe}. Nombre: #{@nombre}.
-        Tipo: #{@tipo}. MazoSorpresas: #{@mazo}. TituloPropiedad: #{@titulo_propiedad.get_nombre}"
+      info = "Nombre: #{@nombre}"
+      if @tipo == Tipo_casilla::CALLE
+        info += "\nPrecio: " + @importe
+        propietario = @titulo_propiedad.get_propietario
+        if propietario != nil
+            info += "\nPropietario: " + propietario.get_nombre
+        else
+            info += "\nLa casilla no tiene dueño"
+        end
+
+      end
+
     end
 
     def recibeJugador_impuesto(actual, todos)

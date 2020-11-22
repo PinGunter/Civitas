@@ -62,7 +62,7 @@ module Civitas
     def nueva_posicion(actual, tirada)
       if correcto
         nueva = actual + tirada
-        if nueva > @casillas.length
+        if nueva >= @casillas.length # cambiado de > a >=
           @por_salida += 1
           nueva = nueva % @casillas.length
         end

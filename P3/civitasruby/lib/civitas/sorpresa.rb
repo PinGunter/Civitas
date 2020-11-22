@@ -61,13 +61,14 @@ module Civitas
     # metodo para informar al Civitas::Diario de que un jugador a recibido esta sorpresa
     def informe(actual,todos)
       if jugador_correcto(actual,todos)
-        Diario.instance.ocurre_evento("Jugador: " + todos.at(actual).nombre + " recibe sorpresa " + @texto)
+        Diario.instance.ocurre_evento("Jugador: " + todos.at(actual).get_nombre + " recibe sorpresa " + @texto)
       end
     end
 
     # metodo para gestionar que le debe pasar al jugador en funcion del tipo de sorpresa que sea
     # es un switch para seleccionar metodos privados
     def aplicar_a_jugador(actual,todos)
+      puts @texto
       case @tipo
       when Tipo_sorpresa::IR_CARCEL
         aplicar_a_jugador_ir_carcel(actual,todos)
