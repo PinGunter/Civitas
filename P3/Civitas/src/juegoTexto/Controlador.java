@@ -25,7 +25,7 @@ public class Controlador {
     public void juega() {
         vista.setCivitasJuego(juego);
         while (!juego.finalDelJuego()) {
-            //vista.actualizarVista(); // comentado para mejorar visibilidad en la ejecucion
+            vista.actualizarVista(); // comentado para mejorar visibilidad en la ejecucion
             vista.pausa();
             OperacionesJuego siguiente = juego.siguientePaso();
             vista.mostrarSiguienteOperacion(siguiente);
@@ -58,8 +58,8 @@ public class Controlador {
                                 juego.cancelarHipoteca(propiedad);
                                 break;
                             case CONSTRUIR_CASA:
-                                System.out.println("Precio de edificación: " + juego.getJugadorActual().getPropiedades().get(propiedad).getPrecioEdificar());
-                                System.out.println("Saldo actual: " + juego.getJugadorActual().getSaldo());
+//                                System.out.println("Precio de edificación: " + juego.getJugadorActual().getPropiedades().get(propiedad).getPrecioEdificar());
+//                                System.out.println("Saldo actual: " + juego.getJugadorActual().getSaldo());
                                 juego.construirCasa(propiedad);
                                 break;
                             case CONSTRUIR_HOTEL:
@@ -85,6 +85,7 @@ public class Controlador {
 
                 }
             } else {
+                System.out.println("======= RANKING ========");
                 juego.mostrarRanking();
             }
         }

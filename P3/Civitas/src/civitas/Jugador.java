@@ -66,8 +66,8 @@ public class Jugador implements Comparable<Jugador> {
 
     boolean encarcelar(int numCasillaCarcel) {
         if (debeSerEncarcelado()) {
-            encarcelado = true;
             moverACasilla(numCasillaCarcel);
+            encarcelado = true;
             Diario.getInstance().ocurreEvento("Jugador " + nombre + " va la carcel");
         }
         return encarcelado;

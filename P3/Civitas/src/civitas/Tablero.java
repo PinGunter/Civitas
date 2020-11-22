@@ -35,7 +35,7 @@ public class Tablero {
     }
 
     private boolean correcto(int numCasilla) {
-        return numCasilla > 0 && numCasilla < casillas.size() && this.correcto();
+        return numCasilla >= 0 && numCasilla < casillas.size() && this.correcto();
     }
 
     int getCarcel() {
@@ -80,7 +80,7 @@ public class Tablero {
         if (!this.correcto()) {
             return -1;
         } else {
-            if (nueva > casillas.size()) {
+            if (nueva >= casillas.size()) {
                 nueva = nueva % casillas.size();
                 porSalida += 1;
             }

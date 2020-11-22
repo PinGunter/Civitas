@@ -63,16 +63,22 @@ public class Sorpresa {
         switch (sorpresa) {
             case IRCARCEL:
                 aplicarAJugador_irCarcel(actual, todos);
+                break;
             case IRCASILLA:
                 aplicarAJugador_irACasilla(actual, todos);
+                break;
             case PAGARCOBRAR:
                 aplicarAJugador_pagarCobrar(actual, todos);
+                break;
             case PORCASAHOTEL:
                 aplicarAJugador_porCasaHotel(actual, todos);
+                break;
             case PORJUGADOR:
                 aplicarAJugador_porJugador(actual, todos);
+                break;
             case SALIRCARCEL:
                 aplicarAJugador_salirCarcel(actual, todos);
+                break;
         }
     }
 
@@ -111,7 +117,7 @@ public class Sorpresa {
     void aplicarAJugador_porJugador(int actual, ArrayList<Jugador> todos) {
         if (jugadorCorrecto(actual, todos)) {
             informe(actual, todos);
-            Sorpresa s = new Sorpresa(TipoSorpresa.PAGARCOBRAR, valor * -1, "");
+            Sorpresa s = new Sorpresa(TipoSorpresa.PAGARCOBRAR, valor, "");
 
             for (int i = 0; i < todos.size(); i++) // o todos.size();
             {
@@ -120,7 +126,7 @@ public class Sorpresa {
                 }
             }
 
-            Sorpresa s1 = new Sorpresa(TipoSorpresa.PAGARCOBRAR, valor * todos.size() - 1, "");
+            Sorpresa s1 = new Sorpresa(TipoSorpresa.PAGARCOBRAR, valor * (todos.size() - 1), "");
             todos.get(actual).recibe(s1.valor);
         }
     }
@@ -136,7 +142,7 @@ public class Sorpresa {
             }
 
             if (!loTienen) {
-                todos.get(actual).obtenerSalvoconducto(new Sorpresa(sorpresa.SALIRCARCEL, -1, "Quedas libre de la carcel"));
+                todos.get(actual).obtenerSalvoconducto(new Sorpresa(TipoSorpresa.SALIRCARCEL, -1, "Quedas libre de la carcel"));
                 salirDelMazo();
             }
         }

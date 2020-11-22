@@ -44,7 +44,7 @@ public class Casilla {
         init();
         this.nombre = nombre;
         importe = cantidad;
-        tipo = TipoCasilla.DESCANSO;
+        tipo = TipoCasilla.IMPUESTO;
     }
 
     Casilla(int numCasillaCarcel, String nombre) {
@@ -58,11 +58,11 @@ public class Casilla {
         init();
         this.nombre = nombre;
         this.mazo = mazo;
-        this.tipo = tipo.SORPRESA;
+        this.tipo = TipoCasilla.SORPRESA;
     }
 
     private void init() {
-        carcel = -1;
+//        carcel = -1;
         importe = -1;
         nombre = "";
         tipo = null;
@@ -92,6 +92,9 @@ public class Casilla {
             Jugador propietario = tituloPropiedad.getPropietario();
             if (propietario != null) {
                 info += "\nPropietario: " + propietario.getNombre();
+                info += "\nNúmero de casas: " + tituloPropiedad.getNumCasas();
+                info += "\nNúmero de hoteles: " + tituloPropiedad.getNumHoteles();
+                info += "\nPrecio alquiler: " + tituloPropiedad.getPrecioAlquiler();
             } else {
                 info += "\nLa casilla no tiene dueño";
             }

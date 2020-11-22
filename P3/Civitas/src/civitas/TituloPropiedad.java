@@ -57,7 +57,8 @@ public class TituloPropiedad {
 
     }
 
-    private float getPrecioAlquiler() {
+    //cambiada visibilidad de private a paquete para que el jugador sepa de antemano la cantidad que debe pagar
+    float getPrecioAlquiler() {
         //  PrecioAlquiler=AlquilerBase*(1+(NumCasas*0.5)+(NumHoteles*2.5))
         float precio = alquilerBase * (1f + (numCasas * 0.5f) + (numHoteles * 2.5f));
         if (hipotecado || propietarioEncarcelado()) {
