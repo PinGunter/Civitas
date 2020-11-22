@@ -131,7 +131,7 @@ module Civitas
     def aplicar_a_jugador_por_jugador(actual,todos)
       if jugador_correcto(actual,todos)
         informe(actual,todos)
-        a_pagar = Sorpresa.new(Tipo_sorpresas::PAGAR_COBRAR,@valor*-1,"Paga al jugador " + todos.at(actual).nombre + ":" + @valor)
+        a_pagar = Sorpresa.new(Tipo_sorpresas::PAGAR_COBRAR,@valor,"Paga al jugador " + todos.at(actual).nombre + ":" + @valor)
         todos.length.times do |indice|
           if indice != actual
             a_pagar.aplicar_a_jugador(indice, todos)

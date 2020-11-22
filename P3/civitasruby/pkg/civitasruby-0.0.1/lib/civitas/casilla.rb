@@ -25,7 +25,7 @@ module Civitas
     end
 
     def self.new_cantidad_nombre(cantidad, nombre)
-      Casilla.new(nombre, nil, cantidad, -1, nil, nil)
+      Casilla.new(nombre, nil, cantidad, -1, nil, Tipo_casilla::IMPUESTO)
     end
 
     def self.new_num_casilla_carcel_nombre(num_casilla_carcel, nombre)
@@ -104,6 +104,9 @@ module Civitas
         propietario = @titulo_propiedad.get_propietario
         if propietario != nil
             info += "\nPropietario: " + propietario.get_nombre
+            info += "\nNúmero de casas: " + @titulo_propiedad.get_num_casas
+            info += "\nNúmero de hoteles: " + @titulo_propiedad.get_num_hoteles
+            info += "\nPrecio del alquiler: " + @titulo_propiedad.get_precio_alquiler
         else
             info += "\nLa casilla no tiene dueño"
         end

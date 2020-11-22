@@ -133,11 +133,11 @@ module Civitas
       @nombre
     end
 
-    def get_casas
+    def get_num_casas
       @num_casas
     end
 
-    def num_hoteles
+    def get_num_hoteles
       @num_hoteles
     end
 
@@ -211,6 +211,6 @@ module Civitas
       return res
     end
 
-    private :es_este_el_propietario, :get_importe_hipoteca, :get_precio_venta, :get_precio_alquiler
+    private :es_este_el_propietario, :get_importe_hipoteca, :get_precio_venta, # :get_precio_alquiler # este ultimo le cambiamos la visiblidad de private a public para mejorar la visibilidad del dato durante las partidas
   end
 end

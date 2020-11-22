@@ -67,7 +67,7 @@ public class CivitasJuego {
     }
 
     private void inicializarMazoSorpresas(Tablero t) { // AÑADIR
-        mazo = new MazoSorpresas(true);
+        mazo = new MazoSorpresas(false);
         mazo.alMazo(new Sorpresa(TipoSorpresa.PAGARCOBRAR, -75, "Multa por exceso de velocidad. Paga 75"));
         mazo.alMazo(new Sorpresa(TipoSorpresa.PORCASAHOTEL, -300, "La nueva PS5 ocupa demasiado espacio, debes hacer reformas. Paga 300 por cada casa u hotel"));
         mazo.alMazo(new Sorpresa(TipoSorpresa.IRCASILLA, 19, "Es la feria de Málaga y no te la puedes perder. Avanza hasta Calle Marqués de Larios"));

@@ -70,6 +70,7 @@ module Civitas
           end
 
         else
+          puts "======== RANKING =========="
           @juego.mostrar_ranking
         end
       end
