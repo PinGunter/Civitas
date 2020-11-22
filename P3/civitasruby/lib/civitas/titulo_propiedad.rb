@@ -107,6 +107,7 @@ module Civitas
       result = false
       if(es_este_el_propietario(jugador))
         @propietario.paga(@precio_compra)
+        @num_casas +=1
       end
     end
 
@@ -114,7 +115,7 @@ module Civitas
       result = false
       if (es_este_el_propietario(jugador))
         @propietario.paga(precio_edificar)
-        num_hoteles = num_hoteles + 1
+        @num_hoteles = @num_hoteles + 1
         result = true
       end
       return result
@@ -172,11 +173,11 @@ module Civitas
     end
 
     def tramitar_alquiler(jugador)
-      if (@propietario != nill)
+      if (@propietario != nil)
         if(es_este_el_propietario(jugador) == false)
           precio= get_precio_alquiler()
           jugador.paga_alquiler(precio)
-          recibe(precio)
+          @propietario.recibe(precio)
         end
       end
     end
@@ -202,15 +203,18 @@ module Civitas
       return res
     end
 
+
+
     def vender(jugador)
       res = false
       if(!@hipotecado && es_este_el_propietario(jugador))
         jugador.recibe(get_precio_venta())
         derruir_casas(@num_casas,jugador)
-        derruir_hoteles(@num_hoteles,jugador)
+        @num_hoteles = 0
         actualiza_propietario_por_conversion(nil)
         res = true
       end
+      puts "\n**********\nvender de titulo: " + res.to_s + "\n**********\n"
       return res
     end
 

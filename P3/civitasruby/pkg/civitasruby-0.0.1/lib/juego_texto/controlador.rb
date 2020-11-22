@@ -46,16 +46,22 @@ module Civitas
 
             case operacion_inm.gestion
             when Civitas::Gestiones_inmobiliarias::VENDER    #me lo asocia con el método vender de juego en vez de con el enum
+              #              puts "SELECCIONADA OPCION VENDER"
               @juego.vender(ip)
             when Civitas::Gestiones_inmobiliarias::HIPOTECAR
+              #              puts "SELECCIONADA OPCION HIPOTECAR"
               @juego.hipotecar(ip)
             when Civitas::Gestiones_inmobiliarias::CANCELAR_HIPOTECA
+              #              puts "SELECCIONADA OPCION CANCELAR_HIPOTECA"
               @juego.cancelar_hipoteca(ip)
             when Civitas::Gestiones_inmobiliarias::CONSTRUIR_CASA
+              #              puts "SELECCIONADA OPCION CONSTRUIR CASA"
               @juego.construir_casa(ip)
             when Civitas::Gestiones_inmobiliarias::CONSTRUIR_HOTEL
+              #              puts "SELECCIONADA OPCION CONSTRUIR HOTEL"
               @juego.construir_hotel(ip)
             when Civitas::Gestiones_inmobiliarias::TERMINAR
+              #              puts "SELECCIONADA OPCION TERMINAR"
               @juego.siguiente_paso_completado(op)
             end
 

@@ -39,16 +39,16 @@ module Civitas
       @tablero = Tablero.new(@@casilla_carcel)
       @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Huerta Los Patos", 100, 0.27, 300, 300, 300)))
       @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Calle Rodahuevo", 200, 0.53, 300, 300, 300)))
-      @tablero.añade_casilla(Casilla.new_mazo_nombre(@mazo, "Suerte"))
+      @tablero.añade_casilla(Casilla.new_mazo_nombre(mazo, "Suerte"))
       @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Calle Recogidas", 400, 0.51, 600, 600, 600)))
       # carcel, ya añadida
       @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Avenida de la Constitución", 500, 0.11, 700, 700, 700)))
       @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Huerta Jorobado", 600, 0.6, 800, 800, 800)))
-      @tablero.añade_casilla(Casilla.new_mazo_nombre(@mazo, "Suerte"))
+      @tablero.añade_casilla(Casilla.new_mazo_nombre(mazo, "Suerte"))
       @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Calle Hierbabuena", 800, 0.08, 1000, 1000, 1000)))
       @tablero.añade_casilla(Casilla.new_nombre("Parking Gratuito"))
       @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Estación de Autobuses", 1000, 0.75, 1200, 1200, 1200)))
-      @tablero.añade_casilla(Casilla.new_mazo_nombre(@mazo, "Sorpresa"))
+      @tablero.añade_casilla(Casilla.new_mazo_nombre(mazo, "Sorpresa"))
       @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Calle Periodista Daniel Saucedo Aranda", 1100, 0.59, 1300, 1300, 1300)))
       @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Calle Periodista Rafael Gómez", 1200, 0.9, 1400, 1400, 1400)))
       @tablero.añade_juez
@@ -63,9 +63,9 @@ module Civitas
       @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::PAGAR_COBRAR, -300, "Multa por exceso de velocidad. Paga 300"))
       @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::POR_CASA_HOTEL, -300, "La nueva PS5 ocupa demasiado espacio, debes hacer reformas. Paga 300 por cada casa u hotel"))
       @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::IR_CASILLA, 19, "Es la feria de Málaga y no te la puedes perder. Avanza hasta Calle Marqués de Larios"))
-      @mazo.al_mazo(Sorpresa.new_tablero(Tipo_sorpresa::IR_CARCEL, @tablero))  # se hace con new_mazo?
+      @mazo.al_mazo(Sorpresa.new_tablero(Tipo_sorpresa::IR_CARCEL, tablero))  # se hace con new_mazo?
       @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::POR_JUGADOR, 250, "Vas a cenar con tus amigos pero se les olvida la cartera. Cada jugador te paga 250"))
-      @mazo.al_mazo(Sorpresa.new_tablero(Tipo_sorpresa::SALIR_CARCEL, @tablero)) # se hace con new_mazo?
+      @mazo.al_mazo(Sorpresa.new_tablero(Tipo_sorpresa::SALIR_CARCEL, tablero)) # se hace con new_mazo?
       @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::IR_CASILLA, 13, "Suspendes el examen de PDOO y tienes que ir a revisión. Ve a la ETSIIT"))
       @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::POR_CASA_HOTEL, 350, "Hay un terremoto y el seguro te paga 350 por cada casa y hotel "))
       @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::PAGAR_COBRAR, 600, "Te conviertes en tu propio jefe y ganas 600"))
@@ -77,7 +77,7 @@ module Civitas
     # metodo para añadir el dinero al jugador segun el numero de veces que pasa por salida
     def contabilizar_pasos_por_salida(jugador_actual)
       while @tablero.get_por_salida > 0
-        jugador.get_por_salida
+        jugador_actual.get_por_salida
       end
     end
 
@@ -93,7 +93,7 @@ module Civitas
 
     # metodo que delega la operacion de construir casas
     def construir_casa(ip)
-      @jugadores.at(@ondice_jugador_actual).construir_casa(ip)
+      @jugadores.at(@indice_jugador_actual).construir_casa(ip)
     end
 
     # metodo que delega la operacion de construir hoteles

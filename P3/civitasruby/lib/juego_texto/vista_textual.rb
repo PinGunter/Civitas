@@ -79,8 +79,10 @@ module Civitas
       opciones = ["Vender", "Hipotecar", "Cancelar Hipoteca", "Construir Casa", "Construir Hotel", "Terminar" ]
       elegido = menu("Elige la gestión inmobiliaria",opciones)
       @iGestion=elegido
-      propiedad = menu("Elige la propiedad que quieres gestionar",@juegoModel.get_jugador_actual.get_propiedades )
-      @iPropiedad = propiedad
+      if elegido != 5
+        propiedad = menu("Elige la propiedad que quieres gestionar",@juegoModel.get_jugador_actual.get_propiedades )
+        @iPropiedad = propiedad
+      end
     end
 
     def get_gestion
