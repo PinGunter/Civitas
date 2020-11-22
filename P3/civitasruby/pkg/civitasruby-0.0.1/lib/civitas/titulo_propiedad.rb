@@ -56,9 +56,8 @@ module Civitas
     end
 
     def get_precio_alquiler
-      res = @alquiler_base * (1+(@num_casas*0.5)
-        + (@num_hoteles*2.5))
-      if @hipotecado == true or propietario_encarcelado
+      res = @alquiler_base * (1+(@num_casas*0.5) + (@num_hoteles*2.5))
+      if @hipotecado || propietario_encarcelado
         res = 0
       end
       return res
@@ -114,7 +113,7 @@ module Civitas
     def construir_hotel(jugador)
       result = false
       if (es_este_el_propietario(jugador))
-        @propietario.paga(precio_edificar)
+        @propietario.paga(@precio_edificar)
         @num_hoteles = @num_hoteles + 1
         result = true
       end
@@ -164,7 +163,7 @@ module Civitas
 
     def hipotecar(jugador)
       salida = false
-      if (@hipotecado == false && es_este_el_propietario(jugador))
+      if (!@hipotecado && es_este_el_propietario(jugador))
         @propietario.recibe(get_importe_hipoteca)
         @hipotecado = true
         salida = true
@@ -196,7 +195,7 @@ module Civitas
 
     def derruir_casas(n, jugador)
       res = false
-      if es_este_el_propietario(jugador) == true and @num_casas >= n
+      if es_este_el_propietario(jugador) && @num_casas >= n
         @num_casas = n
         res = true
       end
