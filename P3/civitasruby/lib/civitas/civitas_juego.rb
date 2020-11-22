@@ -37,25 +37,25 @@ module Civitas
     # metodo para inicialiar el tablero
     def inicializar_tablero(mazo)
       @tablero = Tablero.new(@@casilla_carcel)
-      @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Huerta Los Patos", 10, 0.27, 300, 300, 300)))
-      @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Calle Rodahuevo", 20, 0.53, 300, 300, 300)))
+      @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Huerta Los Patos", 100, 0.27, 300, 300, 300)))
+      @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Calle Rodahuevo", 200, 0.53, 300, 300, 300)))
       @tablero.añade_casilla(Casilla.new_mazo_nombre(mazo, "Suerte"))
-      @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Calle Recogidas", 40, 0.51, 600, 600, 600)))
+      @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Calle Recogidas", 400, 0.51, 600, 600, 600)))
       # carcel, ya añadida
-      @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Avenida de la Constitución", 50, 0.11, 700, 700, 700)))
-      @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Huerta Jorobado", 60, 0.6, 800, 800, 800)))
+      @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Avenida de la Constitución", 500, 0.11, 700, 700, 700)))
+      @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Huerta Jorobado", 600, 0.6, 800, 800, 800)))
       @tablero.añade_casilla(Casilla.new_mazo_nombre(mazo, "Suerte"))
-      @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Calle Hierbabuena", 80, 0.08, 1000, 1000, 1000)))
+      @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Calle Hierbabuena", 800, 0.08, 1000, 1000, 1000)))
       @tablero.añade_casilla(Casilla.new_nombre("Parking Gratuito"))
-      @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Estación de Autobuses", 100, 0.75, 1200, 1200, 1200)))
+      @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Estación de Autobuses", 1000, 0.75, 1200, 1200, 1200)))
       @tablero.añade_casilla(Casilla.new_mazo_nombre(mazo, "Sorpresa"))
-      @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Calle Periodista Daniel Saucedo Aranda", 110, 0.59, 1300, 1300, 1300)))
-      @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Calle Periodista Rafael Gómez", 120, 0.9, 1400, 1400, 1400)))
+      @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Calle Periodista Daniel Saucedo Aranda", 1100, 0.59, 1300, 1300, 1300)))
+      @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Calle Periodista Rafael Gómez", 1200, 0.9, 1400, 1400, 1400)))
       @tablero.añade_juez
-      @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Calle Real de la Alhambra", 130, 0.18, 1500, 1500, 1500)))
-      @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Calle Pedro Antonio de Alarcón", 140, 0.77, 1540, 1540, 1540)))
+      @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Calle Real de la Alhambra", 1300, 0.18, 1500, 1500, 1500)))
+      @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Calle Pedro Antonio de Alarcón", 1340, 0.77, 1540, 1540, 1540)))
       @tablero.añade_casilla(Casilla.new_cantidad_nombre(-1000, "Impuesto"))
-      @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Calle Marqués de Larios", 200, 0.64, 2000, 2000, 2000)))
+      @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Calle Marqués de Larios", 1800, 0.64, 2000, 2000, 2000)))
     end
 
     def inicializar_mazo_sorpresas(tablero)
@@ -72,6 +72,7 @@ module Civitas
       @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::POR_JUGADOR, 350, "Vas de fiesta con tus amigos sin medidas de seguridad y ahora debes pagarle la PCR"))
 
     end
+
 
     # metodo para añadir el dinero al jugador segun el numero de veces que pasa por salida
     def contabilizar_pasos_por_salida(jugador_actual)
