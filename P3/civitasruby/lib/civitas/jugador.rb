@@ -263,21 +263,22 @@ module Civitas
     end
 
     def salir_carcel_pagando
-      res = false
       if @saldo >= @@precio_libertad
-        res = true
+        paga(@@precio_libertad)
+        Diario.instance.ocurre_evento("\n#{@nombre} ha pagado la fianza y sale de la carcel")
+        @encarcelado = false
+        return true
+      else
+        return false
       end
-      return res
     end
 
     def salir_carcel_tirando
-      res = false
       if Dado.instance.salgo_de_la_carcel == true
-        res = true
         @encarcelado = false
         Diario.instance.ocurre_evento("#{@nombre} sale de la carcel tirando")
       end
-      return res
+      return @encarcelado
     end
 
     def pasa_por_salida

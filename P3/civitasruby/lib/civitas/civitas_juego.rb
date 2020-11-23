@@ -78,7 +78,7 @@ module Civitas
     # metodo para añadir el dinero al jugador segun el numero de veces que pasa por salida
     def contabilizar_pasos_por_salida(jugador_actual)
       while @tablero.get_por_salida > 0
-        jugador_actual.get_por_salida
+        jugador_actual.pasa_por_salida # cambiamos get_por_salida ----> pasa_por_salida
       end
     end
 

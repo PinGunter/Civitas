@@ -68,7 +68,7 @@ module Civitas
       if correcto(-1)
         nueva = actual + tirada
         if nueva >= @casillas.length # cambiado de > a >=
-          @por_salida += 1
+          @por_salida = @por_salida + 1
           nueva = nueva % @casillas.length
         end
         return nueva
