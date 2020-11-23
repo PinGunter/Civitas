@@ -22,9 +22,12 @@ public class Prueba {
         ArrayList<String> jugadores = new ArrayList<>();
         jugadores.add("Salva");
         jugadores.add("Abel");
+        jugadores.add("Esther");
+        jugadores.add("Juanma");
+
         VistaTextual vista = new VistaTextual();
         CivitasJuego juego = new CivitasJuego(jugadores);
-        Dado.getInstance().setDebug(Boolean.FALSE);
+        Dado.getInstance().setDebug(Boolean.TRUE);
         Controlador controlador = new Controlador(juego, vista);
         controlador.juega();
     }

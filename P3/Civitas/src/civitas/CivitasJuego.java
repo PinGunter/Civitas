@@ -37,14 +37,14 @@ public class CivitasJuego {
 
         indiceJugadorActual = Dado.getInstance().quienEmpieza(jugadores.size());
 
+        mazo = new MazoSorpresas(false);
+        tablero = new Tablero(casillaCarcel);
         inicializarMazoSorpresas(this.tablero); // hacer
         inicializarTablero(this.mazo); // hacer
 
     }
 
     private void inicializarTablero(MazoSorpresas mazo) {
-        tablero = new Tablero(casillaCarcel);
-
         tablero.añadeCasilla(new Casilla(new TituloPropiedad("Huerta Los Patos", 100, 0.27f, 300, 300, 300)));
         tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle Rodahuevo", 200, 0.53f, 300, 300, 300)));
         tablero.añadeCasilla(new Casilla(mazo, "SUERTE"));
@@ -67,14 +67,13 @@ public class CivitasJuego {
     }
 
     private void inicializarMazoSorpresas(Tablero t) { // AÑADIR
-        mazo = new MazoSorpresas(false);
-        mazo.alMazo(new Sorpresa(TipoSorpresa.PAGARCOBRAR, -75, "Multa por exceso de velocidad. Paga 75"));
+        mazo.alMazo(new Sorpresa(TipoSorpresa.PAGARCOBRAR, -300, "Multa por exceso de velocidad. Paga 300"));
         mazo.alMazo(new Sorpresa(TipoSorpresa.PORCASAHOTEL, -300, "La nueva PS5 ocupa demasiado espacio, debes hacer reformas. Paga 300 por cada casa u hotel"));
-        mazo.alMazo(new Sorpresa(TipoSorpresa.IRCASILLA, 19, "Es la feria de Málaga y no te la puedes perder. Avanza hasta Calle Marqués de Larios"));
+        mazo.alMazo(new Sorpresa(TipoSorpresa.IRCASILLA, t, 19, "Es la feria de Málaga y no te la puedes perder. Avanza hasta Calle Marqués de Larios"));
         mazo.alMazo(new Sorpresa(TipoSorpresa.IRCARCEL, t));
         mazo.alMazo(new Sorpresa(TipoSorpresa.PORJUGADOR, 250, "Vas a cenar con tus amigos pero se les olvida la cartera. Cada jugador te paga 250"));
-        mazo.alMazo(new Sorpresa(TipoSorpresa.SALIRCARCEL, t));
-        mazo.alMazo(new Sorpresa(TipoSorpresa.IRCASILLA, 13, "Suspendes el examen de PDOO y tienes que ir a revisión. Ve a la ETSIIT"));
+        mazo.alMazo(new Sorpresa(TipoSorpresa.SALIRCARCEL, mazo));
+        mazo.alMazo(new Sorpresa(TipoSorpresa.IRCASILLA, t, 13, "Suspendes el examen de PDOO y tienes que ir a revisión. Ve a la ETSIIT"));
         mazo.alMazo(new Sorpresa(TipoSorpresa.PORCASAHOTEL, 350, "Hay un terremoto y el seguro te paga 350 por cada casa y hotel "));
         mazo.alMazo(new Sorpresa(TipoSorpresa.PAGARCOBRAR, 600, "Te conviertes en tu propio jefe y ganas 600"));
         mazo.alMazo(new Sorpresa(TipoSorpresa.PORJUGADOR, -350, "Vas de fiesta con tus amigos sin medidas de seguridad y ahora debes pagarle la PCR"));

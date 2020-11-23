@@ -39,7 +39,7 @@ module Civitas
 
     def self.new_mazo(tipo,mazo)
       #init
-      new(tipo,nil,-1,"Añadida por Mazo",mazo)
+      new(tipo,nil,-1,"\nQuedas libre de la carcel",mazo)
     end
 
     def initialize(tipo, tablero, valor, texto, mazo)
@@ -104,7 +104,7 @@ module Civitas
       if jugador_correcto(actual,todos)
         informe(actual,todos)
         casilla = todos.at(actual).get_num_casilla_actual
-        tirada = @tablero.calcular_tirada(casilla,@valor)
+        tirada = @tablero.calcular_tirada(casilla, @valor)
         nueva = @tablero.nueva_posicion(casilla,tirada)
         todos.at(actual).mover_a_casilla(nueva)
         @tablero.get_casilla(nueva).recibe_jugador(actual,todos)
@@ -131,13 +131,25 @@ module Civitas
     def aplicar_a_jugador_por_jugador(actual,todos)
       if jugador_correcto(actual,todos)
         informe(actual,todos)
-        a_pagar = Sorpresa.new(Tipo_sorpresas::PAGAR_COBRAR,@valor,"Paga al jugador " + todos.at(actual).nombre + ":" + @valor)
+        texto_dinero = ""
+        if @valor < 0
+          texto_dinero = "Recibes del jugador #{todos.at(actual).get_nombre} : #{-1*@valor}"
+        else
+          texto_dinero = "Pagas al jugador #{todos.at(actual).get_nombre} : #{@valor}"
+        end
+        a_pagar = Sorpresa.new_valor_texto(Tipo_sorpresa::PAGAR_COBRAR,@valor*-1,texto_dinero)
         todos.length.times do |indice|
           if indice != actual
+            #puts todos.at(indice).get_nombre
             a_pagar.aplicar_a_jugador(indice, todos)
           end
         end
-        recibe_dinero = Sorpresa.new(Tipo_sorpresas::PAGAR_COBRAR,@valor*(todos.length-1),"Recibes #{@valor} del resto de jugadores")
+        if @valor > 0
+          texto_dinero = "Recibes del resto de los jugadores: #{@valor}"
+        else
+          texto_dinero = "Pagas al resto de jugadores #{todos.at(actual).get_nombre} : #{-1*@valor}"
+        end
+        recibe_dinero = Sorpresa.new_valor_texto(Tipo_sorpresa::PAGAR_COBRAR,@valor*(todos.length-1),texto_dinero)
         recibe_dinero.aplicar_a_jugador(actual,todos)
       end
     end
@@ -156,7 +168,7 @@ module Civitas
           indice +=1
         end
         if not alguien_tiene_s_carcel
-          todos.at(actual).obtener_salvoconducto(Sorpresa.new_valor_texto(Tipo_sorpresa::SALIR_CARCEL,-1,"Quedas libre de la cárcel"))
+          todos.at(actual).obtener_salvoconducto(Sorpresa.new_mazo(Tipo_sorpresa::SALIR_CARCEL,@mazo))
           salir_del_mazo
         end
       end

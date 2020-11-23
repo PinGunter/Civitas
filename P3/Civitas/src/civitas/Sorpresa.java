@@ -28,22 +28,23 @@ public class Sorpresa {
     Sorpresa(TipoSorpresa tipo, Tablero t, int valor, String texto) {
         init();
         sorpresa = tipo;
-        this.tablero = tablero;
+        this.tablero = t;
         this.valor = valor;
         this.texto = texto;
     }
 
-    Sorpresa(TipoSorpresa tipo, int valor, String texto) { //EVITARCARCEL
+    Sorpresa(TipoSorpresa tipo, int valor, String texto) {
         init();
         sorpresa = tipo;
         this.valor = valor;
         this.texto = texto;
     }
 
-    Sorpresa(TipoSorpresa tipo, MazoSorpresas m) { // RESTO
+    Sorpresa(TipoSorpresa tipo, MazoSorpresas m) { // Salir Carcel
         init();
         sorpresa = tipo;
         mazo = m;
+        texto = "Quedas libre de la cárcel";
     }
 
     boolean jugadorCorrecto(int actual, ArrayList<Jugador> todos) {
@@ -54,7 +55,7 @@ public class Sorpresa {
     }
 
     void informe(int actual, ArrayList<Jugador> todos) {
-        Diario.getInstance().ocurreEvento("Se esta aplicando una sorpresa a "
+        Diario.getInstance().ocurreEvento("Se esta aplicando la sorpresa\n\"" + texto + "\"\na "
                 + todos.get(actual).getNombre()); // todos[actual].nombre());
     }
 
@@ -142,7 +143,7 @@ public class Sorpresa {
             }
 
             if (!loTienen) {
-                todos.get(actual).obtenerSalvoconducto(new Sorpresa(TipoSorpresa.SALIRCARCEL, -1, "Quedas libre de la carcel"));
+                todos.get(actual).obtenerSalvoconducto(new Sorpresa(TipoSorpresa.SALIRCARCEL, mazo));
                 salirDelMazo();
             }
         }

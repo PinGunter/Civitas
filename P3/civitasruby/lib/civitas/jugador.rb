@@ -225,8 +225,9 @@ module Civitas
         Diario.instance.ocurre_evento("#{@nombre} se mueve a casilla: #{@num_casilla_actual}")
         res = true
         @puede_comprar = false
+        return res
       end
-      return res
+      #return res modified
     end
 
     def puedo_gastar(precio)
@@ -398,7 +399,10 @@ module Civitas
     def get_nombre  #cambiamos la visibilidad de protected a public para facilitar la accesibilidad de la partida.
       @nombre
     end
-    private :existe_la_propiedad, :get_casas_max, :get_hoteles_max, :get_precio_libertad, :get_premio_por_salida, :perder_salvoconducto, :salir_carcel_pagando,
+    
+    #hemos quitado :salir_carcel_pagando de private porque sino nos da error ya que civitas_juego no puede acceder a ella
+    
+    private :existe_la_propiedad, :get_casas_max, :get_hoteles_max, :get_precio_libertad, :get_premio_por_salida, :perder_salvoconducto, #:salir_carcel_pagando,
       :puedo_edificar_casa, :puedo_edificar_hotel, :puedo_gastar
     protected #:debe_ser_encarcelado, :get_nombre, :get_propiedades, :get_saldo, :jugador
 
