@@ -119,12 +119,12 @@ module Civitas
 
     # metodo que delega la operacion de salir de la carcel pagando
     def salir_carcel_pagando
-      @jugadores.at(@indice_jugador_actual).salir_carcel_tirando
+      @jugadores.at(@indice_jugador_actual).salir_carcel_pagando
     end
 
     # metodo que delega la operacion de salir de la carcel tirando
     def salir_carcel_tirando
-      @jugadores.at(@indice_jugador_actual).salir_carcel_pagando
+      @jugadores.at(@indice_jugador_actual).salir_carcel_tirando
     end
 
     # metodo que devuelve:

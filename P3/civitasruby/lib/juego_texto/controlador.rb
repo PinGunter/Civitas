@@ -66,7 +66,7 @@ module Civitas
             end
 
           when Operaciones_juego::SALIR_CARCEL
-            if(@vista.salir_carcel == salidas_carcel::PAGANDO)
+            if(@vista.salir_carcel == Salidas_carcel::PAGANDO)
               @juego.salir_carcel_pagando
             else
               @juego.salir_carcel_tirando
