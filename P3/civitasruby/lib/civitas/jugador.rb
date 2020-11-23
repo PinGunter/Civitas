@@ -292,8 +292,8 @@ module Civitas
     def cantidad_casas_hoteles
       total = 0
       for i in (0..@propiedades.size-1)
-        total+=@propiedades.at(i).num_casas
-        total+=@propiedades.at(i).num_hoteles
+        total+=@propiedades.at(i).get_num_casas
+        total+=@propiedades.at(i).get_num_hoteles
       end
       return total
     end
@@ -366,6 +366,7 @@ module Civitas
         puedo_edificar_hotel = true
       end
       return puedo_edificar_hotel
+   
     end
 
     @override

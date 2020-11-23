@@ -66,7 +66,7 @@ module Civitas
       @mazo.al_mazo(Sorpresa.new_tablero(Tipo_sorpresa::IR_CARCEL, tablero))  # se hace con new_mazo?
       @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::POR_JUGADOR, 250, "Vas a cenar con tus amigos pero se les olvida la cartera. Cada jugador te paga 250"))
       @mazo.al_mazo(Sorpresa.new_tablero(Tipo_sorpresa::SALIR_CARCEL, tablero)) # se hace con new_mazo?
-      @mazo.al_mazo(Sorpresa.new_valor_texto_valo_texto(Tipo_sorpresa::IR_CASILLA,tablero, 13, "Suspendes el examen de PDOO y tienes que ir a revisión. Ve a la ETSIIT"))
+      @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::IR_CASILLA, 13, "Suspendes el examen de PDOO y tienes que ir a revisión. Ve a la ETSIIT")) #he quitado tablero
       @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::POR_CASA_HOTEL, 350, "Hay un terremoto y el seguro te paga 350 por cada casa y hotel "))
       @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::PAGAR_COBRAR, 600, "Te conviertes en tu propio jefe y ganas 600"))
       @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::POR_JUGADOR, -350, "Vas de fiesta con tus amigos sin medidas de seguridad y ahora debes pagarle la PCR"))

@@ -8,6 +8,8 @@ module Civitas
     #attr_reader :nombre, :precio_compra, :alquiler_base, :factor_revalorizacion,
     # :hipoteca_base, :precio_edificar, :num_hoteles, :num_casas
     attr_accessor :hipotecada, :propietario
+    
+    @@factor_intereses_hipoteca = 1.1
 
     def initialize(nom, alquiler, factor, hipoteca, precioComp, precioEdif)
       @nombre = nom
@@ -78,7 +80,7 @@ module Civitas
     def cancelar_hipoteca(jugador)
       result = false
       if(@hipotecado)
-        if(es_este_el_propietaro(jugador))
+        if(es_este_el_propietario(jugador))
           @propietario.paga(get_importe_cancelar_hipoteca)
           @hipotecado = false
           result =  true
@@ -196,7 +198,7 @@ module Civitas
     def derruir_casas(n, jugador)
       res = false
       if es_este_el_propietario(jugador) && @num_casas >= n
-        @num_casas = n
+        @num_casas = @num_casas - n
         res = true
       end
       return res
