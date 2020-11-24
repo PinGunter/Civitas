@@ -30,10 +30,10 @@ module Civitas
       @indice_jugador_actual = Dado.instance.quien_empieza(nombres.length)
       @mazo = nil
       @tablero = nil
-      
-      
+
+
       @tablero = Tablero.new(@@casilla_carcel)
-      @mazo = Mazo_sorpresas.new
+      @mazo = Mazo_sorpresas.new(false)
       inicializar_mazo_sorpresas(@tablero)
       inicializar_tablero(@mazo)
     end
@@ -57,18 +57,18 @@ module Civitas
       @tablero.añade_juez
       @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Calle Real de la Alhambra", 1300, 0.18, 1500, 1500, 1500)))
       @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Calle Pedro Antonio de Alarcón", 1340, 0.77, 1540, 1540, 1540)))
-      @tablero.añade_casilla(Casilla.new_cantidad_nombre(-1000, "Impuesto"))
+      @tablero.añade_casilla(Casilla.new_cantidad_nombre(1000, "Impuesto"))
       @tablero.añade_casilla(Casilla.new_titulo_propiedad(Titulo_propiedad.new("Calle Marqués de Larios", 1800, 0.64, 2000, 2000, 2000)))
     end
 
-    def inicializar_mazo_sorpresas(tablero) 
+    def inicializar_mazo_sorpresas(tablero)
       @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::PAGAR_COBRAR, -300, "Multa por exceso de velocidad. Paga 300"))
       @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::POR_CASA_HOTEL, -300, "La nueva PS5 ocupa demasiado espacio, debes hacer reformas. Paga 300 por cada casa u hotel"))
       @mazo.al_mazo(Sorpresa.new_tablero_valor_texto(Tipo_sorpresa::IR_CASILLA,tablero, 19, "Es la feria de Málaga y no te la puedes perder. Avanza hasta Calle Marqués de Larios"))
       @mazo.al_mazo(Sorpresa.new_tablero(Tipo_sorpresa::IR_CARCEL, tablero))  # se hace con new_mazo?
       @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::POR_JUGADOR, 250, "Vas a cenar con tus amigos pero se les olvida la cartera. Cada jugador te paga 250"))
       @mazo.al_mazo(Sorpresa.new_mazo(Tipo_sorpresa::SALIR_CARCEL, @mazo))
-      @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::IR_CASILLA, 13, "Suspendes el examen de PDOO y tienes que ir a revisión. Ve a la ETSIIT"))
+      @mazo.al_mazo(Sorpresa.new_tablero_valor_texto(Tipo_sorpresa::IR_CASILLA, tablero, 13, "Suspendes el examen de PDOO y tienes que ir a revisión. Ve a la ETSIIT"))
       @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::POR_CASA_HOTEL, 350, "Hay un terremoto y el seguro te paga 350 por cada casa y hotel "))
       @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::PAGAR_COBRAR, 600, "Te conviertes en tu propio jefe y ganas 600"))
       @mazo.al_mazo(Sorpresa.new_valor_texto(Tipo_sorpresa::POR_JUGADOR, -350, "\nVas de fiesta con tus amigos sin medidas de seguridad y ahora debes pagarle la PCR"))
@@ -78,7 +78,7 @@ module Civitas
     # metodo para añadir el dinero al jugador segun el numero de veces que pasa por salida
     def contabilizar_pasos_por_salida(jugador_actual)
       while @tablero.get_por_salida > 0
-        jugador_actual.get_por_salida
+        jugador_actual.pasa_por_salida
       end
     end
 
@@ -141,19 +141,41 @@ module Civitas
       return bancarrota
     end
 
+    def compare_to(jugador)
+      @saldo <=> jugador.get_saldo
+    end
     # metodo que produce la lista ordenada de jugadores en funcion de su saldo
     def ranking
-      orden = @jugadores.sort { |a,b| a <=> b  }
-      return orden
+      clasificacion = []
+      jugador_aux = @jugadores.clone
+
+      for i in 0..@jugadores.size
+        max = jugador_aux.at(0)
+        pos = 0
+
+        for j in 1..jugador_aux.size-1
+          if max.compare_to(jugador_aux[j]) < 0
+            max = jugador_aux.at(j)
+            pos = j
+          end
+        end
+
+        clasificacion << max
+        jugador_aux.delete_at(pos)
+
+      end
+      return clasificacion
     end
+
 
     def mostrar_ranking
       rango = ranking
-      posicion = 0
-      rango.each do |jugador|
-        puts "Posicion: " + posicion.to_s +  jugador.to_s
-        posicion += 1
-      end
+      puts rango
+      #      posicion = 0
+      #      rango.each do |jugador|
+      #        puts "Posicion: " + posicion.to_s + " " +  jugador.get_nombre + "\n\tSaldo: " + jugador.get_saldo.to_s
+      #        posicion += 1
+      #      end
     end
 
     #metodo que devuelve el jugador actual
@@ -175,6 +197,13 @@ module Civitas
     def avanza_jugador
       jugador_actual = @jugadores.at(@indice_jugador_actual)
       posicion_actual = jugador_actual.get_num_casilla_actual
+      #      puts "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+      #      puts @jugadores
+      #      puts "indice actual"
+      #      puts @indice_jugador_actual
+      #      puts jugador_actual
+      #      puts posicion_actual
+      #      puts "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
       tirada = Dado.instance.tirar
       posicion_nueva = @tablero.nueva_posicion(posicion_actual, tirada)
       casilla = @tablero.get_casilla(posicion_nueva)

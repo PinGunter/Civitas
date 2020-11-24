@@ -94,7 +94,7 @@ module Civitas
     def aplicar_a_jugador_ir_carcel(actual,todos)
       if jugador_correcto(actual,todos)
         informe(actual,todos)
-        jugador.encarcelar
+        todos.at(actual).encarcelar(@tablero.num_casilla_carcel)
       end
     end
 

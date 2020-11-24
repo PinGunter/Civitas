@@ -126,7 +126,7 @@ module Civitas
 
     def hipotecar(ip)
       result = false
-      if(@encarcelad)
+      if(@encarcelado)
         return result
       end
 
@@ -265,6 +265,9 @@ module Civitas
     def salir_carcel_pagando
       res = false
       if @saldo >= @@precio_libertad
+        Diario.instance.ocurre_evento("Jugador #{@nombre} sale de la carcel pagando")
+        paga(@@precio_libertad)
+        @encarcelado = false
         res = true
       end
       return res
@@ -367,7 +370,7 @@ module Civitas
         puedo_edificar_hotel = true
       end
       return puedo_edificar_hotel
-   
+
     end
 
     @override
@@ -382,7 +385,8 @@ module Civitas
       \nEncarcelado: #{@encarcelado}
       \nNumero casilla actual: #{@num_casilla_actual}
       \nSaldo: #{@saldo}
-      \nPropiedades #{nombres_propiedades}"
+      \nPropiedades #{nombres_propiedades}
+      \nSalvoconducto #{@salvoconducto}"
       info += "\n*********"
       return info
     end
@@ -399,11 +403,11 @@ module Civitas
     def get_nombre  #cambiamos la visibilidad de protected a public para facilitar la accesibilidad de la partida.
       @nombre
     end
-    
+
     #hemos quitado :salir_carcel_pagando de private porque sino nos da error ya que civitas_juego no puede acceder a ella
-    
+
     private :existe_la_propiedad, :get_casas_max, :get_hoteles_max, :get_precio_libertad, :get_premio_por_salida, :perder_salvoconducto, #:salir_carcel_pagando,
-      :puedo_edificar_casa, :puedo_edificar_hotel, :puedo_gastar
+    :puedo_edificar_casa, :puedo_edificar_hotel, :puedo_gastar
     protected #:debe_ser_encarcelado, :get_nombre, :get_propiedades, :get_saldo, :jugador
 
     def debe_ser_encarcelado

@@ -5,7 +5,8 @@ require_relative "../juego_texto/controlador"
 require_relative "civitas_juego"
 
 module Civitas
-  jugadores = ["Salva", "Abel", "Esther", "Juanma"]
+  jugadores = ["Salva", "Abel"]
+  Dado.instance.set_debug(false)
   vista = Vista_textual.new
   juego = Civitas_juego.new(jugadores)
   controlador = Controlador.new(juego,vista)
