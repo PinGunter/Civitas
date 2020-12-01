@@ -8,7 +8,7 @@ module Civitas
     #attr_reader :nombre, :precio_compra, :alquiler_base, :factor_revalorizacion,
     # :hipoteca_base, :precio_edificar, :num_hoteles, :num_casas
     attr_accessor :hipotecada, :propietario
-    
+
     @@factor_intereses_hipoteca = 1.1
 
     def initialize(nom, alquiler, factor, hipoteca, precioComp, precioEdif)

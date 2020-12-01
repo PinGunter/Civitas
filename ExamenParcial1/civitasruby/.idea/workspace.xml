@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="9922221a-9d7b-4696-8cbf-7ae8e3afda31" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/lib/civitas/casilla.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/civitas/casilla.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/civitas/civitas_juego.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/civitas/civitas_juego.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/civitas/gestor_estados.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/civitas/gestor_estados.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/civitas/jugador.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/civitas/jugador.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/civitas/sorpresa.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/civitas/sorpresa.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/civitas/tablero.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/civitas/tablero.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/civitas/titulo_propiedad.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/civitas/titulo_propiedad.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/juego_texto/controlador.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/juego_texto/controlador.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/juego_texto/vista_textual.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/juego_texto/vista_textual.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/civitasruby-0.0.1.gem" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/civitasruby-0.0.1.gem" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/civitasruby-0.0.1/lib/civitas/casilla.rb" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/civitasruby-0.0.1/lib/civitas/casilla.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/civitasruby-0.0.1/lib/civitas/civitas_juego.rb" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/civitasruby-0.0.1/lib/civitas/civitas_juego.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/civitasruby-0.0.1/lib/civitas/gestor_estados.rb" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/civitasruby-0.0.1/lib/civitas/gestor_estados.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/civitasruby-0.0.1/lib/civitas/jugador.rb" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/civitasruby-0.0.1/lib/civitas/jugador.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/civitasruby-0.0.1/lib/civitas/sorpresa.rb" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/civitasruby-0.0.1/lib/civitas/sorpresa.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/civitasruby-0.0.1/lib/civitas/tablero.rb" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/civitasruby-0.0.1/lib/civitas/tablero.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/civitasruby-0.0.1/lib/civitas/titulo_propiedad.rb" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/civitasruby-0.0.1/lib/civitas/titulo_propiedad.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/civitasruby-0.0.1/lib/juego_texto/controlador.rb" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/civitasruby-0.0.1/lib/juego_texto/controlador.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/civitasruby-0.0.1/lib/juego_texto/vista_textual.rb" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/civitasruby-0.0.1/lib/juego_texto/vista_textual.rb" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="1kVxCAWfeEiRQScEUTu0BkC8uzI" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpringUtil" SPRING_PRE_LOADER_OPTION="true" RAKE_SPRING_PRE_LOADER_OPTION="true" RAILS_SPRING_PRE_LOADER_OPTION="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9922221a-9d7b-4696-8cbf-7ae8e3afda31" name="Default Changelist" comment="" />
+      <created>1605799430007</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1605799430007</updated>
+      <workItem from="1605799431053" duration="61000" />
+      <workItem from="1606069673507" duration="44000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="637" y="372" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605799484137">
+      <screen x="0" y="28" width="2560" height="1412" />
+    </state>
+    <state x="637" y="372" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.28.2560.1412@0.28.2560.1412" timestamp="1605799484137" />
+  </component>
+</project>
