@@ -274,11 +274,13 @@ module Civitas
     end
 
     def salir_carcel_tirando
+      res = false
       if Dado.instance.salgo_de_la_carcel == true
         @encarcelado = false
+        res = true
         Diario.instance.ocurre_evento("#{@nombre} sale de la carcel tirando")
       end
-      return @encarcelado
+      return res
     end
 
     def pasa_por_salida
