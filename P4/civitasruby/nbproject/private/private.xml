@@ -3,15 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/salva/Civitas/P3/civitasruby/lib/civitas/main.rb</file>
-            <file>file:/home/salva/Civitas/P3/civitasruby/lib/civitas/civitas_juego.rb</file>
-            <file>file:/home/salva/Civitas/P3/civitasruby/lib/civitas/titulo_propiedad.rb</file>
-            <file>file:/home/salva/Civitas/P3/civitasruby/lib/civitas/sorpresa.rb</file>
-            <file>file:/home/salva/Civitas/P3/civitasruby/lib/civitas/tablero.rb</file>
-            <file>file:/home/salva/Civitas/P3/civitasruby/lib/juego_texto/controlador.rb</file>
-            <file>file:/home/salva/Civitas/P3/civitasruby/lib/civitas/mazo_sorpresas.rb</file>
-            <file>file:/home/salva/Civitas/P3/civitasruby/lib/civitas/casilla.rb</file>
-            <file>file:/home/salva/Civitas/P3/civitasruby/lib/civitas/jugador.rb</file>
+            <file>file:/home/abel/GitHub/Civitas/P4/civitasruby/lib/civitas/casilla_impuesto.rb</file>
+            <file>file:/home/abel/GitHub/Civitas/P4/civitasruby/lib/civitas/casilla_juez.rb</file>
+            <file>file:/home/abel/GitHub/Civitas/P4/civitasruby/lib/civitas/casilla_calle.rb</file>
+            <file>file:/home/abel/GitHub/Civitas/P4/civitasruby/lib/civitas/casilla_sorpresa.rb</file>
+            <file>file:/home/abel/GitHub/Civitas/P4/civitasruby/lib/civitas/casilla.rb</file>
         </group>
     </open-files>
 </project-private>
