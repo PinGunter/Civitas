@@ -5,9 +5,12 @@
         <group>
             <file>file:/home/abel/GitHub/Civitas/P4/civitasruby/lib/civitas/casilla_impuesto.rb</file>
             <file>file:/home/abel/GitHub/Civitas/P4/civitasruby/lib/civitas/casilla_juez.rb</file>
+            <file>file:/home/abel/GitHub/Civitas/P4/civitasruby/lib/civitas/titulo_propiedad.rb</file>
             <file>file:/home/abel/GitHub/Civitas/P4/civitasruby/lib/civitas/casilla_calle.rb</file>
+            <file>file:/home/abel/GitHub/Civitas/P4/civitasruby/lib/civitas/jugador.rb</file>
             <file>file:/home/abel/GitHub/Civitas/P4/civitasruby/lib/civitas/casilla_sorpresa.rb</file>
             <file>file:/home/abel/GitHub/Civitas/P4/civitasruby/lib/civitas/casilla.rb</file>
+            <file>file:/home/abel/GitHub/Civitas/P4/civitasruby/lib/civitas/jugador_especulador.rb</file>
         </group>
     </open-files>
 </project-private>

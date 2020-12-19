@@ -6,7 +6,7 @@ module Civitas
 
   class Casilla_impuesto < Casilla
 
-    def initialize
+    def initialize(importe, nombre)
       @importe = importe # debe ser positivo porque en paga (jugador) lo multiplica por *-1
       super(nombre)
     end
