@@ -4,7 +4,7 @@
 
 # Salva
 module Civitas
-  class Sorpresa_carcel < Sorpresa  ## Sorpresa ir a la carcel
+  class Sorpresa_ir_carcel < Sorpresa  ## Sorpresa ir a la carcel
     def initialize(tablero)
       super("Ve a la cárcel")
       @tablero = tablero
