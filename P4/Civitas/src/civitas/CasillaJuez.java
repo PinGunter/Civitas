@@ -1,23 +1,21 @@
 package civitas;
-
 import java.util.ArrayList;
-
 /**
  *
- * @author salva
+ * @author pingu
  */
-public class CasillaImpuesto extends Casilla{
-    private float importe; //debe ser positivo porque en "paga" de jugador se multiplica por -1
+public class CasillaJuez extends Casilla {
+    private static int carcel;
     
-    CasillaImpuesto(float importe, String nombre){
+    CasillaJuez(int carcel, String nombre){
         super(nombre);
-        this.importe = importe;
+        this.carcel = carcel;
     }
     
     @Override
     public String toString(){
         String info = super.toString();
-        info += "\nImporte del impuesto: " + importe;
+        info += "\n¡Has caído en el Juez, VE A LA CÁRCEL!";
         return info;
     }
     
@@ -25,7 +23,7 @@ public class CasillaImpuesto extends Casilla{
     void recibeJugador(int actual, ArrayList<Jugador> todos){
         if (jugadorCorrecto(actual, todos)) {
             informe(actual, todos);
-            todos.get(actual).pagaImpuesto(importe);
+            todos.get(actual).encarcelar(carcel);
         }
     }
     
