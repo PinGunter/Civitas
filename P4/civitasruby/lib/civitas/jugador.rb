@@ -39,7 +39,16 @@ module Civitas
       self.new(false,n,0,false,@@saldo_inicial,nil,[])
     end
 
-
+    def self.copia(otro)
+      @nombre = otro.get_nombre
+      @encarcelado = otro.get_is_encarcelado
+      @num_casilla_actual = otro.get_num_casilla_actual
+      @puede_comprar = otro.get_puede_comprar
+      @saldo = otro.get_saldo
+      @salvoconducto = otro.get_salvoconducto
+      @propiedades = otro.get_propiedades
+    end
+    
     def cancelar_hipoteca(ip)
       result = false
       if(@encarcelado)
@@ -403,12 +412,10 @@ module Civitas
     def get_nombre  #cambiamos la visibilidad de protected a public para facilitar la accesibilidad de la partida.
       @nombre
     end
-
-    #hemos quitado :salir_carcel_pagando de private porque sino nos da error ya que civitas_juego no puede acceder a ella
-
-    private :existe_la_propiedad, :get_casas_max, :get_hoteles_max, :get_precio_libertad, :get_premio_por_salida, :perder_salvoconducto, #:salir_carcel_pagando,
-    :puedo_edificar_casa, :puedo_edificar_hotel, :puedo_gastar
-    protected #:debe_ser_encarcelado, :get_nombre, :get_propiedades, :get_saldo, :jugador
+    
+    def get_salvoconducto
+      @salvoconducto
+    end
 
     def debe_ser_encarcelado
       if @encarcelado == true
@@ -422,13 +429,11 @@ module Civitas
       end
       return res
     end
-
-
-    def self.new_copia(otro)
-      new(otro.encarcelado, otro.nombre, otro.num_casilla_actual, otro.get_puede_comprar,
-        otro.saldo, otro.salvoconducto, otro.propiedades)
-    end
-
+    
+    #hemos quitado :salir_carcel_pagando de private porque sino nos da error ya que civitas_juego no puede acceder a ella
+    private :existe_la_propiedad, :get_casas_max, :get_hoteles_max, :get_precio_libertad, :get_premio_por_salida, :perder_salvoconducto, #:salir_carcel_pagando,
+    :puedo_edificar_casa, :puedo_edificar_hotel, :puedo_gastar
+    protected :debe_ser_encarcelado, :get_salvoconducto
 
 
   end

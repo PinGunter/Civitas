@@ -1,0 +1,45 @@
+package civitas;
+
+/**
+ *
+ * @author Salva
+ */
+public class JugadorEspeculador extends Jugador {
+    private int maxCasas = FactorEspeculador * CasasMax;
+    private int maxHoteles = FactorEspeculador * HotelesMax;
+    
+    private float fianza;
+    private final float factorPagoImpuesto = 0.5f;
+    
+    JugadorEspeculador(Jugador otro, float fianza){
+        super(otro);
+        this.fianza = fianza;
+        actualizarPropiedades(otro);
+    }
+    
+    //la dejamos o la quitamos?
+    private void actualizarPropiedades(Jugador original){
+        original.getPropiedades().forEach((propiedad) -> {      // <- sugerido por NetBeans. Originalmente for (TituloPropiedad propiedad : original.getPropiedades()
+            propiedad.actualizaPropietarioPorConversion(this);
+        });
+    }
+    
+    @Override
+    public String toString(){
+        String info = super.toString();
+        info += "\n ---  JUGADOR ESPECULADOR: PAGA LA MITAD DE IMPUESTOS Y PUEDE PAGAR FIANZA EN LA CÁRCEL --- \n";
+        info += "La fianza que paga es de " + fianza;
+        return info;
+    }
+    
+    @Override
+    protected int getCasasMax() {
+        return maxCasas;
+    }
+    
+    @Override
+    protected int getHotelesMax() {
+        return maxHoteles;
+    }
+    
+}

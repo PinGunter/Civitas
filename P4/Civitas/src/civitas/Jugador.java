@@ -27,6 +27,7 @@ public class Jugador implements Comparable<Jugador> {
     protected static float PasoPorSalida = 1000;
     protected static float PrecioLibertad = 200;
     private static float SaldoInicial = 7500;
+    protected static int FactorEspeculador = 2;
 
     //atributos de referencia
     ArrayList<TituloPropiedad> propiedades;
@@ -217,7 +218,7 @@ public class Jugador implements Comparable<Jugador> {
         return ip >= 0 && ip < propiedades.size();
     }
 
-    private int getCasasMax() {
+    protected int getCasasMax() { //cambiamos visibilidad a protected
         return CasasMax;
     }
 
@@ -225,7 +226,7 @@ public class Jugador implements Comparable<Jugador> {
         return CasasPorHotel;
     }
 
-    private int getHotelesMax() {
+    protected int getHotelesMax() {   //Cambiamos visibilidad a protected
         return HotelesMax;
     }
 
