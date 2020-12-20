@@ -10,7 +10,6 @@ module Civitas
   # Clase Sorpresa
   # Representa las cartas sorpresa que estan dentro del Civitas::Mazo_sorpresas
   class Sorpresa
-    # metodo privado para inicializar referencias vacias
     def initialize(texto)
       @texto = texto
     end

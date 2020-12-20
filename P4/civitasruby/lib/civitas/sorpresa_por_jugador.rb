@@ -20,7 +20,7 @@ module Civitas
         else
           texto_dinero = "Pagas al jugador #{todos.at(actual).get_nombre} : #{@valor}"
         end
-        a_pagar = Sorpresa.new_valor_texto(Tipo_sorpresa::PAGAR_COBRAR,@valor*-1,texto_dinero)
+        a_pagar = Sorpresa_pagar_cobrar.new(@valor*-1,texto_dinero)
         todos.length.times do |indice|
           if indice != actual
             #puts todos.at(indice).get_nombre
@@ -32,7 +32,7 @@ module Civitas
         else
           texto_dinero = "Pagas al resto de jugadores #{todos.at(actual).get_nombre} : #{-1*@valor}"
         end
-        recibe_dinero = Sorpresa.new_valor_texto(Tipo_sorpresa::PAGAR_COBRAR,@valor*(todos.length-1),texto_dinero)
+        recibe_dinero = Sorpresa_pagar_cobrar.new(@valor*(todos.length-1),texto_dinero)
         recibe_dinero.aplicar_a_jugador(actual,todos)
       end
     end

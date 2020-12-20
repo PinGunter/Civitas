@@ -24,7 +24,7 @@ module Civitas
           indice +=1
         end
         if not alguien_tiene_s_carcel
-          todos.at(actual).obtener_salvoconducto(Sorpresa.new_mazo(Tipo_sorpresa::SALIR_CARCEL,@mazo))
+          todos.at(actual).obtener_salvoconducto(Sorpresa_salir_carcel.new(@mazo))
           salir_del_mazo
         end
       end

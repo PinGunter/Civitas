@@ -142,7 +142,7 @@ public class Jugador implements Comparable<Jugador> {
         }
     }
 
-    private boolean puedoGastar(float precio) {
+    protected boolean puedoGastar(float precio) {
         if (encarcelado) {
             return true;
         } else {

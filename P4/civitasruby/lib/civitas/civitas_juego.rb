@@ -62,6 +62,7 @@ module Civitas
     end
 
     def inicializar_mazo_sorpresas(tablero)
+      @mazo.al_mazo(Sorpresa_especulador.new(500, "Te conviertes en jugador especulador, ahora pagarás menos impuestos y podrás evitar la cárcel"))
       @mazo.al_mazo(Sorpresa_pagar_cobrar.new(-300, "Multa por exceso de velocidad. Paga 300"))
       @mazo.al_mazo(Sorpresa_casa_hotel.new(-300, "La nueva PS5 ocupa demasiado espacio, debes hacer reformas. Paga 300 por cada casa u hotel"))
       @mazo.al_mazo(Sorpresa_casilla.new(tablero, 19, "Es la feria de Málaga y no te la puedes perder. Avanza hasta Calle Marqués de Larios"))
