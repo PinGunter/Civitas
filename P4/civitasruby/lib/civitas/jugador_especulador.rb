@@ -10,12 +10,17 @@ module Civitas
     @@max_hoteles = @@factor_especulador * @@hoteles_max
     @@factor_pago_impuesto = 0.5
     
-    def initialize(otro, fianza)
-      puts "#{otro.get_nombre} se transforma en especulador"
-      Jugador.copia(otro)
+    def initialize(fianza)
       @fianza = fianza
-      actualizar_propiedades(otro)
     end
+    
+    def self.nuevo_especulador(otro,fianza)
+      jugador = Jugador_especulador.new(fianza)
+      jugador.copia(otro)
+      jugador.actualizar_propiedades(otro)
+      jugador
+    end
+    
     
     def actualizar_propiedades(original)
       original.get_propiedades().each do |propiedad|
@@ -26,7 +31,7 @@ module Civitas
     def to_s
       info = super
       info += "\n ---  JUGADOR ESPECULADOR: PAGA LA MITAD DE IMPUESTOS Y PUEDE PAGAR FIANZA EN LA CÁRCEL --- \n";
-      info += "La fianza que paga es de " + @fianza;
+      info += "La fianza que paga es de #{@fianza}";
       return info;
     end
     

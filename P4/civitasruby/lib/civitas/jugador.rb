@@ -6,8 +6,8 @@
 
 module Civitas
 
-#  require_relative 'diario'
-#  require_relative 'titulo_propiedad.rb'
+  #  require_relative 'diario'
+  #  require_relative 'titulo_propiedad.rb'
 
   class Jugador
     @@casas_max = 4
@@ -40,14 +40,7 @@ module Civitas
       self.new(false,n,0,false,@@saldo_inicial,nil,[])
     end
 
-    def self.copia(otro)
-      puts "Copiando atributos"
-      puts "Nombre #{otro.get_nombre}"
-      puts "encarcelado #{otro.get_is_encarcelado}"
-      puts "num_casilla #{otro.get_num_casilla_actual}"
-      puts "puede_comprar #{otro.get_puede_comprar}"
-      puts "saldo #{otro.get_saldo}"
-      puts "salvoconducto #{otro.get_salvoconducto.to_s}"
+    def copia(otro)
       @nombre = otro.get_nombre
       @encarcelado = otro.get_is_encarcelado
       @num_casilla_actual = otro.get_num_casilla_actual
@@ -55,6 +48,7 @@ module Civitas
       @saldo = otro.get_saldo
       @salvoconducto = otro.get_salvoconducto
       @propiedades = otro.get_propiedades
+      # self.new(otro.get_is_encarcelado,otro.get_nombre, otro.get_num_casilla_actual, otro.get_puede_comprar, otro.get_saldo, otro.get_salvoconducto, otro.get_propiedades )
     end
     
     def cancelar_hipoteca(ip)
@@ -394,9 +388,11 @@ module Civitas
     @override
     def to_s
       propiedades = get_propiedades
-      nombres_propiedades = []
-      propiedades.each do |nombres|
-        nombres_propiedades << nombres.get_nombre
+      if (!propiedades.nil?)
+        nombres_propiedades = []
+        propiedades.each do |nombres|
+          nombres_propiedades << nombres.get_nombre
+        end
       end
       info = "**********\n"
       info +=  "Nombre: #{@nombre}

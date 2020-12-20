@@ -16,7 +16,7 @@ module Civitas
     def aplicar_a_jugador(actual, todos)
       if jugador_correcto(actual,todos)
         informe(actual,todos)
-        especulador = Jugador_especulador.new(todos.at(actual), @fianza)
+        especulador = Jugador_especulador.nuevo_especulador(todos.at(actual), @fianza)
         todos[actual] = especulador
       end
     end
