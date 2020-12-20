@@ -30,7 +30,7 @@ public class Jugador implements Comparable<Jugador> {
 
     //atributos de referencia
     ArrayList<TituloPropiedad> propiedades;
-    Sorpresa salvoconducto;
+    SorpresaSalirCarcel salvoconducto;
 
     Jugador(String nombre) {
         this.nombre = nombre;
@@ -76,7 +76,7 @@ public class Jugador implements Comparable<Jugador> {
     boolean obtenerSalvoconducto(Sorpresa s) {
         boolean obtiene = !encarcelado;
         if (obtiene) {
-            salvoconducto = s;
+            salvoconducto = ((SorpresaSalirCarcel)s);
             //  salvoconducto.tipo = TipoSorpresa.SALIRCARCEL;
         }
         return obtiene;

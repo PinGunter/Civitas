@@ -6,14 +6,15 @@ import java.util.ArrayList;
  */
 public class SorpresaCasilla extends Sorpresa {
     
+    private Tablero tablero;
+    private int valor;
+    
     SorpresaCasilla(Tablero tablero, int valor, String texto){
-        init();
         this.tablero = tablero;
         this.valor = valor;
         this.texto = texto;
     }
     
-    @Override
     void AplicarAJugador(int actual, ArrayList<Jugador> todos){ // Revisar
         if (jugadorCorrecto(actual, todos)) {
             informe(actual, todos);

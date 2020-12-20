@@ -7,16 +7,18 @@ import java.util.ArrayList;
  */
 public class SorpresaCarcel extends Sorpresa{
     
+    private Tablero tablero;
+    
     SorpresaCarcel(Tablero tablero){
-        init();
         this.tablero = tablero;
-        texto = "Quedas libre de la carcel";
+        this.texto = "Vas a la carcel";
     }
     
-    @Override
     void aplicarAJugador(int actual, ArrayList<Jugador> todos){
-        super.aplicarAJugador(actual, todos);
-        todos.get(actual).encarcelar(tablero.getCarcel());
+        if(jugadorCorrecto(actual, todos)){
+            informe(actual, todos);
+            todos.get(actual).encarcelar(tablero.getCarcel());
+        }
     }
     
 }

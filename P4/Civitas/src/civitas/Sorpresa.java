@@ -9,15 +9,6 @@ import java.util.ArrayList;
 public abstract class Sorpresa{
     
     protected String texto;
-    protected Tablero tablero;
-    protected int valor;
-    protected MazoSorpresas mazo;
-    
-    protected void init(){
-        valor = -1;
-        tablero = null;
-        mazo = null; 
-    }
     
     boolean jugadorCorrecto(int actual, ArrayList<Jugador> todos) {
         return (todos.size() > actual && actual >= 0);
@@ -28,15 +19,9 @@ public abstract class Sorpresa{
                 + todos.get(actual).getNombre());
     }    
     
-    void aplicarAJugador(int actual, ArrayList<Jugador> todos) {
-        if(jugadorCorrecto(actual, todos)){
-            informe(actual, todos);
-        }
-    }
-    
     @Override
     public String toString() {
-        return "\n---Sorpresa---" + "\n" + texto + "\nValor: " + valor ;//+ "\nTipo: " + this.getClass().getSimpleName() + "\n";
+        return texto;
     }   
     
 }

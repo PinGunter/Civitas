@@ -4,20 +4,20 @@ import java.util.ArrayList;
  *
  * @author abel
  */
-public class SorpresaConvertirEspeculador extends Sorpresa {
+public class SorpresaPagarCobrar extends Sorpresa {
     
-    private int valor;
+    private float valor;
     
-    SorpresaConvertirEspeculador(int valor, String texto){
-        this.valor = valor;
+    SorpresaPagarCobrar(int valor, String texto){
+        
         this.texto = texto;
+        this.valor = valor;       
     }
     
     void aplicarAJugador(int actual, ArrayList<Jugador> todos){
         if(jugadorCorrecto(actual, todos)){
             informe(actual, todos);
-            todos.set(actual, new JugadorEspeculador(todos.get(actual), valor));
+            todos.get(actual).modificarSaldo(valor);
         }
     }
-    
 }
