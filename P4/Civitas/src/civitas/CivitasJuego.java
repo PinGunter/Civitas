@@ -45,38 +45,38 @@ public class CivitasJuego {
     }
 
     private void inicializarTablero(MazoSorpresas mazo) {
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Huerta Los Patos", 100, 0.27f, 300, 300, 300)));
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle Rodahuevo", 200, 0.53f, 300, 300, 300)));
-        tablero.añadeCasilla(new Casilla(mazo, "SUERTE"));
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle Recogidas", 400, 0.51f, 600, 600, 600)));
+        tablero.añadeCasilla(new CasillaCalle(new TituloPropiedad("Huerta Los Patos", 100, 0.27f, 300, 300, 300)));
+        tablero.añadeCasilla(new CasillaCalle(new TituloPropiedad("Calle Rodahuevo", 200, 0.53f, 300, 300, 300)));
+        tablero.añadeCasilla(new CasillaSorpresa(mazo, "SUERTE"));
+        tablero.añadeCasilla(new CasillaCalle(new TituloPropiedad("Calle Recogidas", 400, 0.51f, 600, 600, 600)));
 //         carcel (ya añadida)
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Avenida de la Constitución", 500, 0.11f, 700, 700, 700)));
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Huerta Jorobado", 600, 0.6f, 800, 800, 800)));
-        tablero.añadeCasilla(new Casilla(mazo, "SUERTE"));
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle Hierbabuena", 800, 0.08f, 1000, 1000, 1000)));
+        tablero.añadeCasilla(new CasillaCalle(new TituloPropiedad("Avenida de la Constitución", 500, 0.11f, 700, 700, 700)));
+        tablero.añadeCasilla(new CasillaCalle(new TituloPropiedad("Huerta Jorobado", 600, 0.6f, 800, 800, 800)));
+        tablero.añadeCasilla(new CasillaSorpresa(mazo, "SUERTE"));
+        tablero.añadeCasilla(new CasillaCalle(new TituloPropiedad("Calle Hierbabuena", 800, 0.08f, 1000, 1000, 1000)));
         tablero.añadeCasilla(new Casilla("Parking Gratuito")); // DESCANSO
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Estación de Autobuses", 1000, 0.75f, 1200, 1200, 1200)));
-        tablero.añadeCasilla(new Casilla(mazo, "SUERTE"));
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle Periodista Daniel Saucedo Aranda", 1100, 0.59f, 1300, 1300, 1300)));
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle Periodista Rafael Gómez", 1200, 0.9f, 1400, 1400, 1400)));
+        tablero.añadeCasilla(new CasillaCalle(new TituloPropiedad("Estación de Autobuses", 1000, 0.75f, 1200, 1200, 1200)));
+        tablero.añadeCasilla(new CasillaSorpresa(mazo, "SUERTE"));
+        tablero.añadeCasilla(new CasillaCalle(new TituloPropiedad("Calle Periodista Daniel Saucedo Aranda", 1100, 0.59f, 1300, 1300, 1300)));
+        tablero.añadeCasilla(new CasillaCalle(new TituloPropiedad("Calle Periodista Rafael Gómez", 1200, 0.9f, 1400, 1400, 1400)));
         tablero.añadeJuez(); // JUEZ
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle Real de la Alhambra", 1300, 0.18f, 1500, 1500, 1500)));
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle Pedro Antonio de Alarcón", 1340, 0.77f, 1540, 1540, 1540)));
-        tablero.añadeCasilla(new Casilla(1000f, "Impuesto")); // IMPUESTO
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle Marqués de Larios", 1800, 0.64f, 2000, 2000, 2000)));
+        tablero.añadeCasilla(new CasillaCalle(new TituloPropiedad("Calle Real de la Alhambra", 1300, 0.18f, 1500, 1500, 1500)));
+        tablero.añadeCasilla(new CasillaCalle(new TituloPropiedad("Calle Pedro Antonio de Alarcón", 1340, 0.77f, 1540, 1540, 1540)));
+        tablero.añadeCasilla(new CasillaImpuesto(1000f, "Impuesto")); // IMPUESTO
+        tablero.añadeCasilla(new CasillaCalle(new TituloPropiedad("Calle Marqués de Larios", 1800, 0.64f, 2000, 2000, 2000)));
     }
 
     private void inicializarMazoSorpresas(Tablero t) { // AÑADIR
-        mazo.alMazo(new Sorpresa(TipoSorpresa.PAGARCOBRAR, -300, "Multa por exceso de velocidad. Paga 300"));
-        mazo.alMazo(new Sorpresa(TipoSorpresa.PORCASAHOTEL, -300, "La nueva PS5 ocupa demasiado espacio, debes hacer reformas. Paga 300 por cada casa u hotel"));
-        mazo.alMazo(new Sorpresa(TipoSorpresa.IRCASILLA, t, 19, "Es la feria de Málaga y no te la puedes perder. Avanza hasta Calle Marqués de Larios"));
-        mazo.alMazo(new Sorpresa(TipoSorpresa.IRCARCEL, t));
-        mazo.alMazo(new Sorpresa(TipoSorpresa.PORJUGADOR, 250, "Vas a cenar con tus amigos pero se les olvida la cartera. Cada jugador te paga 250"));
-        mazo.alMazo(new Sorpresa(TipoSorpresa.SALIRCARCEL, mazo));
-        mazo.alMazo(new Sorpresa(TipoSorpresa.IRCASILLA, t, 13, "Suspendes el examen de PDOO y tienes que ir a revisión. Ve a la ETSIIT"));
-        mazo.alMazo(new Sorpresa(TipoSorpresa.PORCASAHOTEL, 350, "Hay un terremoto y el seguro te paga 350 por cada casa y hotel "));
-        mazo.alMazo(new Sorpresa(TipoSorpresa.PAGARCOBRAR, 600, "Te conviertes en tu propio jefe y ganas 600"));
-        mazo.alMazo(new Sorpresa(TipoSorpresa.PORJUGADOR, -350, "Vas de fiesta con tus amigos sin medidas de seguridad y ahora debes pagarle la PCR"));
+        mazo.alMazo(new SorpresaPagarCobrar( -300, "Multa por exceso de velocidad. Paga 300"));
+        mazo.alMazo(new SorpresaCasaHotel( -300, "La nueva PS5 ocupa demasiado espacio, debes hacer reformas. Paga 300 por cada casa u hotel"));
+        mazo.alMazo(new SorpresaCasilla( t, 19, "Es la feria de Málaga y no te la puedes perder. Avanza hasta Calle Marqués de Larios"));
+        mazo.alMazo(new SorpresaCarcel( t));
+        mazo.alMazo(new SorpresaPorJugador( 250, "Vas a cenar con tus amigos pero se les olvida la cartera. Cada jugador te paga 250"));
+        mazo.alMazo(new SorpresaSalirCarcel( mazo));
+        mazo.alMazo(new SorpresaCasilla( t, 13, "Suspendes el examen de PDOO y tienes que ir a revisión. Ve a la ETSIIT"));
+        mazo.alMazo(new SorpresaCasaHotel( 350, "Hay un terremoto y el seguro te paga 350 por cada casa y hotel "));
+        mazo.alMazo(new SorpresaPagarCobrar( 600, "Te conviertes en tu propio jefe y ganas 600"));
+        mazo.alMazo(new SorpresaPorJugador( -350, "Vas de fiesta con tus amigos sin medidas de seguridad y ahora debes pagarle la PCR"));
     }
 
     private void contabilizarPasosPorSalida(Jugador jugadorActual) {
@@ -198,7 +198,7 @@ public class CivitasJuego {
         Jugador jugadorActual = jugadores.get(indiceJugadorActual);
         int numCasillaActual = jugadorActual.getNumCasillaActual();
         Casilla casilla = tablero.getCasilla(numCasillaActual);
-        TituloPropiedad titulo = ((CasillaCalle)casilla).getTituloPropiedad(); // getTitulo es getTituloPropiedad ???
+        TituloPropiedad titulo = casilla.getTitulo(); // getTitulo es getTituloPropiedad ???
         boolean res = jugadorActual.comprar(titulo);
 
         return res;

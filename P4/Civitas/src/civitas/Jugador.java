@@ -28,10 +28,9 @@ public class Jugador implements Comparable<Jugador> {
     protected static float PrecioLibertad = 200;
     private static float SaldoInicial = 7500;
     protected static int FactorEspeculador = 2;
-
     //atributos de referencia
     ArrayList<TituloPropiedad> propiedades;
-    Sorpresa salvoconducto;
+    SorpresaSalirCarcel salvoconducto;
 
     Jugador(String nombre) {
         this.nombre = nombre;
@@ -77,7 +76,7 @@ public class Jugador implements Comparable<Jugador> {
     boolean obtenerSalvoconducto(Sorpresa s) {
         boolean obtiene = !encarcelado;
         if (obtiene) {
-            salvoconducto = s;
+            salvoconducto = ((SorpresaSalirCarcel)s);
             //  salvoconducto.tipo = TipoSorpresa.SALIRCARCEL;
         }
         return obtiene;
@@ -142,7 +141,7 @@ public class Jugador implements Comparable<Jugador> {
         }
     }
 
-    protected boolean puedoGastar(float precio) {
+    protected boolean puedoGastar(float precio) {   //se cambia para usarse en jugador especulador
         if (encarcelado) {
             return true;
         } else {
@@ -218,7 +217,7 @@ public class Jugador implements Comparable<Jugador> {
         return ip >= 0 && ip < propiedades.size();
     }
 
-    protected int getCasasMax() { //cambiamos visibilidad a protected
+    protected int getCasasMax() {   //cambiado para usarse en especulador
         return CasasMax;
     }
 
@@ -226,7 +225,7 @@ public class Jugador implements Comparable<Jugador> {
         return CasasPorHotel;
     }
 
-    protected int getHotelesMax() {   //Cambiamos visibilidad a protected
+    protected int getHotelesMax() { //cambiado para usarse en especulador
         return HotelesMax;
     }
 

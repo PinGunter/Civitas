@@ -16,6 +16,7 @@ module Civitas
     @@paso_por_salida = 1000
     @@precio_libertad = 200
     @@saldo_inicial = 7500
+    @@factor_especulador = 2
 
     def initialize(encarcelado,nombre,num_casilla_actual,puede_comprar,
         saldo ,salvoconducto,propiedades)
