@@ -7,23 +7,24 @@ module Civitas
     
     def initialize(mazo, nombre) # deberiamos pasarle nombre como parametro?
       @mazo = mazo
-      @sorpresa = nil
+      #@sorpresa = nil
       super(nombre) 
     end
     
     @override
     def to_s
-      if @sorpresa == nil
-        @sorpresa = @mazo.siguiente
-      end
-      "#{super} {#@sorpresa.to_s}"
+      #if @sorpresa == nil
+      #  @sorpresa = @mazo.siguiente
+      #end
+      super
+      #"#{super} {#@sorpresa.to_s}"
     end
     
     def recibe_jugador(actual, todos)
       if(jugador_correcto(actual, todos))
-        @sorpresa = @mazo.siguiente
+        sorpresa = @mazo.siguiente
         super
-        @sorpresa.aplicar_a_jugador(actual, todos)
+        sorpresa.aplicar_a_jugador(actual, todos)
       end
     end
     

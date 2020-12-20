@@ -8,23 +8,25 @@ import java.util.ArrayList;
  */
 public class CasillaSorpresa extends Casilla{
     private MazoSorpresas mazo;
-    private Sorpresa sorpresa;
+    //private Sorpresa sorpresa;
     
     CasillaSorpresa(MazoSorpresas mazo, String nombre){
         super(nombre);
         this.mazo = mazo;
-        this.sorpresa = null;
+    //    this.sorpresa = null;
     }
     
     @Override
     public String toString(){
-        if(sorpresa == null){
-            sorpresa = mazo.siguiente();
-        }
-        String info = super.toString();
-        info += "\n¡Has caído en una sorpresa!";
-        info += sorpresa.toString();
-        return info;
+//        if(sorpresa == null){
+//            sorpresa = mazo.siguiente();
+//        }
+//        String info = super.toString();
+//        info += "\n¡Has caído en una sorpresa!";
+//        info += sorpresa.toString();
+//        return info;
+        String s = super.toString();
+        return s;
     }
     
     @Override
