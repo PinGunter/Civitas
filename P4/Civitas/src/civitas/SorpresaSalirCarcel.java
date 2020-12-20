@@ -13,7 +13,8 @@ public class SorpresaSalirCarcel extends Sorpresa {
         this.mazo = mazo;
     }
     
-    void aplicarAJugador_salirCarcel(int actual, ArrayList<Jugador> todos) {
+    @Override
+    void aplicarAJugador(int actual, ArrayList<Jugador> todos) {
         if (jugadorCorrecto(actual, todos)) {
             informe(actual, todos);
             Boolean loTienen = false;

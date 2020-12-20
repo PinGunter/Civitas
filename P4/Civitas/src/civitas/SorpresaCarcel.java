@@ -14,6 +14,7 @@ public class SorpresaCarcel extends Sorpresa{
         this.texto = "Vas a la carcel";
     }
     
+    @Override
     void aplicarAJugador(int actual, ArrayList<Jugador> todos){
         if(jugadorCorrecto(actual, todos)){
             informe(actual, todos);

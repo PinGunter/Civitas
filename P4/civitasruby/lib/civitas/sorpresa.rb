@@ -30,6 +30,12 @@ module Civitas
       @texto
     end
     
+    def aplicar_a_jugador(actual,todos)
+      if(jugador_correcto(actual, todos))
+        informe(actual, todos)
+      end
+    end
+    
     protected  :informe
   end
 

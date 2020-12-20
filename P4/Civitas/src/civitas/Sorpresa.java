@@ -22,7 +22,13 @@ public abstract class Sorpresa{
     @Override
     public String toString() {
         return texto;
-    }   
+    }
+    
+    void aplicarAJugador(int actual, ArrayList<Jugador> todos){
+        if(jugadorCorrecto(actual, todos)){
+            informe(actual, todos);
+        }
+    }
     
 }
 

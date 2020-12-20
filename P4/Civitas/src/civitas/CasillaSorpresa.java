@@ -13,10 +13,14 @@ public class CasillaSorpresa extends Casilla{
     CasillaSorpresa(MazoSorpresas mazo, String nombre){
         super(nombre);
         this.mazo = mazo;
+        this.sorpresa = null;
     }
     
     @Override
     public String toString(){
+        if(sorpresa == null){
+            sorpresa = mazo.siguiente();
+        }
         String info = super.toString();
         info += "\n¡Has caído en una sorpresa!";
         info += sorpresa.toString();

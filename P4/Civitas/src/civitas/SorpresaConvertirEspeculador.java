@@ -13,6 +13,7 @@ public class SorpresaConvertirEspeculador extends Sorpresa {
         this.texto = texto;
     }
     
+    @Override
     void aplicarAJugador(int actual, ArrayList<Jugador> todos){
         if(jugadorCorrecto(actual, todos)){
             informe(actual, todos);

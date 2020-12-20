@@ -37,7 +37,7 @@ public class CivitasJuego {
 
         indiceJugadorActual = Dado.getInstance().quienEmpieza(jugadores.size());
 
-        mazo = new MazoSorpresas(false);
+        mazo = new MazoSorpresas(true);
         tablero = new Tablero(casillaCarcel);
         inicializarMazoSorpresas(this.tablero); // hacer
         inicializarTablero(this.mazo); // hacer
@@ -67,6 +67,7 @@ public class CivitasJuego {
     }
 
     private void inicializarMazoSorpresas(Tablero t) { // AÑADIR
+        mazo.alMazo(new SorpresaConvertirEspeculador(500, "Te conviertes en jugador especulador, ahora pagarás menos impuestos y podrás evitar la cárcel"));
         mazo.alMazo(new SorpresaPagarCobrar( -300, "Multa por exceso de velocidad. Paga 300"));
         mazo.alMazo(new SorpresaCasaHotel( -300, "La nueva PS5 ocupa demasiado espacio, debes hacer reformas. Paga 300 por cada casa u hotel"));
         mazo.alMazo(new SorpresaCasilla( t, 19, "Es la feria de Málaga y no te la puedes perder. Avanza hasta Calle Marqués de Larios"));
@@ -198,7 +199,7 @@ public class CivitasJuego {
         Jugador jugadorActual = jugadores.get(indiceJugadorActual);
         int numCasillaActual = jugadorActual.getNumCasillaActual();
         Casilla casilla = tablero.getCasilla(numCasillaActual);
-        TituloPropiedad titulo = casilla.getTitulo(); // getTitulo es getTituloPropiedad ???
+        TituloPropiedad titulo = ((CasillaCalle)casilla).getTituloPropiedad(); // getTitulo es getTituloPropiedad ???
         boolean res = jugadorActual.comprar(titulo);
 
         return res;

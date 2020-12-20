@@ -15,7 +15,8 @@ public class SorpresaCasilla extends Sorpresa {
         this.texto = texto;
     }
     
-    void AplicarAJugador(int actual, ArrayList<Jugador> todos){ // Revisar
+    @Override
+    void aplicarAJugador(int actual, ArrayList<Jugador> todos){ // Revisar
         if (jugadorCorrecto(actual, todos)) {
             informe(actual, todos);
             int casilla = todos.get(actual).getNumCasillaActual();
