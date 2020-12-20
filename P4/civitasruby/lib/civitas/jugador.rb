@@ -434,7 +434,7 @@ module Civitas
     #hemos quitado :salir_carcel_pagando de private porque sino nos da error ya que civitas_juego no puede acceder a ella
     private :existe_la_propiedad, :get_casas_max, :get_hoteles_max, :get_precio_libertad, :get_premio_por_salida, :perder_salvoconducto, #:salir_carcel_pagando,
     :puedo_edificar_casa, :puedo_edificar_hotel, :puedo_gastar
-    protected :debe_ser_encarcelado, :get_salvoconducto
+    protected :debe_ser_encarcelado
 
 
   end

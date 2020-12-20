@@ -35,16 +35,17 @@ module Civitas
 
 
       @tablero = Tablero.new(@@casilla_carcel)
-      @mazo = Mazo_sorpresas.new(false)
+      @mazo = Mazo_sorpresas.new(true)
       inicializar_mazo_sorpresas(@tablero)
       inicializar_tablero(@mazo)
     end
 
     # metodo para inicialiar el tablero
     def inicializar_tablero(mazo)
+      @tablero.añade_casilla(Casilla_sorpresa.new(mazo, "Suerte!"))
+      @tablero.añade_juez
       @tablero.añade_casilla(Casilla_calle.new(Titulo_propiedad.new("Huerta Los Patos", 100, 0.27, 300, 300, 300)))
       @tablero.añade_casilla(Casilla_calle.new(Titulo_propiedad.new("Calle Rodahuevo", 200, 0.53, 300, 300, 300)))
-      @tablero.añade_casilla(Casilla_sorpresa.new(mazo, "Suerte!"))
       @tablero.añade_casilla(Casilla_calle.new(Titulo_propiedad.new("Calle Recogidas", 400, 0.51, 600, 600, 600)))
       # carcel, ya añadida
       @tablero.añade_casilla(Casilla_calle.new(Titulo_propiedad.new("Avenida de la Constitución", 500, 0.11, 700, 700, 700)))
@@ -56,7 +57,6 @@ module Civitas
       @tablero.añade_casilla(Casilla_sorpresa.new(mazo, "Suerte!"))
       @tablero.añade_casilla(Casilla_calle.new(Titulo_propiedad.new("Calle Periodista Daniel Saucedo Aranda", 1100, 0.59, 1300, 1300, 1300)))
       @tablero.añade_casilla(Casilla_calle.new(Titulo_propiedad.new("Calle Periodista Rafael Gómez", 1200, 0.9, 1400, 1400, 1400)))
-      @tablero.añade_juez
       @tablero.añade_casilla(Casilla_calle.new(Titulo_propiedad.new("Calle Real de la Alhambra", 1300, 0.18, 1500, 1500, 1500)))
       @tablero.añade_casilla(Casilla_calle.new(Titulo_propiedad.new("Calle Pedro Antonio de Alarcón", 1340, 0.77, 1540, 1540, 1540)))
       @tablero.añade_casilla(Casilla_impuesto.new(1000, "Impuesto"))
@@ -221,7 +221,7 @@ module Civitas
       jugador_actual = @jugadores.at(@indice_jugador_actual)
       num_casilla_actual = jugador_actual.get_num_casilla_actual
       casilla = @tablero.get_casilla(num_casilla_actual)
-      titulo = casilla.get_titulo
+      titulo = casilla.titulo
       res = jugador_actual.comprar(titulo)
       res
     end

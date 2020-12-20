@@ -5,8 +5,7 @@
 # and open the template in the editor.
 module Civitas
   class Titulo_propiedad
-    #attr_reader :nombre, :precio_compra, :alquiler_base, :factor_revalorizacion,
-    # :hipoteca_base, :precio_edificar, :num_hoteles, :num_casas
+    attr_reader :nombre, :precio_compra, :alquiler_base, :factor_revalorizacion, :hipoteca_base, :precio_edificar, :num_hoteles, :num_casas
     attr_accessor :hipotecada, :propietario
 
     @@factor_intereses_hipoteca = 1.1

@@ -13,7 +13,7 @@ module Civitas
     def initialize(otro, fianza)
       Jugador.copia(otro)
       @fianza = fianza
-      actualizar_propiedad(otro)
+      actualizar_propiedades(otro)
     end
     
     def actualizar_propiedades(original)

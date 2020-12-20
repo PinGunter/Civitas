@@ -11,7 +11,7 @@ module Civitas
     attr_reader :titulo
 
     def initialize(titulo)
-      super(@titulo.nombre)
+      super(titulo.nombre)
       @titulo = titulo
     end
     
