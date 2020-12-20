@@ -6,8 +6,8 @@
 
 module Civitas
 
-  require_relative 'diario'
-  require_relative 'titulo_propiedad.rb'
+#  require_relative 'diario'
+#  require_relative 'titulo_propiedad.rb'
 
   class Jugador
     @@casas_max = 4

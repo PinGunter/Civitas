@@ -1,16 +1,18 @@
 #encoding:utf-8
 
+#encoding:utf-8
+
 # To change this license header, choose License Headers in Project Properties.
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
 # @author salva
-require_relative "dado"
-require_relative "tablero"
-require_relative "mazo_sorpresas"
-require_relative "gestor_estados"
-require_relative "sorpresa"
-require_relative "jugador"
-require_relative "titulo_propiedad"
+#require_relative "dado"
+#require_relative "tablero"
+#require_relative "mazo_sorpresas"
+#require_relative "gestor_estados"
+#require_relative "sorpresa"
+#require_relative "jugador"
+#require_relative "titulo_propiedad"
 module Civitas
   #clase Civitas::Civitas_juego que representa la partida de civitas
   class Civitas_juego

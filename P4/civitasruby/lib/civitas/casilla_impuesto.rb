@@ -1,3 +1,5 @@
+#encoding:utf-8
+
 # To change this license header, choose License Headers in Project Properties.
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
@@ -7,8 +9,8 @@ module Civitas
   class Casilla_impuesto < Casilla
 
     def initialize(importe, nombre)
-      @importe = importe # debe ser positivo porque en paga (jugador) lo multiplica por *-1
       super(nombre)
+      @importe = importe # debe ser positivo porque en paga (jugador) lo multiplica por *-1
     end
     
     @override

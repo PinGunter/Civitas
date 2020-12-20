@@ -28,7 +28,7 @@ public class JugadorEspeculador extends Jugador {
     @Override
     public String toString() {
         String info = super.toString();
-        info += "\n ---  JUGADOR ESPECULADOR: PAGA LA MITAD DE IMPUESTOS Y PUEDE PAGAR FIANZA EN LA CÁRCEL --- \n";
+        info += "\n ---  Es jugador especulador. Paga menos impuestos y puede evitar la cárcel --- \n";
         info += "La fianza que paga es de " + fianza;
         return info;
     }

@@ -4,7 +4,7 @@
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
 #require_relative "sorpresa"
-require_relative "diario"
+#require_relative "diario"
 module Civitas
   class Mazo_sorpresas
     def initialize(d=false)

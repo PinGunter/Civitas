@@ -1,7 +1,7 @@
 #encoding:utf-8
 # Salva Romero
 
-require_relative "casilla"
+#require_relative "casilla"
 module Civitas
   class Tablero
     attr_reader :num_casilla_carcel
@@ -14,7 +14,7 @@ module Civitas
       end
 
       @casillas = Array.new
-      @casillas << Casilla.new_nombre("Salida")
+      @casillas << Casilla.new("Salida")
       @por_salida = 0
       @tiene_juez = false
 
@@ -40,17 +40,17 @@ module Civitas
 
     def añade_casilla(casilla)
       if @casillas.length == @num_casilla_carcel
-        @casillas << Casilla.new_nombre("Cárcel")
+        @casillas << Casilla.new("Cárcel")
       end
       @casillas << casilla
       if @casillas.length == @num_casilla_carcel
-        @casillas << Casilla.new_nombre("Cárcel")
+        @casillas << Casilla.new("Cárcel")
       end
     end
 
     def añade_juez
       if not @tiene_juez
-        @casillas << Casilla.new_num_casilla_carcel_nombre(@num_casilla_carcel, "Juez")
+        @casillas << Casilla_juez.new(@num_casilla_carcel, "Juez")
         @tiene_juez = true
       end
     end
