@@ -41,6 +41,13 @@ module Civitas
     end
 
     def self.copia(otro)
+      puts "Copiando atributos"
+      puts "Nombre #{otro.get_nombre}"
+      puts "encarcelado #{otro.get_is_encarcelado}"
+      puts "num_casilla #{otro.get_num_casilla_actual}"
+      puts "puede_comprar #{otro.get_puede_comprar}"
+      puts "saldo #{otro.get_saldo}"
+      puts "salvoconducto #{otro.get_salvoconducto.to_s}"
       @nombre = otro.get_nombre
       @encarcelado = otro.get_is_encarcelado
       @num_casilla_actual = otro.get_num_casilla_actual
@@ -313,8 +320,9 @@ module Civitas
     end
 
     def en_bancarrota
+      puts "Jugador: #{self.to_s}"
       res = false
-      if @saldo <= 0
+      if (@saldo<=0)
         res = true
       end
       return res
@@ -407,7 +415,7 @@ module Civitas
     end
 
     def get_saldo  #cambiamos la visibilidad de protected a public para facilitar la accesibilidad de la partida. Consultado al construir
-      @saldo
+      return @saldo
     end
 
     def get_nombre  #cambiamos la visibilidad de protected a public para facilitar la accesibilidad de la partida.

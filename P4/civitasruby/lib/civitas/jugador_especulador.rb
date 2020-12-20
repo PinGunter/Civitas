@@ -11,6 +11,7 @@ module Civitas
     @@factor_pago_impuesto = 0.5
     
     def initialize(otro, fianza)
+      puts "#{otro.get_nombre} se transforma en especulador"
       Jugador.copia(otro)
       @fianza = fianza
       actualizar_propiedades(otro)
