@@ -423,16 +423,15 @@ module Civitas
     end
 
     def debe_ser_encarcelado
-      if @encarcelado == true
-        res = false
-      elsif tiene_salvoconducto == true
-        perder_salvoconducto
-        res = false
-        Diario.instance.ocurre_evento("#{@nombre} utiliza carta salvoconducto y no va a la carcel")
-      else
-        res = true
+      carcel = !@encarcelado
+      if (carcel)
+        if tiene_salvoconducto
+          perder_salvoconducto
+          Diario.instance.ocurre_evento("Jugador #{@nombre} se libra de la carcel usando el salvoconducto")
+          carcel = false
+        end
+        carcel
       end
-      return res
     end
     
     #hemos quitado :salir_carcel_pagando de private porque sino nos da error ya que civitas_juego no puede acceder a ella

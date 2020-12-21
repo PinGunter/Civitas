@@ -21,7 +21,7 @@ module Civitas
     def recibe_jugador(actual, todos)
       if(jugador_correcto(actual, todos))
         super
-        todos.at(actual).paga_impuesto(importe)
+        todos.at(actual).paga_impuesto(@importe)
       end
     end
 

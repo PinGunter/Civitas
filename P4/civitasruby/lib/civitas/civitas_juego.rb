@@ -42,10 +42,9 @@ module Civitas
 
     # metodo para inicialiar el tablero
     def inicializar_tablero(mazo)
-      @tablero.añade_casilla(Casilla_sorpresa.new(mazo, "Suerte!"))
-      @tablero.añade_juez
       @tablero.añade_casilla(Casilla_calle.new(Titulo_propiedad.new("Huerta Los Patos", 100, 0.27, 300, 300, 300)))
       @tablero.añade_casilla(Casilla_calle.new(Titulo_propiedad.new("Calle Rodahuevo", 200, 0.53, 300, 300, 300)))
+      @tablero.añade_casilla(Casilla_sorpresa.new(mazo, "Suerte!"))
       @tablero.añade_casilla(Casilla_calle.new(Titulo_propiedad.new("Calle Recogidas", 400, 0.51, 600, 600, 600)))
       # carcel, ya añadida
       @tablero.añade_casilla(Casilla_calle.new(Titulo_propiedad.new("Avenida de la Constitución", 500, 0.11, 700, 700, 700)))
@@ -57,6 +56,7 @@ module Civitas
       @tablero.añade_casilla(Casilla_sorpresa.new(mazo, "Suerte!"))
       @tablero.añade_casilla(Casilla_calle.new(Titulo_propiedad.new("Calle Periodista Daniel Saucedo Aranda", 1100, 0.59, 1300, 1300, 1300)))
       @tablero.añade_casilla(Casilla_calle.new(Titulo_propiedad.new("Calle Periodista Rafael Gómez", 1200, 0.9, 1400, 1400, 1400)))
+      @tablero.añade_juez
       @tablero.añade_casilla(Casilla_calle.new(Titulo_propiedad.new("Calle Real de la Alhambra", 1300, 0.18, 1500, 1500, 1500)))
       @tablero.añade_casilla(Casilla_calle.new(Titulo_propiedad.new("Calle Pedro Antonio de Alarcón", 1340, 0.77, 1540, 1540, 1540)))
       @tablero.añade_casilla(Casilla_impuesto.new(1000, "Impuesto"))
@@ -66,11 +66,11 @@ module Civitas
     def inicializar_mazo_sorpresas(tablero)
       @mazo.al_mazo(Sorpresa_especulador.new(500, "Te conviertes en jugador especulador, ahora pagarás menos impuestos y podrás evitar la cárcel"))
       @mazo.al_mazo(Sorpresa_pagar_cobrar.new(-300, "Multa por exceso de velocidad. Paga 300"))
+      @mazo.al_mazo(Sorpresa_salir_carcel.new(@mazo))
       @mazo.al_mazo(Sorpresa_casa_hotel.new(-300, "La nueva PS5 ocupa demasiado espacio, debes hacer reformas. Paga 300 por cada casa u hotel"))
       @mazo.al_mazo(Sorpresa_casilla.new(tablero, 19, "Es la feria de Málaga y no te la puedes perder. Avanza hasta Calle Marqués de Larios"))
       @mazo.al_mazo(Sorpresa_ir_carcel.new(tablero))
       @mazo.al_mazo(Sorpresa_por_jugador.new(250, "Vas a cenar con tus amigos pero se les olvida la cartera. Cada jugador te paga 250"))
-      @mazo.al_mazo(Sorpresa_salir_carcel.new(@mazo))
       @mazo.al_mazo(Sorpresa_casilla.new(tablero, 13, "Suspendes el examen de PDOO y tienes que ir a revisión. Ve a la ETSIIT"))
       @mazo.al_mazo(Sorpresa_casa_hotel.new(350, "Hay un terremoto y el seguro te paga 350 por cada casa y hotel "))
       @mazo.al_mazo(Sorpresa_pagar_cobrar.new(600, "Te conviertes en tu propio jefe y ganas 600"))

@@ -48,14 +48,14 @@ module Civitas
     end
     
     def debe_ser_encarcelado
-      res = true
-      if super
-        if puedo_gastar(@fianza)
+      carcel = super
+      if (carcel)
+        if (puedo_gastar(@fianza))
           paga(@fianza)
-          res = false
+          carcel = false
         end
       end
-      return res
+      return carcel
     end
     
     

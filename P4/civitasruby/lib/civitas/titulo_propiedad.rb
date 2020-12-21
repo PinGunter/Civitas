@@ -214,7 +214,6 @@ module Civitas
         actualiza_propietario_por_conversion(nil)
         res = true
       end
-      puts "\n**********\nvender de titulo: " + res.to_s + "\n**********\n"
       return res
     end
 
