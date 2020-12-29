@@ -59,5 +59,10 @@ public class JugadorEspeculador extends Jugador {
         }
         return carcel;
     }
+    
+    @Override
+    public boolean isEspeculador(){
+        return true;
+    }
 
 }

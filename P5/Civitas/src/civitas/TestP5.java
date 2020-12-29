@@ -22,6 +22,7 @@ public class TestP5 {
         CivitasJuego juego = new CivitasJuego(nombres);
         Controlador controller = new Controlador(juego,vista);
         vista.setCivitasJuego(juego);
+        vista.actualizarVista();
         
     }
 }

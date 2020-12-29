@@ -230,7 +230,7 @@ public class Jugador implements Comparable<Jugador> {
         return HotelesMax;
     }
 
-    protected String getNombre() {
+    public String getNombre() { //cambiada de protected a public para usarla en gui
         return nombre;
     }
 
@@ -401,5 +401,9 @@ public class Jugador implements Comparable<Jugador> {
         }
 
         return result;
+    }
+    
+    public boolean isEspeculador(){
+        return false;
     }
 }
