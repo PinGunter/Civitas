@@ -140,8 +140,9 @@ public class CivitasJuego {
         }
         return false;
     }
-
-    private ArrayList<Jugador> ranking() {
+    
+    // Cambiado la visibilidad de private a public para usarlo en CivitasView
+    public ArrayList<Jugador> ranking() {
         ArrayList<Jugador> ranking = new ArrayList<Jugador>();
 
         for (int i = 0; i < jugadores.size(); i++) {

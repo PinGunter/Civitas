@@ -1,6 +1,8 @@
 package GUI;
 
 import civitas.CivitasJuego;
+import civitas.OperacionesJuego;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,12 +25,49 @@ public class CivitasView extends javax.swing.JFrame {
     
     public void actualizarVista(){
         jugadorPanel.setJugador(juego.getJugadorActual());
+        label_ranking.setVisible(false);
+        text_area_ranking.setVisible(false);
+        
+        if(juego.finalDelJuego()){
+            label_ranking.setVisible(true);
+            text_area_ranking.setVisible(true);
+            text_area_ranking.setText(juego.ranking().toString());
+            repaint();
+            revalidate();
+        }
     }
     
     public void setCivitasJuego(CivitasJuego juego){
         this.juego = juego;
         this.setVisible(true);
     }
+    
+    public void mostrarSiguienteOperacion(OperacionesJuego operacion){
+        // actualizar textfile
+        nombre_casilla_texto.setText(operacion.toString());
+        actualizarVista();
+    }
+    
+    public void mostrarEventos(){
+        DiarioDialog diarioD = new DiarioDialog(this);
+        diarioD.repaint();
+        diarioD.revalidate();
+    }
+    
+    public void comprar(){
+        int opcion = JOptionPane.showConfirmDialog(null, "¿Quieres comprar la calle actual?", "Compra", JOptionPane.YES_NO_OPTION);
+        
+        if(opcion == 1){
+            
+        } 
+        else{
+            
+        }
+        
+        // devolver un enumadora de respuestas en funcion de esa opcion
+    }
+    
+            
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -41,6 +80,11 @@ public class CivitasView extends javax.swing.JFrame {
 
         titulo = new javax.swing.JLabel();
         contenedorVistaJugador = new javax.swing.JPanel();
+        nombre_casilla_gui = new javax.swing.JLabel();
+        nombre_casilla_texto = new javax.swing.JTextField();
+        label_ranking = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        text_area_ranking = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("CivitasJuego");
@@ -50,6 +94,22 @@ public class CivitasView extends javax.swing.JFrame {
         titulo.setEnabled(false);
 
         contenedorVistaJugador.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        nombre_casilla_gui.setText("Siguiente Operacion");
+        nombre_casilla_gui.setEnabled(false);
+
+        nombre_casilla_texto.setText("jTextField1");
+        nombre_casilla_texto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombre_casilla_textoActionPerformed(evt);
+            }
+        });
+
+        label_ranking.setText("Ranking");
+
+        text_area_ranking.setColumns(20);
+        text_area_ranking.setRows(5);
+        jScrollPane1.setViewportView(text_area_ranking);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -62,16 +122,41 @@ public class CivitasView extends javax.swing.JFrame {
                         .addComponent(titulo))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(28, 28, 28)
-                        .addComponent(contenedorVistaJugador, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(574, Short.MAX_VALUE))
+                        .addComponent(contenedorVistaJugador, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addComponent(nombre_casilla_gui)
+                                .addGap(18, 18, 18)
+                                .addComponent(nombre_casilla_texto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(132, 132, 132)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(428, 428, 428)
+                                .addComponent(label_ranking)))))
+                .addContainerGap(377, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(titulo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(contenedorVistaJugador, javax.swing.GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(nombre_casilla_gui)
+                            .addComponent(nombre_casilla_texto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(label_ranking)
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 529, Short.MAX_VALUE))
+                            .addComponent(contenedorVistaJugador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
 
         titulo.getAccessibleContext().setAccessibleName("titulo");
@@ -79,6 +164,10 @@ public class CivitasView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void nombre_casilla_textoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombre_casilla_textoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombre_casilla_textoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -117,6 +206,11 @@ public class CivitasView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel contenedorVistaJugador;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel label_ranking;
+    private javax.swing.JLabel nombre_casilla_gui;
+    private javax.swing.JTextField nombre_casilla_texto;
+    private javax.swing.JTextArea text_area_ranking;
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
 }

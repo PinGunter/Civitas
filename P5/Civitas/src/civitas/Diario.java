@@ -13,7 +13,9 @@ public class Diario {
     return instance;
   }
   
-  private Diario () {
+  // Cambiada la visibilida de privado a publica para usarlo en DiarioDialog
+  
+  public Diario () {
     eventos = new ArrayList<>();
   }
   
